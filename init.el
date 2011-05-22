@@ -1,11 +1,11 @@
 (set-frame-font "Monospace 9")
 
-;; (load "~/.emacs.d/elpa/package.el")
-;; (require 'package)
-;; (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-;;                   ("elpa" . "http://tromey.com/elpa/")))
-;;   (add-to-list 'package-archives source t))
-;; (package-initialize)
+(load "~/.emacs.d/elpa/package.el")
+(require 'package)
+(dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
+                  ("elpa" . "http://tromey.com/elpa/")))
+  (add-to-list 'package-archives source t))
+(package-initialize)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
