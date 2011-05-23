@@ -141,7 +141,7 @@
             (common-lisp-hook)))
 
 (require 'whitespace)
-(global-whitespace-mode)
+(global-whitespace-mode t)
 (setq-default whitespace-style
         '(face trailing tabs tab-mark))
 
