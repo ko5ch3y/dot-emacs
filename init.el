@@ -158,3 +158,6 @@
 ;;                                                      plain-tex-mode))
 ;;                 (let ((mark-even-if-inactive transient-mark-mode))
 ;;                   (indent-region (region-beginning) (region-end) nil))))))
+
+(split-window-vertically)
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
