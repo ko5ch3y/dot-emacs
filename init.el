@@ -110,7 +110,6 @@
 ;              'slime-indent-and-complete-symbol)))
 
 (require 'rainbow-delimiters)
-(rainbow-delimiters-mode t)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
@@ -127,7 +126,7 @@
 
 
 (defun common-lisp-hook ()
-  'rainbow-delimiters-mode
+  (rainbow-delimiters-mode t)
   (setq standard-indent 2)
   (setq tab-stop-list (generate-tab-stop-list)))
 
