@@ -24,6 +24,14 @@
 (define-key global-map (kbd "\M-s") 'switch-to-buffer)
 (vimpulse-omap "re" 'find-alternate-file)
 (vimpulse-map "-" 'comment-dwim)
+(vimpulse-map "o" (lambda ()
+                    (interactive)
+                    (viper-open-line 1)
+                    (indent-for-tab-command)))
+(vimpulse-map "O" (lambda ()
+                    (interactive)
+                    (viper-Open-line 1)
+                    (indent-for-tab-command)))
 
 (defun anything-find-file-other-window ()
   (interactive)
@@ -48,21 +56,19 @@
 (vimpulse-map "zk" 'windmove-up)
 
 ;(setq-default viper-auto-indent t)
-;(setq-default indent-line-function 'insert-tab)
+(vimpulse-map [tab] 'indent-for-tab-command)
+(vimpulse-vmap [tab] 'indent-for-tab-command)
+(vimpulse-imap [C-tab] 'tab-to-tab-stop)
+;; (setq-default indent-line-function 'indent-according-to-mode)
+(setq-default indent-tabs-mode 'complete)
+(setq-default standard-indent 4)
+(setq-default tab-width 4)
+
 (setq-default
   c-default-style
   '((java-mode . "java")
     (other . "linux"))
   c-basic-offset 4)
-
-(vimpulse-imap [C-tab] 'tab-to-tab-stop)
-;; (vimpulse-imap [C-S-tab] 'viper-backward-char)
-(vimpulse-map [tab] 'indent-according-to-mode)
-(vimpulse-vmap [tab] 'indent-region)
-(define-key viper-insert-diehard-map "\t" 'indent-according-to-mode)
-(setq-default indent-tabs-mode nil)
-(setq-default standard-indent 4)
-(setq-default tab-width 4)
 
 (defun generate-tab-stop-list ()
   (let ((result (list)))
@@ -84,9 +90,6 @@
 (load "elscreen" "ElScreen" t)
 (define-key viper-vi-basic-map "`" 'elscreen-select-and-goto)
 
-
-;(setq-default auto-indent-on-visit-file t)
-;(require 'auto-indent-mode)
 
 ;(setq-default inferior-lisp-program "/usr/bin/ecl")
 ;(require 'slime-autoloads)
