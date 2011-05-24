@@ -39,7 +39,7 @@
 (vimpulse-map "zsv" 'split-window-vertically)
 (vimpulse-map "zsh" 'split-window-horizontally)
 (vimpulse-map "zx" 'delete-window)
-(vimpulse-map "zk" 'kill-this-buffer)
+(vimpulse-map "zd" 'kill-this-buffer)
 (vimpulse-map "zi" 'imenu)
 (vimpulse-map "zo" 'other-window)
 (vimpulse-map "zh" 'windmove-left)
