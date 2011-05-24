@@ -25,6 +25,11 @@
 (vimpulse-omap "re" 'find-alternate-file)
 (vimpulse-map "-" 'comment-dwim)
 
+(defun anything-find-file-other-window ()
+  (interactive)
+  (other-window 1)
+  (anything-find-file))
+(vimpulse-map "zE" 'anything-find-file-other-window)
 (vimpulse-map "ze" 'anything-find-file)
 (vimpulse-map "zb" 'viper-switch-to-buffer-other-window)
 (vimpulse-map "zB" 'viper-switch-to-buffer)
@@ -34,6 +39,8 @@
 (vimpulse-map "zv" 'split-window-vertically)
 (vimpulse-map "zh" 'split-window-horizontally)
 (vimpulse-map "zd" 'delete-window)
+(vimpulse-map "zi" 'imenu)
+(vimpulse-map "zo" 'other-window)
 
 ;; (defun anything-find-file-other-window ()
 ;;   (interactive)
