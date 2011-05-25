@@ -48,7 +48,7 @@
 (vimpulse-map "zB" 'viper-switch-to-buffer-other-window)
 (vimpulse-map "zb" 'viper-switch-to-buffer)
 (vimpulse-map "zw" 'save-buffer)
-(vimpulse-map "zq" 'quit-window)
+(vimpulse-map "zq" 'save-buffers-kill-terminal)
 (vimpulse-map "zcd" 'cd)
 (vimpulse-map "zsv" 'split-window-vertically)
 (vimpulse-map "zsh" 'split-window-horizontally)
