@@ -33,11 +33,11 @@
 (vimpulse-map "o" (lambda ()
                     (interactive)
                     (viper-open-line 1)
-                    (indent-for-tab-command)))
+                    (indent-according-to-mode)))
 (vimpulse-map "O" (lambda ()
                     (interactive)
                     (viper-Open-line 1)
-                    (indent-for-tab-command)))
+                    (indent-according-to-mode)))
 
 (defun anything-find-file-other-window ()
   (interactive)
@@ -68,7 +68,7 @@ point."
   (if (and
        (or (bobp) (= ?w (char-syntax (char-before))))
        (or (eobp) (not (= ?w (char-syntax (char-after))))))
-      (dabbrev-expand arg)
+      (hippie-expand arg)
     (indent-for-tab-command)))
 ;(setq-default viper-auto-indent t)
 (setq-default tab-always-indent 'complete)
