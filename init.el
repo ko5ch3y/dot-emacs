@@ -61,12 +61,22 @@
 (vimpulse-map "zj" 'windmove-down)
 (vimpulse-map "zk" 'windmove-up)
 
+(defun indent-or-expand (arg)
+  "Either indent according to mode, or expand the word preceding
+point."
+  (interactive "*P")
+  (if (and
+       (or (bobp) (= ?w (char-syntax (char-before))))
+       (or (eobp) (not (= ?w (char-syntax (char-after))))))
+      (dabbrev-expand arg)
+    (indent-for-tab-command)))
 ;(setq-default viper-auto-indent t)
+(setq-default tab-always-indent 'complete)
 (vimpulse-map [tab] 'indent-for-tab-command)
 (vimpulse-vmap [tab] 'indent-for-tab-command)
+(vimpulse-imap [tab] 'indent-or-expand)
 (vimpulse-imap [C-tab] 'tab-to-tab-stop)
 (setq-default indent-line-function 'indent-according-to-mode)
-(setq-default tabs-always-indent 'complete)
 (setq-default indent-tabs-mode nil)
 (setq-default standard-indent 4)
 (setq-default tab-width 4)
