@@ -184,3 +184,6 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
+(require 'color-theme)
