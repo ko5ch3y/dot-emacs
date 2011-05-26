@@ -123,15 +123,15 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(rainbow-delimiters-depth-1-face ((t (:foreground "purple"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "green"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "brown"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "orange"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "red"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "violet"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "cyan")))))
-
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
+ '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
+ '(rainbow-delimiters-depth-3-face ((t (:foreground "orange"))))
+ '(rainbow-delimiters-depth-4-face ((t (:foreground "purple"))))
+ '(rainbow-delimiters-depth-5-face ((t (:foreground "brown"))))
+ '(rainbow-delimiters-depth-6-face ((t (:foreground "darkblue"))))
+ '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
+ '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
+ '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
 
 (defun common-lisp-hook ()
   (setq standard-indent 2)
@@ -179,3 +179,28 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
 (require 'color-theme)
+(defun my-light-color-theme ()
+  (interactive)
+  (color-theme-install
+   '(my-light-color-theme
+      ((background-color . "#f0f0f0")
+      (background-mode . light)
+      (border-color . "#969696")
+      (cursor-color . "#000000")
+      (foreground-color . "#000000")
+      (mouse-color . "black"))
+     (fringe ((t (:background "#969696"))))
+     (mode-line ((t (:foreground "#ffffff" :background "#595959"))))
+     (region ((t (:background "#666666"))))
+     (font-lock-builtin-face ((t (:foreground "#f820b4"))))
+     (font-lock-comment-face ((t (:foreground "#7d827d"))))
+     (font-lock-function-name-face ((t (:foreground "#102cc1"))))
+     (font-lock-keyword-face ((t (:foreground "#b415c1"))))
+     (font-lock-string-face ((t (:foreground "#c77429"))))
+     (font-lock-type-face ((t (:foreground"#199915"))))
+     (font-lock-variable-name-face ((t (:foreground "#e6a00f"))))
+     (minibuffer-prompt ((t (:foreground "#7299ff" :bold t))))
+     (font-lock-warning-face ((t (:foreground "Red" :bold t))))
+     )))
+(color-theme-initialize)
+(my-light-color-theme)
