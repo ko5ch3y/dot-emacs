@@ -174,3 +174,5 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
 (require 'color-theme)
+
+(add-to-list 'auto-mode-alist '("\\.qml$" . js-mode))
