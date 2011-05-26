@@ -60,6 +60,10 @@
 (vimpulse-map "zl" 'windmove-right)
 (vimpulse-map "zj" 'windmove-down)
 (vimpulse-map "zk" 'windmove-up)
+(vimpulse-map "H" 'windmove-left)
+(vimpulse-map "L" 'windmove-right)
+(vimpulse-map "J" 'windmove-down)
+(vimpulse-map "K" 'windmove-up)
 
 ;(setq-default viper-auto-indent t)
 (add-hook 'completion-at-point-functions 'hippie-expand nil)
