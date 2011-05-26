@@ -23,13 +23,13 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (define-key global-map (kbd "\M-s") 'switch-to-buffer)
 (vimpulse-omap "re" 'find-alternate-file)
-(vimpulse-map "-" (lambda ()
+(vimpulse-map "_" (lambda ()
                     (interactive)
                     (vimpulse-visual-toggle-line)
                     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
                     (vimpulse-visual-toggle-line)
                     (viper-next-line 1)))
-(vimpulse-map ";" 'comment-dwim)
+(vimpulse-map "-" 'comment-dwim)
 (vimpulse-map "o" (lambda ()
                     (interactive)
                     (viper-open-line 1)
@@ -66,7 +66,9 @@
 (setq-default tab-always-indent 'complete)
 (vimpulse-map  [tab] (lambda () (interactive) (let ((tab-always-indent t)) (indent-for-tab-command nil))))
 (vimpulse-vmap [tab] (lambda () (interactive) (let ((tab-always-indent t)) (indent-for-tab-command nil))))
-(vimpulse-imap [tab] 'indent-for-tab-command)
+;; don't use this, it breaks tab usage in minibuffer with navigating in anything.
+;; besides, tab is mapped to 'indent-for-tab-command by default anyway
+;; (vimpulse-imap [tab] 'indent-for-tab-command)
 (vimpulse-imap [C-tab] 'tab-to-tab-stop)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
@@ -126,7 +128,6 @@
 
 
 (defun common-lisp-hook ()
-  (rainbow-delimiters-mode t)
   (setq standard-indent 2)
   (setq tab-stop-list (generate-tab-stop-list)))
 
