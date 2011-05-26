@@ -184,7 +184,3 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/qml-mode")
-(require 'qml-mode)
-(add-to-list 'auto-mode-alist '("\\.qml$" . qml-mode))
