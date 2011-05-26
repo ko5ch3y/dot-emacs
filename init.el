@@ -18,7 +18,7 @@
 (define-key viper-vi-diehard-map "\C-v" 'vimpulse-visual-toggle-block)
 (define-key viper-vi-basic-map "\C-u" 'viper-scroll-down)
 ;; (define-key viper-insert-diehard-map (kbd "C-h") 'delete-backward-char)
-(define-key viper-insert-diehard-map (kbd "C-S-h") 'delete-backward-char)
+(define-key viper-insert-basic-map (kbd "C-S-h") 'delete-backward-char)
 (define-key key-translation-map [?\C-h] [?\C-?])
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (define-key global-map (kbd "\M-s") 'switch-to-buffer)
@@ -111,6 +111,7 @@
 ;              viper-insert-diehard-map "\t"
 ;              'slime-indent-and-complete-symbol)))
 
+
 ;; (require 'rainbow-delimiters)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
@@ -168,19 +169,8 @@
   (fix-server))
 
 
-
-;; (dolist (command '(yank yank-pop))
-;;   (eval `(defadvice ,command (after indent-region activate)
-;;            (and (not current-prefix-arg)
-;;                 (member major-mode '(emacs-lisp-mode lisp-mode
-;;                                                      clojure-mode    scheme-mode
-;;                                                      haskell-mode    ruby-mode
-;;                                                      rspec-mode      python-mode
-;;                                                      c-mode          c++-mode
-;;                                                      objc-mode       latex-mode
-;;                                                      plain-tex-mode))
-;;                 (let ((mark-even-if-inactive transient-mark-mode))
-;;                   (indent-region (region-beginning) (region-end) nil))))))
-
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
+(require 'color-theme)
