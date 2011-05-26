@@ -29,7 +29,7 @@
                     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
                     (vimpulse-visual-toggle-line)
                     (viper-next-line 1)))
-(vimpulse-map "," 'comment-dwim)
+(vimpulse-map ";" 'comment-dwim)
 (vimpulse-map "o" (lambda ()
                     (interactive)
                     (viper-open-line 1)
@@ -61,20 +61,12 @@
 (vimpulse-map "zj" 'windmove-down)
 (vimpulse-map "zk" 'windmove-up)
 
-(defun indent-or-expand (arg)
-  "Either indent according to mode, or expand the word preceding
-point."
-  (interactive "*P")
-  (if (and
-       (or (bobp) (= ?w (char-syntax (char-before))))
-       (or (eobp) (not (= ?w (char-syntax (char-after))))))
-      (hippie-expand arg)
-    (indent-for-tab-command)))
 ;(setq-default viper-auto-indent t)
+(add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
-(vimpulse-map [tab] 'indent-for-tab-command)
-(vimpulse-vmap [tab] 'indent-for-tab-command)
-(vimpulse-imap [tab] 'indent-or-expand)
+(vimpulse-map  [tab] (lambda () (interactive) (let ((tab-always-indent t)) (indent-for-tab-command nil))))
+(vimpulse-vmap [tab] (lambda () (interactive) (let ((tab-always-indent t)) (indent-for-tab-command nil))))
+(vimpulse-imap [tab] 'indent-for-tab-command)
 (vimpulse-imap [C-tab] 'tab-to-tab-stop)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
@@ -117,7 +109,7 @@ point."
 ;              viper-insert-diehard-map "\t"
 ;              'slime-indent-and-complete-symbol)))
 
-(require 'rainbow-delimiters)
+;; (require 'rainbow-delimiters)
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
