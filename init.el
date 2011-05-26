@@ -69,6 +69,7 @@
 ;; don't use this, it breaks tab usage in minibuffer with navigating in anything.
 ;; besides, tab is mapped to 'indent-for-tab-command by default anyway
 ;; (vimpulse-imap [tab] 'indent-for-tab-command)
+(define-key read-expression-map [(tab)] 'hippie-expand)
 (vimpulse-imap [C-tab] 'tab-to-tab-stop)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
