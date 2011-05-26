@@ -18,7 +18,7 @@
 (define-key viper-vi-diehard-map "\C-v" 'vimpulse-visual-toggle-block)
 (define-key viper-vi-basic-map "\C-u" 'viper-scroll-down)
 ;; (define-key viper-insert-diehard-map (kbd "C-h") 'delete-backward-char)
-(define-key viper-insert-diehard-map (kbd "C-S-h") 'delete-backward-char)
+(define-key viper-insert-basic-map (kbd "C-S-h") 'delete-backward-char)
 (define-key key-translation-map [?\C-h] [?\C-?])
 (define-key global-map (kbd "RET") 'newline-and-indent)
 (define-key global-map (kbd "\M-s") 'switch-to-buffer)
