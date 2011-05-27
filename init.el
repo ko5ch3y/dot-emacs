@@ -62,6 +62,10 @@
 (vimpulse-map "L" 'windmove-right)
 (vimpulse-map "J" 'windmove-down)
 (vimpulse-map "K" 'windmove-up)
+(vimpulse-map "za" 'align-current)
+(vimpulse-vmap "za" 'align)
+(vimpulse-map "zA" 'align-regexp)
+(vimpulse-vmap "zA" 'align-regexp)
 
 (defun indent-line ()
   (interactive)
