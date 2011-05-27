@@ -74,6 +74,7 @@
                                      (indent-according-to-mode)))
 (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
+(define-key c-mode-map [tab] 'indent-for-tab-command)
 (vimpulse-map  [tab] 'indent-line)
 (vimpulse-vmap [tab] 'indent-line)
 ;; (vimpulse-imap [tab] 'indent-for-tab-command)
