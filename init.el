@@ -179,7 +179,8 @@
   (fix-server))
 
 
-(add-to-list 'auto-mode-alist '("\\.qi$" . lisp-mode))
+(require 'qi-mode)
+
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
 
