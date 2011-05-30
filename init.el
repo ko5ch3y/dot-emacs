@@ -55,10 +55,9 @@
 
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
-(setq-default elscreen-prefix-key "`")
-(load "elscreen" "ElScreen" t)
-
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
+;; (setq-default elscreen-prefix-key "`")
+;; (load "elscreen" "ElScreen" t)
 
 ;(setq-default inferior-lisp-program "/usr/bin/ecl")
 ;(require 'slime-autoloads)
@@ -110,7 +109,7 @@
 (setq-default read-file-name-completion-ignore-case t)
 (setq-default backup-inhibited t)
 (setq-default auto-save-default nil)
-(setq-default initial-buffer-choice t)
+;; (setq-default initial-buffer-choice t)
 (setq-default inhibit-read-only t)
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)

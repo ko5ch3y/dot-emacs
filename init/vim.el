@@ -54,7 +54,7 @@
 ;; (vimpulse-imap [tab] 'indent-for-tab-command)
 (define-key viper-vi-basic-map [tab] 'indent-for-tab-command)
 (vimpulse-imap [C-tab] 'tab-to-tab-stop)
-(define-key viper-vi-basic-map "`" 'elscreen-select-and-goto)
+;; (define-key viper-vi-basic-map "`" 'elscreen-select-and-goto)
 
 (defadvice viper-maybe-checkout (around viper-svn-checkin-fix activate)
       "Advise viper-maybe-checkout to ignore svn files."
