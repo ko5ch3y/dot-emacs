@@ -6,6 +6,9 @@
 (vim:imap (kbd "C-S-h") 'delete-backward-char)
 (define-key key-translation-map [?\C-h] [?\C-?])
 
+(vim:nmap ";" 'vim:ex-read-command)
+(vim:vmap ";" 'vim:ex-read-command)
+
 (vim:nmap "-" (lambda ()
                 (interactive)
                 (vim:visual-toggle-linewise)
@@ -21,7 +24,7 @@
 (vim:nmap "zb" 'switch-to-buffer)
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zq" 'save-buffers-kill-terminal)
-(vim:nmap "zcd" 'cd)
+(vim:nmap "zc" 'cd)
 (vim:nmap "zV" 'split-window-vertically)
 (vim:nmap "zH" 'split-window-horizontally)
 (vim:nmap "zx" 'delete-window)
@@ -36,7 +39,7 @@
 (vim:vmap "za" 'align)
 (vim:nmap "zA" 'align-regexp)
 (vim:vmap "zA" 'align-regexp)
-(vim:vmap "zs" 'start-server)
+(vim:nmap "zs" 'start-server)
 
 (vim:nmap "H" 'windmove-left)
 (vim:nmap "L" 'windmove-right)
@@ -44,4 +47,12 @@
 (vim:nmap "K" 'windmove-up)
 
 (vim:imap [C-tab] 'tab-to-tab-stop)
+
+(vim:defcmd vim:cmd-delete-bwd-word (count register)
+  "Deletes the next count characters."
+  (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
+                  :register register))
+
+(vim:imap "\C-w" 'vim:cmd-delete-bwd-word)
+
 (vim:nmap "`" 'elscreen-select-and-goto)

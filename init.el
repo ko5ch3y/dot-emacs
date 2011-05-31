@@ -122,6 +122,7 @@
 (defun fix-server ()
   (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 (defun start-server ()
+  (interactive)
   (server-mode t)
   (fix-server))
 
