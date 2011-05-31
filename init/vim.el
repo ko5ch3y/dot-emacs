@@ -17,8 +17,8 @@
 
 (vim:nmap "zE" 'anything-find-file-other-window)
 (vim:nmap "ze" 'anything-find-file)
-(vim:nmap "zB" 'viper-switch-to-buffer-other-window)
-(vim:nmap "zb" 'viper-switch-to-buffer)
+(vim:nmap "zB" 'switch-to-buffer-other-window)
+(vim:nmap "zb" 'switch-to-buffer)
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zq" 'save-buffers-kill-terminal)
 (vim:nmap "zcd" 'cd)
@@ -36,6 +36,7 @@
 (vim:vmap "za" 'align)
 (vim:nmap "zA" 'align-regexp)
 (vim:vmap "zA" 'align-regexp)
+(vim:vmap "zs" 'start-server)
 
 (vim:nmap "H" 'windmove-left)
 (vim:nmap "L" 'windmove-right)
