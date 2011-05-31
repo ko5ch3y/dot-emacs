@@ -20,7 +20,6 @@
   t "" 'my-keys-minor-mode-map)
 (my-keys-minor-mode 1)
 
-;; (define-key my-keys-minor-mode-map (kbd "C-w") 'vim:cmd-delete-bwd-word)
 (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
 
 
