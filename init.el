@@ -105,7 +105,9 @@
         '(face trailing tabs tab-mark))
 
 
-(iswitchb-mode 1)
+(ido-mode 0)
+(iswitchb-mode 0)
+
 (setq-default read-file-name-completion-ignore-case t)
 (setq-default backup-inhibited t)
 (setq-default auto-save-default nil)
