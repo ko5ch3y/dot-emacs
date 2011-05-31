@@ -55,5 +55,6 @@
                   :register register))
 
 (vim:imap "\C-w" 'vim:cmd-delete-bwd-word)
+(vim:nmap "\C-j" 'vim:cmd-join-lines)
 
 (vim:nmap "`" 'elscreen-select-and-goto)
