@@ -9,8 +9,20 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
+
 (add-to-list 'load-path "~/.emacs.d/init/")
 (load "vim.el")
+
+
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t "" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
+
+;; (define-key my-keys-minor-mode-map (kbd "C-w") 'vim:cmd-delete-bwd-word)
+(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")

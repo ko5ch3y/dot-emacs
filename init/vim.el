@@ -47,6 +47,7 @@
 (vim:nmap "K" 'windmove-up)
 
 (vim:imap [C-tab] 'tab-to-tab-stop)
+(vim:vmap [tab] 'vim:cmd-indent)
 
 (vim:defcmd vim:cmd-delete-bwd-word (count register)
   "Deletes the next count characters."
