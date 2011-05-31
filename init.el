@@ -114,10 +114,10 @@
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)
 
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda ()
+;; (add-hook 'emacs-lisp-mode-hook
+          ;; '(lambda ()
              ;; Automatically byte-compile emacs-lisp files upon save
-             (add-hook 'after-save-hook 'emacs-lisp-byte-compile t t)))
+             ;; (add-hook 'after-save-hook 'emacs-lisp-byte-compile t t)))
 
 (defun fix-server ()
   (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
