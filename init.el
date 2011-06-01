@@ -10,10 +10,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
-(add-to-list 'load-path "~/.emacs.d/init/")
-(load "vim.el")
-
-
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
