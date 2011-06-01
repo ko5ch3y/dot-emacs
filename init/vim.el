@@ -40,6 +40,7 @@
 (vim:nmap "zA" 'align-regexp)
 (vim:vmap "zA" 'align-regexp)
 (vim:nmap "zs" 'start-server)
+(vim:nmap "zo" 'occur)
 
 (vim:nmap "H" 'windmove-left)
 (vim:nmap "L" 'windmove-right)
