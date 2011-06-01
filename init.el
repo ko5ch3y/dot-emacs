@@ -84,7 +84,18 @@
 (vim:imap "\C-w" 'vim:cmd-delete-bwd-word)
 (vim:nmap "\C-j" 'vim:cmd-join-lines)
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
+(setq-default elscreen-prefix-key "`")
+(load "elscreen" "ElScreen" t)
+
 (vim:nmap "`" 'elscreen-select-and-goto)
+(require 'vim-elscreen)
+(vim:nmap "te" 'vim:cmd-tab-new)
+(vim:nmap "tc" 'vim:cmd-tab-close)
+(vim:nmap "to" 'vim:cmd-tab-close-other)
+(vim:nmap "tn" 'vim:cmd-tab-next)
+(vim:nmap "tp" 'vim:cmd-tab-previous)
+(vim:nmap "tt" 'elscreen-toggle)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
@@ -129,10 +140,6 @@
 (setq-default tab-stop-list (generate-tab-stop-list))
 
 
-
-;; (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
-;; (setq-default elscreen-prefix-key "`")
-;; (load "elscreen" "ElScreen" t)
 
 ;(setq-default inferior-lisp-program "/usr/bin/ecl")
 ;(require 'slime-autoloads)
