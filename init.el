@@ -23,6 +23,8 @@
 (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
 
 
+(require 'undo-tree)
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (require 'anything-startup)
