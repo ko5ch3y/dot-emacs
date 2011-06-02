@@ -82,6 +82,7 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
 (setq-default elscreen-prefix-key "`")
+(setq-default elscreen-startup-command-line-processing nil)
 (load "elscreen" "ElScreen" t)
 
 (vim:nmap "`" 'elscreen-select-and-goto)
