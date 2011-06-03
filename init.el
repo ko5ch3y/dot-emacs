@@ -209,6 +209,7 @@
 
 
 (require 'qi-mode)
+(add-to-list 'auto-mode-alist '("\\.qml$" . js-mode))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
