@@ -16,7 +16,7 @@
       (background-color . "#1B1D1E")
       (cursor-color . "#F92672")
       (background-mode . dark))
-     (default ((t (:foreground "#F8F8F2" :background "#1B1D1E"))))
+     (default ((t (:weight bold foreground "#F8F8F2" :background "#1B1D1E"))))
      (bold ((t (:weight bold))))
      (bold-italic ((t (:weight bold :slant italic))))
      (custom-face-tag ((t (:foreground "#66D9EF" :weight bold))))

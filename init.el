@@ -1,4 +1,4 @@
-(set-frame-font "Monospace 9")
+(set-frame-font "Monospace 11")
 
 (load "~/.emacs.d/elpa/package.el")
 (require 'package)
