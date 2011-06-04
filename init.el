@@ -91,6 +91,7 @@
 (vim:nmap "tn" 'vim:cmd-tab-next)
 (vim:nmap "tp" 'vim:cmd-tab-previous)
 (vim:nmap "tt" 'elscreen-toggle)
+(vim:imap "`" 'self-insert-command)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
