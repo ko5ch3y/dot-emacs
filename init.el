@@ -195,6 +195,7 @@
 (setq-default inhibit-read-only t)
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)
+(setq-default scroll-step 1)
 
 ;; (add-hook 'emacs-lisp-mode-hook
           ;; '(lambda ()
