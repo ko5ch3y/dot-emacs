@@ -213,8 +213,9 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
 
-(global-hl-line-mode 1)
-(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
-(require 'color-theme)
-(require 'color-theme-molokai)
-(color-theme-molokai)
+(when window-system
+  (global-hl-line-mode 1)
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
+  (require 'color-theme)
+  (require 'color-theme-molokai)
+  (color-theme-molokai))
