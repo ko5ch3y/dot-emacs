@@ -111,6 +111,19 @@
 (vim:emap "cp" "cprevious")
 (vim:nmap "zp" 'vim:cmd-prev-error)
 
+(setq-default vim:initial-modes
+              '((debugger-mode . window)
+                (compilation-mode . normal)
+                (grep-mode . window)
+                (gud-mode . window)
+                (sldb-mode . window)
+                (slime-repl-mode . window)
+                (reftex-select-bib-mode . window)
+                (completion-list-mode . window)
+                (help-mode . motion)
+                (Info-mode . motion)))
+
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
 (setq-default elscreen-prefix-key "`")
