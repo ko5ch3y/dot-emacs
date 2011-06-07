@@ -144,7 +144,7 @@
 ;              'slime-indent-and-complete-symbol)))
 
 
-(set-frame-font "Monospace 8")
+(set-frame-font "Monospace 9")
 ;; (set-face-attribute 'default nil :weight 'bold)
 ;; (require 'rainbow-delimiters)
 (custom-set-faces
