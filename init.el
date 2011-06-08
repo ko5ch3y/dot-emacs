@@ -86,6 +86,32 @@
 (vim:nmap "\C-j" 'vim:cmd-join-lines)
 
 
+(vim:defcmd vim:cmd-make (nonrepeatable argument)
+  "Executes compile or recompile."
+  (if argument
+      (compile (concat "make " argument))
+    (recompile)))
+
+(vim:emap "make" 'vim:cmd-make)
+(vim:emap "m" "make")
+(vim:nmap "zm" 'vim:cmd-make)
+
+(vim:defcmd vim:cmd-next-error (nonrepeatable count)
+  "Moves to the `count'th next error."
+  (next-error count))
+
+(vim:defcmd vim:cmd-prev-error (nonrepeatable count)
+  "Moves to the `count'th previous error."
+  (next-error (- (or count 1))))
+
+(vim:emap "cnext" 'vim:cmd-next-error)
+(vim:emap "cn" "cnext")
+(vim:nmap "zn" 'vim:cmd-next-error)
+(vim:emap "cprevious" 'vim:cmd-prev-error)
+(vim:emap "cp" "cprevious")
+(vim:nmap "zp" 'vim:cmd-prev-error)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
 (setq-default elscreen-prefix-key "`")
 (setq-default elscreen-startup-command-line-processing nil)
