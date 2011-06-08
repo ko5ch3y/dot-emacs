@@ -16,6 +16,10 @@
 
 (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
 
+(defun my-c-initialization-hook ()
+  (define-key c-mode-base-map [tab] 'indent-for-tab-command))
+(add-hook 'c-initialization-hook 'my-c-initialization-hook)
+
 
 (require 'undo-tree)
 
@@ -80,6 +84,7 @@
 
 (vim:imap "\C-w" 'vim:cmd-delete-bwd-word)
 (vim:nmap "\C-j" 'vim:cmd-join-lines)
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
 (setq-default elscreen-prefix-key "`")
