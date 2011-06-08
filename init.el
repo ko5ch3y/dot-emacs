@@ -64,6 +64,12 @@
 (vim:nmap "J" 'windmove-down)
 (vim:nmap "K" 'windmove-up)
 
+(vim:nmap "tc" 'transpose-chars)
+(vim:nmap "tw" 'transpose-words)
+(vim:nmap "tp" 'transpose-paragraphs)
+(vim:nmap "ts" 'transpose-sentences)
+(vim:nmap "tl" 'transpose-lines)
+
 (vim:imap [C-tab] 'tab-to-tab-stop)
 (vim:vmap [tab] 'vim:cmd-indent)
 
