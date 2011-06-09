@@ -127,11 +127,7 @@
 (setq compilation-finish-functions 'compile-autoclose)
 (defun compile-autoclose (buffer string)
   (cond ((string-match "finished" string)
-         ;; (bury-buffer "*compilation*")
-         ;; (winner-undo)
-         (switch-to-buffer-other-window "*compilation*")
-         (kill-this-buffer)
-         (vim:window-prev)
+         (kill-buffer "*compilation*")
          (message "Build successful."))
         (t
          (message "Compilation exited abnormally: %s" string))))
