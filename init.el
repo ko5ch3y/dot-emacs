@@ -221,8 +221,8 @@
  '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
 
 (defun common-lisp-hook ()
-  (setq standard-indent 2)
-  (setq tab-stop-list (generate-tab-stop-list)))
+  (setq-mode-local standard-indent 2)
+  (setq-mode-local tab-stop-list (generate-tab-stop-list)))
 
 (add-hook 'scheme-mode-hook
           (lambda ()
