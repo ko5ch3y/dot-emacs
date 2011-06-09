@@ -123,17 +123,18 @@
                 (help-mode . motion)
                 (Info-mode . motion)))
 
-;; Close the compilation window if there was no error at all.
-(setq compilation-exit-message-function
-      (lambda (status code msg)
-        ;; If M-x compile exists with a 0
-        (when (and (eq status 'exit) (zerop code))
-          ;; then bury the *compilation* buffer, so that C-x b doesn't go there
-          (bury-buffer "*compilation*")
-          ;; and return to whatever were looking at before
-          (replace-buffer-in-windows "*compilation*"))
-        ;; Always return the anticipated result of compilation-exit-message-function
-        (cons msg code)))
+(winner-mode t)
+(setq compilation-finish-functions 'compile-autoclose)
+(defun compile-autoclose (buffer string)
+  (cond ((string-match "finished" string)
+         ;; (bury-buffer "*compilation*")
+         ;; (winner-undo)
+         (switch-to-buffer-other-window "*compilation*")
+         (kill-this-buffer)
+         (vim:window-prev)
+         (message "Build successful."))
+        (t
+         (message "Compilation exited abnormally: %s" string))))
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
