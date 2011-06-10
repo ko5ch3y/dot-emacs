@@ -95,6 +95,7 @@
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m" "make")
 (vim:nmap "zm" 'vim:cmd-make)
+(vim:nmap "zk" 'kill-compilation)
 
 (vim:defcmd vim:cmd-next-error (nonrepeatable count)
   "Moves to the `count'th next error."
