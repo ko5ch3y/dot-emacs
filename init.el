@@ -150,6 +150,10 @@
 (vim:imap "`" 'self-insert-command)
 
 
+(require 'autopair)
+(autopair-mode t)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (require 'anything-startup)
@@ -163,10 +167,10 @@
   (interactive)
   (let ((tab-always-indent t))
     (indent-for-tab-command nil)))
-(define-key global-map (kbd "RET") (lambda ()
-                                     (interactive)
-                                     (newline)
-                                     (indent-according-to-mode)))
+(vim:imap (kbd "RET") (lambda ()
+                        (interactive)
+                        (newline)
+                        (indent-according-to-mode)))
 (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
 (require 'cc-mode)
