@@ -158,6 +158,7 @@
 
 (require 'auto-complete-config)
 (ac-config-default)
+(define-key ac-completing-map " " 'ac-complete)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
