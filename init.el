@@ -8,19 +8,6 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t "" 'my-keys-minor-mode-map)
-(my-keys-minor-mode 1)
-
-(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
-
-(defun my-c-initialization-hook ()
-  (define-key c-mode-base-map [tab] 'indent-for-tab-command))
-(add-hook 'c-initialization-hook 'my-c-initialization-hook)
-
-
 (require 'undo-tree)
 
 
@@ -73,9 +60,6 @@
 (vim:nmap "tp" 'transpose-paragraphs)
 (vim:nmap "ts" 'transpose-sentences)
 (vim:nmap "tl" 'transpose-lines)
-
-(vim:imap [C-tab] 'tab-to-tab-stop)
-(vim:vmap [tab] 'vim:cmd-indent)
 
 (vim:defcmd vim:cmd-delete-bwd-word (count register)
   "Deletes the next count characters."
@@ -150,8 +134,30 @@
 (vim:imap "`" 'self-insert-command)
 
 
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t "" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
+
+(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+
+;; (defun my-c-initialization-hook ()
+  ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
+;; (add-hook 'c-initialization-hook 'my-c-initialization-hook)
+
+;; (define-key c-mode-map [tab] 'indent-for-tab-command)
+(define-key read-expression-map [(tab)] 'hippie-expand)
+
+(vim:imap [C-tab] 'tab-to-tab-stop)
+(vim:vmap [tab] 'vim:cmd-indent)
+
+
 (require 'autopair)
 (autopair-mode t)
+
+(require 'auto-complete-config)
+(ac-config-default)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
@@ -174,8 +180,6 @@
 (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
 (require 'cc-mode)
-(define-key c-mode-map [tab] 'indent-for-tab-command)
-(define-key read-expression-map [(tab)] 'hippie-expand)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
 (setq-default standard-indent 4)
