@@ -8,6 +8,27 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
+(when window-system
+  (global-hl-line-mode 1)
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
+  (require 'color-theme)
+  (require 'color-theme-molokai)
+  (color-theme-molokai))
+
+
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t "" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
+
+(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+
+(defun my-c-initialization-hook ()
+  (define-key c-mode-base-map [tab] 'indent-for-tab-command))
+(add-hook 'c-initialization-hook 'my-c-initialization-hook)
+
+
 (require 'undo-tree)
 
 
@@ -284,10 +305,3 @@
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
-
-(when window-system
-  (global-hl-line-mode 1)
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
-  (require 'color-theme)
-  (require 'color-theme-molokai)
-  (color-theme-molokai))
