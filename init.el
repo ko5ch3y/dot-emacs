@@ -223,14 +223,28 @@
 
 
 
-;(setq-default inferior-lisp-program "/usr/bin/ecl")
-;(require 'slime-autoloads)
-;(slime-setup '(slime-fancy))
-;(add-hook 'slime-mode-hook
-;          (lambda ()
-;            (define-key
-;              viper-insert-diehard-map "\t"
-;              'slime-indent-and-complete-symbol)))
+(setq-default inferior-lisp-program "/usr/bin/sbcl --core /data/Temp/QiII1.07/Lisp/Qi.core")
+(require 'slime)
+(slime-setup)
+;; (require 'slime-autoloads)
+;; (slime-setup '(slime-fancy))
+;; (add-hook 'slime-mode-hook
+;;          (lambda ()
+;;            (define-key
+;;              viper-insert-diehard-map "\t"
+;;              'slime-indent-and-complete-symbol)))
+
+;; (defun qi-init-cmd (port-filename coding-system)
+;;   (format "%S\n\n"
+;;           `(PROGN
+;;             (FUNCALL (READ-FROM-STRING "SWANK:START-SERVER")
+;;                      ,port-filename
+;;                      :CODING-SYSTEM , (slime-coding-system-cl-name
+;;                                        coding-system)))))
+;; (defun qi ()
+;;   (interactive)
+;;   (slime-start :program "/data/Temp/QiII1.07/Lisp/Qi-Linux-SBCL"
+;;                :init 'qi-init-cmd ))
 
 
 (set-frame-font "Monospace 9")
