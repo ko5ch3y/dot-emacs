@@ -261,6 +261,10 @@
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)
 (setq-default scroll-step 1)
+(setq-default require-final-newline t)
+(setq-default next-line-add-newlines nil)
+(setq-default visible-bell t)
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; (add-hook 'emacs-lisp-mode-hook
           ;; '(lambda ()
