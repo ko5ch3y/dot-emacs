@@ -247,7 +247,7 @@
 ;;                :init 'qi-init-cmd ))
 
 
-(set-frame-font "Monospace 9")
+(set-frame-font "Monospace 10")
 ;; (set-face-attribute 'default nil :weight 'bold)
 ;; (require 'rainbow-delimiters)
 (custom-set-faces
