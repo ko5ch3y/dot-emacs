@@ -162,7 +162,7 @@
 
 
 (require 'autopair)
-(autopair-mode t)
+(autopair-global-mode t)
 
 (require 'auto-complete-config)
 (ac-config-default)
