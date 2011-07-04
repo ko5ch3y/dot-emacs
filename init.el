@@ -166,7 +166,7 @@
 
 (require 'auto-complete-config)
 (ac-config-default)
-(define-key ac-completing-map " " 'ac-complete)
+;; (define-key ac-completing-map " " 'ac-complete)
 (setq ac-auto-show-menu 0)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
