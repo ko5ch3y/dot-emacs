@@ -101,7 +101,7 @@
      (outline-7 ((t (:foreground "#F92672"))))
      (outline-8 ((t (:foreground "#A6E22E"))))
      (secondary-selection ((t (:background "#272822"))))
-     (show-paren-match-face ((t (:foreground "#F92672"))))
+     (show-paren-match-face ((t (:background "#A6E22A" :foreground "#000000"))))
      (show-paren-mismatch-face ((t (:foreground "#960050"))))
      (widget-inactive-face ((t (:background "#ff0000"))))
      (woman-addition ((t (:foreground "#AE81FF"))))
