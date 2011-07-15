@@ -160,6 +160,33 @@
 (vim:imap [C-tab] 'tab-to-tab-stop)
 (vim:vmap [tab] 'vim:cmd-indent)
 
+(defun find-tags-file ()
+  "recursively searches each parent directory for a file named `TAGS' and returns the
+path to that file or nil if a tags file is not found. Returns nil if the buffer is
+not visiting a file"
+  (labels
+      ((find-tags-file-r (path)
+         (let* ((parent (file-name-directory path))
+                (possible-tags-file (concat parent "TAGS")))
+           (cond
+             ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
+             ((string= "/TAGS" possible-tags-file) (error "no tags file found"))
+             (t (find-tags-file-r (directory-file-name parent)))))))
+
+    (if (buffer-file-name)
+        (catch 'found-it
+          (find-tags-file-r (buffer-file-name)))
+        (error "buffer is not visiting a file"))))
+
+(defun set-tags-file-path ()
+  "calls `find-tags-file' to recursively search up the directory tree to find
+a file named `tags'. If found, calls `visit-tags-table' with that path as an argument
+otherwise raises an error."
+  (interactive)
+  (visit-tags-table (jds-find-tags-file)))
+
+(vim:nmap "zf" 'set-tags-file-path)
+
 
 (require 'autopair)
 (autopair-global-mode t)
@@ -178,16 +205,20 @@
   (interactive)
   (other-window 1)
   (anything-find-file))
+
 (defun indent-line ()
   (interactive)
   (let ((tab-always-indent t))
     (indent-for-tab-command nil)))
+
 (vim:imap (kbd "RET") (lambda ()
                         (interactive)
                         (newline)
                         (indent-according-to-mode)))
+
 (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
+
 (require 'cc-mode)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
