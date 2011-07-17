@@ -12,8 +12,8 @@
   (global-hl-line-mode 0)
   (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
   (require 'color-theme)
-  (require 'color-theme-molokai)
-  (color-theme-molokai))
+  (require 'color-theme-lolokai)
+  (color-theme-lolokai))
 
 
 (require 'undo-tree)

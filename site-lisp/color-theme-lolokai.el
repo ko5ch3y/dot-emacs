@@ -6,10 +6,10 @@
   (require 'color-theme))
 
 (defun color-theme-lolokai ()
-  "Color theme based on the Molokai color scheme for vim."
+  "Color theme based on the Molokai color scheme."
   (interactive)
   (color-theme-install
-   '(color-theme-molokai
+   '(color-theme-lolokai
      ((foreground-color . "#000000")
       (background-color . "#FFFFFF")
       (cursor-color . "#5CA5FE")
