@@ -297,6 +297,9 @@ otherwise raises an error."
           (lambda ()
             (common-lisp-hook)))
 
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 (require 'whitespace)
 (global-whitespace-mode t)
 (setq-default whitespace-style
