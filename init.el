@@ -147,6 +147,11 @@
 (vim:nmap "tt" 'elscreen-toggle)
 (vim:imap "`" 'self-insert-command)
 
+(vim:nmap "zt" 'inferior-haskell-type)
+(vim:nmap "zi" 'inferior-haskell-info)
+(vim:nmap "zL" 'inferior-haskell-load-file)
+(vim:nmap "zD" 'inferior-haskell-find-definition)
+
 
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
