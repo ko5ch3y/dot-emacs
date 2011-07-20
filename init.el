@@ -10,10 +10,8 @@
 
 (when window-system
   (global-hl-line-mode 0)
-  (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-6.6.0")
   (require 'color-theme)
-  (require 'color-theme-lolokai)
-  (color-theme-lolokai))
+  (require 'color-theme-github))
 
 
 (require 'undo-tree)
