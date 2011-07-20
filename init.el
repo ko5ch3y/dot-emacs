@@ -76,6 +76,14 @@
 (vim:nmap "\C-j" 'vim:cmd-join-lines)
 
 
+(vim:nmap "\M-b" 'vim:cmd-prev-jump)
+(vim:nmap "\M-f" 'vim:cmd-next-jump)
+(vim:imap "\M-b" 'vim:cmd-prev-jump)
+(vim:imap "\M-f" 'vim:cmd-next-jump)
+
+(vim:nmap "\M-l" 'vim:scroll-line-to-center)
+
+
 (vim:defcmd vim:cmd-make (nonrepeatable argument)
   "Executes compile or recompile."
   (if argument

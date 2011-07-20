@@ -1,15 +1,12 @@
 ;; Author: Vladimir Darmanian <Vladimir.Darmanian@gmail.com>
-;;
-;; Note: Based on the molokai theme.
 
 (eval-when-compile
   (require 'color-theme))
 
-(defun color-theme-lolokai ()
-  "Color theme based on the Molokai color scheme."
+(defun color-theme-nature ()
   (interactive)
   (color-theme-install
-   '(color-theme-lolokai
+   '(color-theme-nature
      ((foreground-color . "#000000")
       (background-color . "#FFFFFF")
       (cursor-color . "#5CA5FE")
@@ -108,4 +105,4 @@
      (woman-unknown ((t (:foreground "#89BDEF"))))
      )))
 
-(provide 'color-theme-lolokai)
+(provide 'color-theme-nature)
