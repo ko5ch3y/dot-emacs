@@ -182,7 +182,7 @@ not visiting a file"
                 (possible-tags-file (concat parent "TAGS")))
            (cond
              ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
-             ((string= "/TAGS" possible-tags-file) (error "no tags file found"))
+             ((string= "/TAGS" possible-tags-file) (error "no TAGS file found"))
              (t (find-tags-file-r (directory-file-name parent)))))))
 
     (if (buffer-file-name)
@@ -195,7 +195,7 @@ not visiting a file"
 a file named `tags'. If found, calls `visit-tags-table' with that path as an argument
 otherwise raises an error."
   (interactive)
-  (visit-tags-table (jds-find-tags-file)))
+  (visit-tags-table (find-tags-file)))
 
 (vim:nmap "zf" 'set-tags-file-path)
 
