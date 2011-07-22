@@ -207,19 +207,21 @@ otherwise raises an error."
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 ;; (define-key ac-completing-map " " 'ac-complete)
-(setq ac-auto-show-menu 0)
+(setq-default ac-auto-show-menu 0)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+(setq-default yas/prompt-functions '(yas/dropdown-prompt))
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
 (require 'auto-complete-clang)
+(setq-default ac-clang-auto-save nil)
 
 (defun my-ac-cc-mode-setup ()
-  ;; (setq ac-sources (append '(ac-source-clang) ac-sources))
-  (setq ac-sources (append '(ac-source-yasnippet) ac-sources)))
+  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
 (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
 
 (defun my-ac-config ()
