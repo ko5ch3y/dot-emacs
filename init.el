@@ -148,8 +148,8 @@
 (vim:nmap "tt" 'elscreen-toggle)
 (vim:imap "`" 'self-insert-command)
 
-(vim:nmap "zt" 'inferior-haskell-type)
-(vim:nmap "zi" 'inferior-haskell-info)
+(vim:nmap "zT" 'inferior-haskell-type)
+(vim:nmap "zI" 'inferior-haskell-info)
 (vim:nmap "zL" 'inferior-haskell-load-file)
 (vim:nmap "zD" 'inferior-haskell-find-definition)
 
