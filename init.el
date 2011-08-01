@@ -359,7 +359,7 @@ otherwise raises an error."
 (require 'whitespace)
 (global-whitespace-mode t)
 (setq-default whitespace-style
-        '(face trailing tabs tab-mark))
+        '(face tabs tab-mark))
 
 
 (ido-mode 0)
