@@ -161,6 +161,10 @@
 
 (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
 
+(add-hook 'c-mode-common-hook
+  (lambda()
+    (vim:local-nmap "zh" 'ff-find-other-file)))
+
 ;; (defun my-c-initialization-hook ()
   ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
 ;; (add-hook 'c-initialization-hook 'my-c-initialization-hook)
