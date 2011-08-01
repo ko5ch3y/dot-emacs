@@ -83,6 +83,9 @@
 
 (vim:nmap "\M-l" 'vim:scroll-line-to-center)
 
+(vim:nmap "zf" 'find-tag-other-window)
+(vim:nmap "zt" 'anything-c-etags-select)
+
 
 (vim:defcmd vim:cmd-make (nonrepeatable argument)
   "Executes compile or recompile."
@@ -200,7 +203,7 @@ otherwise raises an error."
   (interactive)
   (visit-tags-table (find-tags-file)))
 
-(vim:nmap "zf" 'set-tags-file-path)
+(vim:nmap "zF" 'set-tags-file-path)
 
 
 (require 'autopair)
