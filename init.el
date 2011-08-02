@@ -83,8 +83,8 @@
 
 (vim:nmap "\M-l" 'vim:scroll-line-to-center)
 
-(vim:nmap "zf" 'find-tag-other-window)
-(vim:nmap "zt" 'anything-c-etags-select)
+(vim:nmap "zt" (lambda () (interactive) (find-tag-other-window (thing-at-point 'symbol))))
+(vim:nmap "zf" 'anything-c-etags-select)
 
 
 (vim:defcmd vim:cmd-make (nonrepeatable argument)
