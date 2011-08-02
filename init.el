@@ -206,6 +206,22 @@ otherwise raises an error."
 (vim:nmap "zF" 'set-tags-file-path)
 
 
+(defun now ()
+  "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y-%m-%d %-I:%M %p")))
+
+(defun today ()
+  "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y-%m-%d")))
+
+(defun short-date ()
+  "Insert string for today's date formatted like 110801."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%y%m%d")))
+
+
 (require 'autopair)
 (autopair-global-mode t)
 
