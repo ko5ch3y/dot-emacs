@@ -113,6 +113,7 @@
 (vim:emap "cp" "cprevious")
 (vim:nmap "zp" 'vim:cmd-prev-error)
 
+(setq-default vim:default-initial-mode 'normal)
 (setq-default vim:initial-modes
               '((debugger-mode . window)
                 (compilation-mode . normal)
@@ -258,14 +259,26 @@ otherwise raises an error."
 (my-ac-config)
 
 
-(setq load-path (cons "~/.emacs.d/site-lisp/org-mode/lisp" load-path))
-(setq load-path (cons "~/.emacs.d/site-lisp/org-mode/contrib/lisp" load-path))
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
 (require 'org-install)
+(require 'org-mw)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-; (vim:nmap "'l" 'org-store-link)
-; (vim:nmap "'c" 'org-capture)
-; (vim:nmap "'a" 'org-agenda)
-; (vim:nmap "'b" 'org-iswitchb)
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
+(add-hook 'org-mode-hook
+          (lambda ()
+            (vim:local-nmap [tab] 'org-cycle)
+            (vim:local-nmap "\M-n" 'outline-next-visible-heading)
+            (vim:local-nmap "\M-p" 'outline-previous-visible-heading)
+            (vim:local-nmap "\M-u" 'outline-up-heading)
+            (vim:local-nmap "\M-f" 'org-forward-same-level)
+            (vim:local-nmap "\M-b" 'org-backward-same-level)
+            (vim:local-imap "\M-n" 'outline-next-visible-heading)
+            (vim:local-imap "\M-p" 'outline-previous-visible-heading)
+            (vim:local-imap "\M-u" 'outline-up-heading)
+            (vim:local-imap "\M-f" 'org-forward-same-level)
+            (vim:local-imap "\M-b" 'org-backward-same-level)))
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
@@ -288,7 +301,7 @@ otherwise raises an error."
                         (newline)
                         (indent-according-to-mode)))
 
-(add-hook 'completion-at-point-functions 'hippie-expand nil)
+;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
 
 (require 'cc-mode)
