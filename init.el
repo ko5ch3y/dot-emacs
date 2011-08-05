@@ -43,8 +43,8 @@
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zq" 'save-buffers-kill-terminal)
 (vim:nmap "zc" 'cd)
-(vim:nmap "zV" 'split-window-vertically)
-(vim:nmap "zH" 'split-window-horizontally)
+(vim:nmap "\C-V" 'split-window-vertically)
+(vim:nmap "\C-H" 'split-window-horizontally)
 (vim:nmap "zx" 'delete-window)
 (vim:nmap "zd" 'kill-this-buffer)
 (vim:nmap "zi" 'imenu)
@@ -52,20 +52,20 @@
 (vim:vmap "za" 'align)
 (vim:nmap "zA" 'align-regexp)
 (vim:vmap "zA" 'align-regexp)
-(vim:nmap "zs" 'start-server)
+(vim:nmap "\C-s" 'start-server)
 (vim:nmap "zo" 'occur)
-(vim:nmap "zl" 'vim:cmd-nohighlight)
+(vim:nmap "\C-l" 'vim:cmd-nohighlight)
 
 (vim:nmap "H" 'windmove-left)
 (vim:nmap "L" 'windmove-right)
 (vim:nmap "J" 'windmove-down)
 (vim:nmap "K" 'windmove-up)
 
-(vim:nmap "tc" 'transpose-chars)
-(vim:nmap "tw" 'transpose-words)
-(vim:nmap "tp" 'transpose-paragraphs)
-(vim:nmap "ts" 'transpose-sentences)
-(vim:nmap "tl" 'transpose-lines)
+(vim:nmap "Tc" 'transpose-chars)
+(vim:nmap "Tw" 'transpose-words)
+(vim:nmap "Tp" 'transpose-paragraphs)
+(vim:nmap "Ts" 'transpose-sentences)
+(vim:nmap "Tl" 'transpose-lines)
 
 (vim:defcmd vim:cmd-delete-bwd-word (count register)
   "Deletes the next count characters."
@@ -151,10 +151,10 @@
 (vim:nmap "tt" 'elscreen-toggle)
 (vim:imap "`" 'self-insert-command)
 
-(vim:nmap "zT" 'inferior-haskell-type)
-(vim:nmap "zI" 'inferior-haskell-info)
-(vim:nmap "zL" 'inferior-haskell-load-file)
-(vim:nmap "zD" 'inferior-haskell-find-definition)
+(vim:nmap "\M-T" 'inferior-haskell-type)
+(vim:nmap "\M-I" 'inferior-haskell-info)
+(vim:nmap "\M-L" 'inferior-haskell-load-file)
+(vim:nmap "\M-D" 'inferior-haskell-find-definition)
 
 
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
@@ -269,6 +269,14 @@ otherwise raises an error."
 (add-hook 'org-mode-hook
           (lambda ()
             (vim:local-nmap [tab] 'org-cycle)
+            (vim:local-imap "\M-l" 'org-metaright)
+            (vim:local-imap "\M-h" 'org-metaleft)
+            (vim:local-imap "\M-k" 'org-metaup)
+            (vim:local-imap "\M-j" 'org-metadown)
+            (vim:local-nmap "\M-l" 'org-metaright)
+            (vim:local-nmap "\M-h" 'org-metaleft)
+            (vim:local-nmap "\M-k" 'org-metaup)
+            (vim:local-nmap "\M-j" 'org-metadown)
             (vim:local-nmap "\M-n" 'outline-next-visible-heading)
             (vim:local-nmap "\M-p" 'outline-previous-visible-heading)
             (vim:local-nmap "\M-u" 'outline-up-heading)
@@ -324,30 +332,6 @@ otherwise raises an error."
 
 (setq-default tab-stop-list (generate-tab-stop-list))
 
-
-
-(setq-default inferior-lisp-program "/usr/bin/sbcl --core /data/Temp/QiII1.07/Lisp/Qi.core")
-(require 'slime)
-(slime-setup)
-;; (require 'slime-autoloads)
-;; (slime-setup '(slime-fancy))
-;; (add-hook 'slime-mode-hook
-;;          (lambda ()
-;;            (define-key
-;;              viper-insert-diehard-map "\t"
-;;              'slime-indent-and-complete-symbol)))
-
-;; (defun qi-init-cmd (port-filename coding-system)
-;;   (format "%S\n\n"
-;;           `(PROGN
-;;             (FUNCALL (READ-FROM-STRING "SWANK:START-SERVER")
-;;                      ,port-filename
-;;                      :CODING-SYSTEM , (slime-coding-system-cl-name
-;;                                        coding-system)))))
-;; (defun qi ()
-;;   (interactive)
-;;   (slime-start :program "/data/Temp/QiII1.07/Lisp/Qi-Linux-SBCL"
-;;                :init 'qi-init-cmd ))
 
 
 (set-frame-font "Monospace 10")
