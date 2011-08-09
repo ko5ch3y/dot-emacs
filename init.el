@@ -405,6 +405,8 @@ otherwise raises an error."
 (setq-default show-paren-delay 0)
 (setq-default show-paren-style 'mixed)
 
+(setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHI -e ")
+
 ;; (add-hook 'emacs-lisp-mode-hook
           ;; '(lambda ()
              ;; Automatically byte-compile emacs-lisp files upon save
