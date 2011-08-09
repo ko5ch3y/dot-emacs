@@ -18,114 +18,6 @@
 (require 'undo-tree)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
-(require 'vim)
-(vim-mode 1)
-(vim:imap (kbd "C-S-h") 'delete-backward-char)
-(define-key key-translation-map [?\C-h] [?\C-?])
-
-(vim:nmap ";" 'vim:ex-read-command)
-(vim:vmap ";" 'vim:ex-read-command)
-
-(vim:nmap "-" (lambda ()
-                (interactive)
-                (vim:visual-toggle-linewise)
-                (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-                (vim:visual-toggle-linewise)
-                (vim:motion-down :count 1)))
-(vim:vmap "-" 'comment-or-uncomment-region)
-(vim:nmap "_" 'comment-dwim)
-
-(vim:nmap "zE" 'anything-find-file-other-window)
-(vim:nmap "ze" 'anything-find-file)
-(vim:nmap "zB" 'switch-to-buffer-other-window)
-(vim:nmap "zb" 'switch-to-buffer)
-(vim:nmap "zw" 'save-buffer)
-(vim:nmap "zq" 'save-buffers-kill-terminal)
-(vim:nmap "zc" 'cd)
-(vim:nmap "\C-V" 'split-window-vertically)
-(vim:nmap "\C-H" 'split-window-horizontally)
-(vim:nmap "zx" 'delete-window)
-(vim:nmap "zd" 'kill-this-buffer)
-(vim:nmap "zi" 'imenu)
-(vim:nmap "za" 'align-current)
-(vim:vmap "za" 'align)
-(vim:nmap "zA" 'align-regexp)
-(vim:vmap "zA" 'align-regexp)
-(vim:nmap "\C-s" 'start-server)
-(vim:nmap "zo" 'occur)
-(vim:nmap "\C-l" 'vim:cmd-nohighlight)
-
-(vim:nmap "H" 'windmove-left)
-(vim:nmap "L" 'windmove-right)
-(vim:nmap "J" 'windmove-down)
-(vim:nmap "K" 'windmove-up)
-
-(vim:nmap "Tc" 'transpose-chars)
-(vim:nmap "Tw" 'transpose-words)
-(vim:nmap "Tp" 'transpose-paragraphs)
-(vim:nmap "Ts" 'transpose-sentences)
-(vim:nmap "Tl" 'transpose-lines)
-
-(vim:defcmd vim:cmd-delete-bwd-word (count register)
-  "Deletes the next count characters."
-  (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
-                  :register register))
-
-(vim:imap "\C-w" 'vim:cmd-delete-bwd-word)
-(vim:nmap "\C-j" 'vim:cmd-join-lines)
-
-
-(vim:nmap "\M-b" 'vim:cmd-prev-jump)
-(vim:nmap "\M-f" 'vim:cmd-next-jump)
-(vim:imap "\M-b" 'vim:cmd-prev-jump)
-(vim:imap "\M-f" 'vim:cmd-next-jump)
-
-(vim:nmap "\M-l" 'vim:scroll-line-to-center)
-
-(vim:nmap "zt" (lambda () (interactive) (find-tag-other-window (thing-at-point 'symbol))))
-(vim:nmap "zf" 'anything-c-etags-select)
-
-
-(vim:defcmd vim:cmd-make (nonrepeatable argument)
-  "Executes compile or recompile."
-  (if argument
-      (compile (concat "make " argument))
-    (recompile)))
-
-(vim:emap "make" 'vim:cmd-make)
-(vim:emap "m" "make")
-(vim:nmap "zm" 'vim:cmd-make)
-(vim:nmap "zk" 'kill-compilation)
-
-(vim:defcmd vim:cmd-next-error (nonrepeatable count)
-  "Moves to the `count'th next error."
-  (next-error count))
-
-(vim:defcmd vim:cmd-prev-error (nonrepeatable count)
-  "Moves to the `count'th previous error."
-  (next-error (- (or count 1))))
-
-(vim:emap "cnext" 'vim:cmd-next-error)
-(vim:emap "cn" "cnext")
-(vim:nmap "zn" 'vim:cmd-next-error)
-(vim:emap "cprevious" 'vim:cmd-prev-error)
-(vim:emap "cp" "cprevious")
-(vim:nmap "zp" 'vim:cmd-prev-error)
-
-(setq-default vim:default-initial-mode 'normal)
-(setq-default vim:initial-modes
-              '((debugger-mode . window)
-                (compilation-mode . normal)
-                (grep-mode . window)
-                (gud-mode . window)
-                (sldb-mode . window)
-                (slime-repl-mode . window)
-                (reftex-select-bib-mode . window)
-                (completion-list-mode . window)
-                (help-mode . motion)
-                (Info-mode . motion)))
-
 (winner-mode t)
 (setq compilation-finish-functions 'compile-autoclose)
 (defun compile-autoclose (buffer string)
@@ -141,43 +33,51 @@
 (setq-default elscreen-startup-command-line-processing nil)
 (load "elscreen" "ElScreen" t)
 
-(vim:nmap "`" 'elscreen-select-and-goto)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
+(require 'vim)
+(vim-mode 1)
 (require 'vim-elscreen)
-(vim:nmap "te" 'vim:cmd-tab-new)
-(vim:nmap "tc" 'vim:cmd-tab-close)
-(vim:nmap "to" 'vim:cmd-tab-close-other)
-(vim:nmap "tn" 'vim:cmd-tab-next)
-(vim:nmap "tp" 'vim:cmd-tab-previous)
-(vim:nmap "tt" 'elscreen-toggle)
-(vim:imap "`" 'self-insert-command)
 
-(vim:nmap "\M-T" 'inferior-haskell-type)
-(vim:nmap "\M-I" 'inferior-haskell-info)
-(vim:nmap "\M-L" 'inferior-haskell-load-file)
-(vim:nmap "\M-D" 'inferior-haskell-find-definition)
+(setq-default vim:default-initial-mode 'normal)
+(setq-default vim:initial-modes
+              '((debugger-mode . window)
+                (compilation-mode . normal)
+                (grep-mode . normal)
+                (gud-mode . normal)
+                (sldb-mode . window)
+                (slime-repl-mode . window)
+                (reftex-select-bib-mode . window)
+                (completion-list-mode . window)
+                (help-mode . motion)
+                (Info-mode . motion)))
 
+(vim:defcmd vim:cmd-delete-bwd-word (count register)
+  "Deletes the next count characters."
+  (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
+                  :register register))
 
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t "" 'my-keys-minor-mode-map)
-(my-keys-minor-mode 1)
+(vim:defcmd vim:cmd-make (nonrepeatable argument)
+  "Executes compile or recompile."
+  (if argument
+      (compile (concat "make " argument))
+    (recompile)))
 
-(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+(vim:defcmd vim:cmd-next-error (nonrepeatable count)
+  "Moves to the `count'th next error."
+  (next-error count))
 
-(add-hook 'c-mode-common-hook
-  (lambda()
-    (vim:local-nmap "zh" 'ff-find-other-file)))
+(vim:defcmd vim:cmd-prev-error (nonrepeatable count)
+  "Moves to the `count'th previous error."
+  (next-error (- (or count 1))))
 
-;; (defun my-c-initialization-hook ()
-  ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
-;; (add-hook 'c-initialization-hook 'my-c-initialization-hook)
+(defun comment-uncomment-line ()
+  (interactive)
+  (vim:visual-toggle-linewise)
+  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+  (vim:visual-toggle-linewise)
+  (vim:motion-down :count 1))
 
-;; (define-key c-mode-map [tab] 'indent-for-tab-command)
-(define-key read-expression-map [(tab)] 'hippie-expand)
-
-(vim:imap [C-tab] 'tab-to-tab-stop)
-(vim:vmap [tab] 'vim:cmd-indent)
 
 (defun find-tags-file ()
   "recursively searches each parent directory for a file named `TAGS' and returns the
@@ -204,7 +104,132 @@ otherwise raises an error."
   (interactive)
   (visit-tags-table (find-tags-file)))
 
-(vim:nmap "zF" 'set-tags-file-path)
+(defun anything-find-file-other-window ()
+  (interactive)
+  (other-window 1)
+  (anything-find-file))
+
+(defun indent-line ()
+  (interactive)
+  (let ((tab-always-indent t))
+    (indent-for-tab-command nil)))
+
+(defun fix-server ()
+  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+
+(defun start-server ()
+  (interactive)
+  (server-mode t)
+  (fix-server))
+
+(defun find-tag-at-point ()
+ (interactive)
+ (find-tag (thing-at-point 'symbol)))
+
+(defun find-tag-at-point-other-window ()
+ (interactive)
+ (find-tag-other-window (thing-at-point 'symbol)))
+
+
+(vim:imap (kbd "RET") (lambda ()
+                        (interactive)
+                        (newline)
+                        (indent-according-to-mode)))
+
+(vim:nmap ";" 'vim:ex-read-command)
+(vim:vmap ";" 'vim:ex-read-command)
+
+;; (vim:imap (kbd "`" 'self-insert-command)
+
+(vim:nmap "-" 'comment-uncomment-line)
+(vim:vmap "-" 'comment-or-uncomment-region)
+(vim:nmap "_" 'comment-dwim)
+
+(vim:imap [C-tab] 'tab-to-tab-stop)
+(vim:vmap [tab] 'vim:cmd-indent)
+
+(vim:nmap "\M-a"      'align-current)
+(vim:vmap "\M-a"      'align)
+(vim:nmap "\M-A"      'align-regexp)
+(vim:vmap "\M-A"      'align-regexp)
+(vim:nmap "\M-b"      'switch-to-buffer)
+(vim:nmap "\M-B"      'vim:cmd-prev-jump)
+(vim:imap "\M-B"      'vim:cmd-prev-jump)
+(vim:nmap "\M-c"      'cd)
+(vim:emap "cnext"     'vim:cmd-next-error)
+(vim:emap "cn"        "cnext")
+(vim:emap "cprevious" 'vim:cmd-prev-error)
+(vim:emap "cp"        "cprevious")
+(vim:nmap "\M-d"      'kill-this-buffer)
+(vim:nmap "\M-e"      'anything-find-file)
+(vim:nmap "\M-f"      'anything-c-etags-select)
+(vim:nmap "\M-F"      'vim:cmd-next-jump)
+(vim:imap "\M-F"      'vim:cmd-next-jump)
+(vim:nmap "H"         'windmove-left)
+(vim:imap "\C-H"      'delete-backward-char)
+(vim:nmap "\M-i"      'imenu)
+(vim:nmap "J"         'windmove-down)
+(vim:nmap "\C-j"      'vim:cmd-join-lines)
+(vim:nmap "K"         'windmove-up)
+(vim:nmap "\M-k"      'kill-compilation)
+(vim:nmap "L"         'windmove-right)
+(vim:nmap "\M-l"      'vim:scroll-line-to-center)
+(vim:emap "make"      'vim:cmd-make)
+(vim:emap "m"         "make")
+(vim:nmap "\M-m"      'vim:cmd-make)
+(vim:nmap "\M-n"      'vim:cmd-next-error)
+(vim:nmap "\M-o"      'occur)
+(vim:nmap "\M-p"      'vim:cmd-prev-error)
+(vim:nmap "\M-q"      'save-buffers-kill-terminal)
+(vim:nmap "\M-t"      'find-tag-at-point)
+(vim:nmap "\M-T"      'find-tag-at-point-other-window)
+(vim:nmap "te"        'vim:cmd-tab-new)
+(vim:nmap "tc"        'vim:cmd-tab-close)
+(vim:nmap "to"        'vim:cmd-tab-close-other)
+(vim:nmap "tn"        'vim:cmd-tab-next)
+(vim:nmap "tp"        'vim:cmd-tab-previous)
+(vim:nmap "tt"        'elscreen-toggle)
+(vim:nmap "Tc"        'transpose-chars)
+(vim:nmap "Tl"        'transpose-lines)
+(vim:nmap "Tp"        'transpose-paragraphs)
+(vim:nmap "Ts"        'transpose-sentences)
+(vim:nmap "Tw"        'transpose-words)
+(vim:nmap "\M-w"      'save-buffer)
+(vim:imap "\C-w"      'vim:cmd-delete-bwd-word)
+(vim:nmap "X"         'delete-window)
+(vim:nmap "zf"        'set-tags-file-path)
+(vim:nmap "zh"        'split-window-horizontally)
+(vim:nmap "zl"        'vim:cmd-nohighlight)
+(vim:nmap "zs"        'start-server)
+(vim:nmap "zv"        'split-window-vertically)
+
+(add-hook 'c-mode-common-hook
+  (lambda ()
+    (vim:local-nmap "\M-h" 'ff-find-other-file)))
+
+(add-hook 'haskell-mode-hook
+  (lambda ()
+    (vim:nmap "\C-\M-d" 'inferior-haskell-find-definition)
+    (vim:nmap "\C-\M-i" 'inferior-haskell-info)
+    (vim:nmap "\C-\M-l" 'inferior-haskell-load-file)
+    (vim:nmap "\C-\M-t" 'inferior-haskell-type)))
+
+(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  t "" 'my-keys-minor-mode-map)
+(my-keys-minor-mode 1)
+
+(define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+
+(define-key key-translation-map [?\C-h] [?\C-?])
+
+;; (defun my-c-initialization-hook ()
+  ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
+;; (add-hook 'c-initialization-hook 'my-c-initialization-hook)
+
+;; (define-key c-mode-map [tab] 'indent-for-tab-command)
+(define-key read-expression-map [(tab)] 'hippie-expand)
 
 
 (defun now ()
@@ -269,45 +294,31 @@ otherwise raises an error."
 (add-hook 'org-mode-hook
           (lambda ()
             (vim:local-nmap [tab] 'org-cycle)
-            (vim:local-imap "\M-l" 'org-metaright)
-            (vim:local-imap "\M-h" 'org-metaleft)
-            (vim:local-imap "\M-k" 'org-metaup)
-            (vim:local-imap "\M-j" 'org-metadown)
-            (vim:local-nmap "\M-l" 'org-metaright)
-            (vim:local-nmap "\M-h" 'org-metaleft)
-            (vim:local-nmap "\M-k" 'org-metaup)
-            (vim:local-nmap "\M-j" 'org-metadown)
-            (vim:local-nmap "\M-n" 'outline-next-visible-heading)
-            (vim:local-nmap "\M-p" 'outline-previous-visible-heading)
-            (vim:local-nmap "\M-u" 'outline-up-heading)
-            (vim:local-nmap "\M-f" 'org-forward-same-level)
-            (vim:local-nmap "\M-b" 'org-backward-same-level)
-            (vim:local-imap "\M-n" 'outline-next-visible-heading)
-            (vim:local-imap "\M-p" 'outline-previous-visible-heading)
-            (vim:local-imap "\M-u" 'outline-up-heading)
-            (vim:local-imap "\M-f" 'org-forward-same-level)
-            (vim:local-imap "\M-b" 'org-backward-same-level)))
+            (vim:local-imap (kbd "M-l") 'org-metaright)
+            (vim:local-imap (kbd "M-h") 'org-metaleft)
+            (vim:local-imap (kbd "M-k") 'org-metaup)
+            (vim:local-imap (kbd "M-j") 'org-metadown)
+            (vim:local-nmap (kbd "M-l") 'org-metaright)
+            (vim:local-nmap (kbd "M-h") 'org-metaleft)
+            (vim:local-nmap (kbd "M-k") 'org-metaup)
+            (vim:local-nmap (kbd "M-j") 'org-metadown)
+            (vim:local-nmap (kbd "M-n") 'outline-next-visible-heading)
+            (vim:local-nmap (kbd "M-p") 'outline-previous-visible-heading)
+            (vim:local-nmap (kbd "M-u") 'outline-up-heading)
+            (vim:local-nmap (kbd "M-f") 'org-forward-same-level)
+            (vim:local-nmap (kbd "M-b") 'org-backward-same-level)
+            (vim:local-imap (kbd "M-n") 'outline-next-visible-heading)
+            (vim:local-imap (kbd "M-p") 'outline-previous-visible-heading)
+            (vim:local-imap (kbd "M-u") 'outline-up-heading)
+            (vim:local-imap (kbd "M-f") 'org-forward-same-level)
+            (vim:local-imap (kbd "M-b") 'org-backward-same-level)))
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (require 'anything-startup)
 
-(define-key global-map (kbd "\M-s") 'switch-to-buffer)
-(defun anything-find-file-other-window ()
-  (interactive)
-  (other-window 1)
-  (anything-find-file))
-
-(defun indent-line ()
-  (interactive)
-  (let ((tab-always-indent t))
-    (indent-for-tab-command nil)))
-
-(vim:imap (kbd "RET") (lambda ()
-                        (interactive)
-                        (newline)
-                        (indent-according-to-mode)))
+(define-key global-map (kbd "M-s") 'switch-to-buffer)
 
 ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
@@ -391,17 +402,13 @@ otherwise raises an error."
 (setq-default visible-bell t)
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(setq-default show-paren-delay 0)
+(setq-default show-paren-style 'mixed)
+
 ;; (add-hook 'emacs-lisp-mode-hook
           ;; '(lambda ()
              ;; Automatically byte-compile emacs-lisp files upon save
              ;; (add-hook 'after-save-hook 'emacs-lisp-byte-compile t t)))
-
-(defun fix-server ()
-  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
-(defun start-server ()
-  (interactive)
-  (server-mode t)
-  (fix-server))
 
 
 (require 'qi-mode)
