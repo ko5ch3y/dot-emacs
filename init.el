@@ -34,6 +34,15 @@
 (load "elscreen" "ElScreen" t)
 
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
+(require 'org-install)
+(require 'org-mw)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (require 'vim)
 (vim-mode 1)
@@ -235,6 +244,29 @@ otherwise raises an error."
 
 (add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
+(defun my-org-mode-hook ()
+  (vim:local-nmap [tab] 'org-cycle)
+  (vim:local-imap (kbd "M-l") 'org-metaright)
+  (vim:local-imap (kbd "M-h") 'org-metaleft)
+  (vim:local-imap (kbd "M-k") 'org-metaup)
+  (vim:local-imap (kbd "M-j") 'org-metadown)
+  (vim:local-nmap (kbd "M-l") 'org-metaright)
+  (vim:local-nmap (kbd "M-h") 'org-metaleft)
+  (vim:local-nmap (kbd "M-k") 'org-metaup)
+  (vim:local-nmap (kbd "M-j") 'org-metadown)
+  (vim:local-nmap (kbd "M-n") 'outline-next-visible-heading)
+  (vim:local-nmap (kbd "M-p") 'outline-previous-visible-heading)
+  (vim:local-nmap (kbd "M-u") 'outline-up-heading)
+  (vim:local-nmap (kbd "M-f") 'org-forward-same-level)
+  (vim:local-nmap (kbd "M-b") 'org-backward-same-level)
+  (vim:local-imap (kbd "M-n") 'outline-next-visible-heading)
+  (vim:local-imap (kbd "M-p") 'outline-previous-visible-heading)
+  (vim:local-imap (kbd "M-u") 'outline-up-heading)
+  (vim:local-imap (kbd "M-f") 'org-forward-same-level)
+  (vim:local-imap (kbd "M-b") 'org-backward-same-level))
+
+(add-hook 'org-mode-hook 'my-org-mode-hook)
+
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
@@ -307,41 +339,9 @@ otherwise raises an error."
 (my-ac-config)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
-(require 'org-install)
-(require 'org-mw)
-(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-(add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
-(add-hook 'org-mode-hook
-          (lambda ()
-            (vim:local-nmap [tab] 'org-cycle)
-            (vim:local-imap (kbd "M-l") 'org-metaright)
-            (vim:local-imap (kbd "M-h") 'org-metaleft)
-            (vim:local-imap (kbd "M-k") 'org-metaup)
-            (vim:local-imap (kbd "M-j") 'org-metadown)
-            (vim:local-nmap (kbd "M-l") 'org-metaright)
-            (vim:local-nmap (kbd "M-h") 'org-metaleft)
-            (vim:local-nmap (kbd "M-k") 'org-metaup)
-            (vim:local-nmap (kbd "M-j") 'org-metadown)
-            (vim:local-nmap (kbd "M-n") 'outline-next-visible-heading)
-            (vim:local-nmap (kbd "M-p") 'outline-previous-visible-heading)
-            (vim:local-nmap (kbd "M-u") 'outline-up-heading)
-            (vim:local-nmap (kbd "M-f") 'org-forward-same-level)
-            (vim:local-nmap (kbd "M-b") 'org-backward-same-level)
-            (vim:local-imap (kbd "M-n") 'outline-next-visible-heading)
-            (vim:local-imap (kbd "M-p") 'outline-previous-visible-heading)
-            (vim:local-imap (kbd "M-u") 'outline-up-heading)
-            (vim:local-imap (kbd "M-f") 'org-forward-same-level)
-            (vim:local-imap (kbd "M-b") 'org-backward-same-level)))
-
-
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (require 'anything-startup)
-
-(define-key global-map (kbd "M-s") 'switch-to-buffer)
 
 ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
 (setq-default tab-always-indent 'complete)
