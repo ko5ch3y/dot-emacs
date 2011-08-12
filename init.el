@@ -43,6 +43,12 @@
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
 
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
+(setq-default anything-c-use-standard-keys t)
+(require 'anything-startup)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (require 'vim)
 (vim-mode 1)
@@ -139,6 +145,20 @@ otherwise raises an error."
  (interactive)
  (find-tag-other-window (thing-at-point 'symbol)))
 
+(defun generate-tab-stop-list ()
+  (let ((result (list)))
+    (dotimes (n 10 result)
+      (setq result (cons (* (+ 1 n) standard-indent) result)))
+    (reverse result)))
+
+(setq-default indent-line-function 'indent-according-to-mode)
+(setq-default indent-tabs-mode nil)
+(setq-default standard-indent 4)
+(setq-default tab-width 4)
+;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
+(setq-default tab-always-indent 'complete)
+(setq-default tab-stop-list (generate-tab-stop-list))
+
 
 (vim:imap (kbd "RET") (lambda ()
                         (interactive)
@@ -176,21 +196,13 @@ otherwise raises an error."
 (vim:imap "\M-F"      'vim:cmd-next-jump)
 (vim:nmap "\M-g"      'grep)
 (vim:nmap "H"         'windmove-left)
-(vim:imap "\M-h"      'backward-list)
-(vim:nmap "\M-h"      'backward-list)
-(vim:nmap "\M-H"      'ff-find-other-file)
+(vim:nmap "\M-h"      'ff-find-other-file)
 (vim:imap "\C-H"      'delete-backward-char)
 (vim:nmap "\M-i"      'imenu)
 (vim:nmap "J"         'windmove-down)
-(vim:imap "\M-j"      'up-list)
-(vim:nmap "\M-j"      'up-list)
 (vim:nmap "K"         'windmove-up)
-(vim:imap "\M-k"      'backward-up-list)
-(vim:nmap "\M-k"      'backward-up-list)
 (vim:nmap "L"         'windmove-right)
-(vim:imap "\M-l"      'forward-list)
-(vim:nmap "\M-l"      'forward-list)
-(vim:nmap "\M-L"      'vim:scroll-line-to-center)
+(vim:nmap "\M-l"      'vim:scroll-line-to-center)
 (vim:emap "make"      'vim:cmd-make)
 (vim:emap "m"         "make")
 (vim:nmap "\M-m"      'vim:cmd-make)
@@ -215,6 +227,7 @@ otherwise raises an error."
 (vim:nmap "\M-w"      'save-buffer)
 (vim:imap "\C-w"      'vim:cmd-delete-bwd-word)
 (vim:nmap "X"         'delete-window)
+(vim:nmap "Y"         "y$")
 (vim:nmap "zb"        'gud-break)
 (vim:nmap "zf"        'set-tags-file-path)
 (vim:nmap "zh"        'split-window-horizontally)
@@ -268,6 +281,29 @@ otherwise raises an error."
 
 (add-hook 'org-mode-hook 'my-org-mode-hook)
 
+(defun common-lisp-hook ()
+  (setq standard-indent 2)
+  (setq tab-stop-list (generate-tab-stop-list)))
+
+(add-hook 'lisp-mode-hook       'common-lisp-hook)
+(add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
+
+(defun my-scheme-mode-hook ()
+  (vim:local-imap "\M-h" 'backward-list)
+  (vim:local-nmap "\M-h" 'backward-list)
+  (vim:local-imap "\M-j" 'up-list)
+  (vim:local-nmap "\M-j" 'up-list)
+  (vim:local-imap "\M-k" 'backward-up-list)
+  (vim:local-nmap "\M-k" 'backward-up-list)
+  (vim:local-imap "\M-l" 'forward-list)
+  (vim:local-nmap "\M-l" 'forward-list)
+  (mapc (lambda (sym)
+          (put sym 'scheme-indent-function 'defun))
+        (list 'call/cc)))
+
+(add-hook 'scheme-mode-hook     'common-lisp-hook)
+(add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
+
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
@@ -278,6 +314,12 @@ otherwise raises an error."
 
 (define-key key-translation-map [?\C-h] [?\C-?])
 (define-key key-translation-map [?\C-\S-h] [?\C-?])
+
+(require 'cc-mode)
+(setq-default c-default-style
+              '((java-mode . "java")
+                (other . "linux"))
+              c-basic-offset 4)
 
 ;; (defun my-c-initialization-hook ()
   ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
@@ -340,35 +382,6 @@ otherwise raises an error."
 (my-ac-config)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
-(require 'anything-startup)
-
-;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
-(setq-default tab-always-indent 'complete)
-
-(require 'cc-mode)
-(setq-default indent-line-function 'indent-according-to-mode)
-(setq-default indent-tabs-mode nil)
-(setq-default standard-indent 4)
-(setq-default tab-width 4)
-
-(setq-default
-  c-default-style
-  '((java-mode . "java")
-    (other . "linux"))
-  c-basic-offset 4)
-
-(defun generate-tab-stop-list ()
-  (let ((result (list)))
-    (dotimes (n 10 result)
-      (setq result (cons (* (+ 1 n) standard-indent) result)))
-    (reverse result)))
-
-(setq-default tab-stop-list (generate-tab-stop-list))
-
-
-
 (set-frame-font "Monospace 10")
 ;; (set-face-attribute 'default nil :weight 'bold)
 ;; (require 'rainbow-delimiters)
@@ -386,19 +399,6 @@ otherwise raises an error."
  '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
  '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
-
-(defun common-lisp-hook ()
-  (setq standard-indent 2)
-  (setq tab-stop-list (generate-tab-stop-list)))
-
-(defun my-scheme-mode-hook ()
-  (mapc (lambda (sym) (put sym 'scheme-indent-function 'defun))
-        (list 'call/cc)))
-
-(add-hook 'scheme-mode-hook     'common-lisp-hook)
-(add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
-(add-hook 'lisp-mode-hook       'common-lisp-hook)
-(add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
 
 (require 'whitespace)
 (global-whitespace-mode t)
