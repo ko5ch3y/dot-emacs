@@ -157,6 +157,7 @@ otherwise raises an error."
 (vim:imap [C-tab] 'tab-to-tab-stop)
 (vim:vmap [tab] 'vim:cmd-indent)
 
+(vim:imap "\M- "      'yas/expand)
 (vim:nmap "\M-a"      'align-current)
 (vim:vmap "\M-a"      'align)
 (vim:nmap "\M-A"      'align-regexp)
