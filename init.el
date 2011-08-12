@@ -152,7 +152,6 @@ otherwise raises an error."
 (vim:vmap "\M-a"      'align)
 (vim:nmap "\M-A"      'align-regexp)
 (vim:vmap "\M-A"      'align-regexp)
-(vim:nmap "\M-b"      'switch-to-buffer)
 (vim:nmap "\M-B"      'vim:cmd-prev-jump)
 (vim:imap "\M-B"      'vim:cmd-prev-jump)
 (vim:nmap "\M-c"      'cd)
@@ -189,6 +188,7 @@ otherwise raises an error."
 (vim:nmap "\M-o"      'occur)
 (vim:nmap "\M-p"      'vim:cmd-prev-error)
 (vim:nmap "\M-q"      'save-buffers-kill-terminal)
+(vim:nmap "\M-s"      'switch-to-buffer)
 (vim:nmap "\M-t"      'find-tag-at-point)
 (vim:nmap "\M-T"      'find-tag-at-point-other-window)
 (vim:nmap "te"        'vim:cmd-tab-new)
@@ -205,11 +205,16 @@ otherwise raises an error."
 (vim:nmap "\M-w"      'save-buffer)
 (vim:imap "\C-w"      'vim:cmd-delete-bwd-word)
 (vim:nmap "X"         'delete-window)
+(vim:nmap "zb"        'gud-break)
 (vim:nmap "zf"        'set-tags-file-path)
 (vim:nmap "zh"        'split-window-horizontally)
 (vim:nmap "zk"        'kill-compilation)
 (vim:nmap "zl"        'vim:cmd-nohighlight)
+(vim:nmap "zp"        'gud-print)
+(vim:nmap "zr"        'gud-remove)
 (vim:nmap "zs"        'start-server)
+(vim:nmap "zt"        'gud-tbreak)
+(vim:nmap "zu"        'gud-until)
 (vim:nmap "zv"        'split-window-vertically)
 
 (defun my-haskell-mode-hook ()
@@ -218,7 +223,17 @@ otherwise raises an error."
   (vim:local-nmap "\C-\M-l" 'inferior-haskell-load-file)
   (vim:local-nmap "\C-\M-t" 'inferior-haskell-type))
 
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
+
+(defun my-gud-mode-hook ()
+  (vim:local-nmap "\M-s" 'gud-step)
+  (vim:local-nmap "\M-n" 'gud-next)
+  (vim:local-nmap "\M-r" 'gud-run)
+  (vim:local-nmap "\M-c" 'gud-cont))
+
+(add-hook 'gud-mode-hook 'my-gud-mode-hook)
 
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
@@ -229,6 +244,7 @@ otherwise raises an error."
 (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
 
 (define-key key-translation-map [?\C-h] [?\C-?])
+(define-key key-translation-map [?\C-\S-h] [?\C-?])
 
 ;; (defun my-c-initialization-hook ()
   ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
@@ -268,6 +284,7 @@ otherwise raises an error."
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
 (setq-default yas/prompt-functions '(yas/dropdown-prompt))
+(yas/global-mode t)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
@@ -373,18 +390,14 @@ otherwise raises an error."
   (setq standard-indent 2)
   (setq tab-stop-list (generate-tab-stop-list)))
 
-(add-hook 'scheme-mode-hook
-          (lambda ()
-            (common-lisp-hook)))
-(add-hook 'lisp-mode-hook
-          (lambda ()
-            (common-lisp-hook)))
-(add-hook 'emacs-lisp-mode-hook
-          (lambda ()
-            (common-lisp-hook)))
+(defun my-scheme-mode-hook ()
+  (mapc (lambda (sym) (put sym 'scheme-indent-function 'defun))
+        (list 'call/cc)))
 
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+(add-hook 'scheme-mode-hook     'common-lisp-hook)
+(add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
+(add-hook 'lisp-mode-hook       'common-lisp-hook)
+(add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
 
 (require 'whitespace)
 (global-whitespace-mode t)
