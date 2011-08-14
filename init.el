@@ -47,6 +47,8 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (setq-default anything-c-use-standard-keys t)
 (require 'anything-startup)
+(require 'anything-gtags)
+(setq-default anything-gtags-enable-initial-pattern t)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
