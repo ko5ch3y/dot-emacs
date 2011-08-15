@@ -49,6 +49,7 @@
 (require 'anything-startup)
 (require 'anything-gtags)
 (setq-default anything-gtags-enable-initial-pattern t)
+(setq-default gtags-path-style 'relative)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
