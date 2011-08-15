@@ -11,12 +11,12 @@
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation, either version 3 of the License, or
 ;; (at your option) any later version.
-;; 
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-;; 
+;;
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
@@ -561,21 +561,6 @@
               (setq now-buffer-list (cdr now-buffer-list))))))
     (setq buffer (generate-new-buffer (generate-new-buffer-name (concat "*GTAGS SELECT* " prefix tagname))))
     (set-buffer buffer)
-    ;
-    ; Path style is defined in gtags-path-style:
-    ;   root: relative from the root of the project (Default)
-    ;   relative: relative from the current directory
-    ;	absolute: absolute (relative from the system root directory)
-    ;
-    (cond
-     ((equal gtags-path-style 'absolute)
-      (setq option (concat option "a")))
-     ((equal gtags-path-style 'root)
-      (let (rootdir)
-        (if gtags-rootdir
-          (setq rootdir gtags-rootdir)
-         (setq rootdir (gtags-get-rootpath)))
-        (if rootdir (cd rootdir)))))
     (message "Searching %s ..." tagname)
     (if (not (= 0 (if (equal flag "C")
                       (call-process "global" nil t nil option "--encode-path=\" \t\"" context tagname)
@@ -611,6 +596,22 @@
 
 ;; select a tag line from lines
 (defun gtags-select-it (delete &optional other-win)
+  (message (concat "pwd c = " (pwd)))
+  ;;
+  ;; Path style is defined in gtags-path-style:
+  ;;   root: relative from the root of the project (Default)
+  ;;   relative: relative from the current directory
+  ;;	absolute: absolute (relative from the system root directory)
+  ;;
+  (cond
+   ((equal gtags-path-style 'absolute)
+    (setq option (concat option "a")))
+   ((equal gtags-path-style 'root)
+    (let (rootdir)
+      (if gtags-rootdir
+          (setq rootdir gtags-rootdir)
+        (setq rootdir (gtags-get-rootpath)))
+      (if rootdir (cd rootdir)))))
   (let (line file)
     ;; get context from current tag line
     (beginning-of-line)
@@ -625,11 +626,11 @@
       ;; will be changed. This might cause loading error, if you use relative
       ;; path in [GTAGS SELECT MODE], because emacs's buffer has its own
       ;; current directory.
-      ;; 
+      ;;
       (let ((prev-buffer (current-buffer)))
         ;; move to the context
-        (if gtags-read-only 
-	    (if (null other-win) (find-file-read-only file) 
+        (if gtags-read-only
+	    (if (null other-win) (find-file-read-only file)
 	      (find-file-read-only-other-window file))
 	  (if (null other-win) (find-file file)
 	    (find-file-other-window file)))
