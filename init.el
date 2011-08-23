@@ -330,6 +330,31 @@ otherwise raises an error."
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
 
+(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
+(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
+(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
+(add-hook 'scheme-mode-hook (function gambit-mode))
+(setq-default scheme-program-name "gsi -:d-")
+
+(defun my-gambit-mode-hook ()
+  (vim:local-nmap "\M-C" 'gambit-continue)
+  (vim:local-nmap "\M-L" 'gambit-leap-continuation)
+  (vim:local-nmap "\M-N" 'gambit-crawl-backtrace-newer)
+  (vim:local-nmap "\M-O" 'gambit-crawl-backtrace-older)
+  (vim:local-nmap "\M-S" 'gambit-step-continuation))
+;; scheme-send-definition
+;; scheme-send-region
+;; scheme-send-last-sexp
+;; scheme-load-file
+;; switch-to-scheme
+;; scheme-expand-current-form
+;; scheme-send-definition-and-go
+;; scheme-send-region-and-go
+;; scheme-compile-file
+;; scheme-compile-definition
+
+(add-hook 'scheme-mode-hook 'my-gambit-mode-hook)
+
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
