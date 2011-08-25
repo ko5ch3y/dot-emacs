@@ -45,7 +45,6 @@
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
-(setq-default anything-c-use-standard-keys t)
 (require 'anything-startup)
 (require 'anything-gtags)
 (setq-default anything-gtags-enable-initial-pattern t)
@@ -66,8 +65,8 @@
                 (sldb-mode . window)
                 (slime-repl-mode . window)
                 (reftex-select-bib-mode . window)
-                (completion-list-mode . window)
-                (help-mode . window)
+                (completion-list-mode . normal)
+                (help-mode . normal)
                 (Info-mode . motion)))
 
 (vim:defcmd vim:cmd-delete-bwd-word (count register)
@@ -333,6 +332,8 @@ otherwise raises an error."
 
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
+
+(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 
 (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
 (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
