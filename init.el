@@ -222,6 +222,17 @@ otherwise raises an error."
 (define-key my-haskell-map "l" 'inferior-haskell-load-file)
 (define-key my-haskell-map "t" 'inferior-haskell-type)
 
+(define-key anything-map "\M-n" 'anything-next-line)
+(define-key anything-map "\M-p" 'anything-previous-line)
+(define-key anything-map "\C-n" 'next-history-element)
+(define-key anything-map "\C-p" 'previous-history-element)
+
+(define-key minibuffer-local-map "\C-p" 'previous-history-element)
+(define-key minibuffer-local-map "\C-n" 'next-history-element)
+(define-key minibuffer-local-map "\M-p" 'anything-previous-line)
+(define-key minibuffer-local-map "\M-n" 'anything-next-line)
+(define-key minibuffer-local-map "\M-h" 'anything-minibuffer-history)
+
 
 (vim:imap (kbd "RET") 'newline-and-indent)
 
