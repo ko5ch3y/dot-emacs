@@ -143,6 +143,8 @@ otherwise raises an error."
   (server-mode t)
   (fix-server))
 
+(setq server-name "gui")
+
 (defun find-tag-at-point ()
  (interactive)
  (find-tag (thing-at-point 'symbol)))
