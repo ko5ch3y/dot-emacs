@@ -370,7 +370,7 @@ otherwise raises an error."
 (defun my-scheme-mode-hook ()
   (mapc (lambda (sym)
           (put sym 'scheme-indent-function 'defun))
-        (list 'call/cc)))
+        (list 'call/cc 'c-lambda)))
 
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
