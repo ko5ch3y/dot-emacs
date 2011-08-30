@@ -429,6 +429,7 @@ otherwise raises an error."
   (vim:local-nmap "\M-U" 'gud-up))
 
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
+(add-hook 'gud-mode-hook 'my-c-mode-hook)
 
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
