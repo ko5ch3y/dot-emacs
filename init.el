@@ -159,6 +159,7 @@ otherwise raises an error."
       (setq result (cons (* (+ 1 n) standard-indent) result)))
     (reverse result)))
 
+(setq-default lisp-indent-function 'scheme-smart-indent-function)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
 (setq-default standard-indent 4)
@@ -367,10 +368,19 @@ otherwise raises an error."
 (add-hook 'lisp-mode-hook       'common-lisp-hook)
 (add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
 
+(autoload 'scheme-smart-complete "scheme-complete" nil t)
+(autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
+
 (defun my-scheme-mode-hook ()
   (mapc (lambda (sym)
           (put sym 'scheme-indent-function 'defun))
-        (list 'call/cc 'c-lambda)))
+        (list 'call/cc 'c-lambda))
+
+  (define-key scheme-mode-map "\t" 'scheme-complete-or-indent)
+
+  (make-local-variable 'eldoc-documentation-function)
+  (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
+  (eldoc-mode))
 
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
@@ -566,3 +576,16 @@ otherwise raises an error."
       (set-buffer-file-coding-system (intern coding-str)) )))
 
 (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
+
+
+(vim:define-keymap vim-gdb-mode "vim gdb mode" :map-command gmap)
+
+(vim:define-mode window "VIM gdb mode"
+                 :ident "G"
+                 :keymaps '(vim:normal-mode-keymap
+                            vim:operator-pending-mode-keymap
+                            vim:motion-mode-keymap
+                            vim:window-mode-keymap
+                            vim:override-keymap)
+                 :command-function 'vim:normal-mode-command)
+
