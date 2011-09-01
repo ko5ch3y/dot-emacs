@@ -605,3 +605,8 @@ otherwise raises an error."
                             vim:override-keymap)
                  :command-function 'vim:normal-mode-command)
 
+
+(require 'eldoc)
+(require 'c-eldoc)
+(setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
+(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
