@@ -500,13 +500,21 @@ otherwise raises an error."
 (require 'auto-complete-clang)
 (setq-default ac-clang-auto-save nil)
 
-(defun my-ac-cc-mode-setup ()
-  (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
-(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
-
 (defun my-ac-config ()
-  (setq ac-clang-flags (split-string "-I/usr/include -I/usr/local/include -I/usr/include/QtCore"))
-  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (setq-default ac-clang-flags (list "-I/usr/include"
+                                     "-I/usr/local/include"
+                                     "-I/usr/include/QtCore"
+                                     "-I/usr/include/QtGui"))
+  (setq-default ac-sources '(ac-source-abbrev
+                             ac-source-dictionary
+                             ac-source-functions
+                             ac-source-variables
+                             ac-source-symbols
+                             ac-source-features
+                             ac-source-yasnippet
+                             ac-source-words-in-same-mode-buffers))
+  (define-key ac-completing-map "\t" 'ac-complete)
+  (setq-default ac-ignore-case t)
   (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
   (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
   (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
