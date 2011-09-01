@@ -493,9 +493,8 @@ otherwise raises an error."
 (require 'yasnippet)
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
-(setq-default yas/prompt-functions '(yas/dropdown-prompt))
+;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
 (yas/global-mode t)
-
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
 (require 'auto-complete-clang)
