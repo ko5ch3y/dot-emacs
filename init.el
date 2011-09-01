@@ -159,7 +159,10 @@ otherwise raises an error."
       (setq result (cons (* (+ 1 n) standard-indent) result)))
     (reverse result)))
 
-(setq-default lisp-indent-function 'scheme-smart-indent-function)
+(autoload 'scheme-smart-complete "scheme-complete" nil t)
+(autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
+
+(setq-default scheme-indent-function 'scheme-smart-indent-function)
 (setq-default indent-line-function 'indent-according-to-mode)
 (setq-default indent-tabs-mode nil)
 (setq-default standard-indent 4)
@@ -367,9 +370,6 @@ otherwise raises an error."
 
 (add-hook 'lisp-mode-hook       'common-lisp-hook)
 (add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
-
-(autoload 'scheme-smart-complete "scheme-complete" nil t)
-(autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
 
 (defun my-scheme-mode-hook ()
   (mapc (lambda (sym)
