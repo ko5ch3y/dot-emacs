@@ -55,7 +55,11 @@
 
 
 (require 'paredit)
-(paredit-mode t)
+(add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
+(add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
+(add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
+(add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
+(add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t)))
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
@@ -395,8 +399,6 @@ otherwise raises an error."
 
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
-
-(add-hook 'slime-repl-mode-hook (lambda () (paredit-mode +1)))
 
 (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
 (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
