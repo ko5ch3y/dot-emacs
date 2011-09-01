@@ -8,6 +8,9 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
+(require 'auto-install)
+(setq-default url-proxy-services '(("http" . "localhost:3128")))
+
 (when window-system
   (global-hl-line-mode 0)
   (require 'color-theme)
