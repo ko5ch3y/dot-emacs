@@ -60,6 +60,7 @@
 
 
 (require 'paredit)
+(add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
