@@ -42,6 +42,7 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
 (require 'org-install)
 (require 'org-mw)
+(setq-default initial-major-mode 'org-mode)
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode))
 
@@ -254,7 +255,7 @@ otherwise raises an error."
 (vim:nmap ";" 'vim:ex-read-command)
 (vim:vmap ";" 'vim:ex-read-command)
 
-;; (vim:imap (kbd "`" 'self-insert-command)
+(vim:imap "`" 'self-insert-command)
 
 (vim:nmap "-" 'comment-uncomment-line)
 (vim:vmap "-" 'comment-or-uncomment-region)
@@ -349,7 +350,6 @@ otherwise raises an error."
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 
-(setq-default initial-major-mode 'org-mode)
 (defun my-org-mode-hook ()
   (vim:local-nmap [tab]  'org-cycle)
   (vim:local-nmap "C"    "c$")
