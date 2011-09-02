@@ -11,11 +11,15 @@
 (require 'auto-install)
 (setq-default url-proxy-services '(("http" . "localhost:3128")))
 
+
+(setq server-name "terminal")
+
 (when window-system
   (global-hl-line-mode 0)
   (require 'color-theme)
   (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
-  (require 'color-theme-github))
+  (require 'color-theme-github)
+  (setq server-name "gui"))
 
 
 (require 'undo-tree)
@@ -150,8 +154,6 @@ otherwise raises an error."
   (interactive)
   (server-mode t)
   (fix-server))
-
-(setq server-name "gui")
 
 (defun find-tag-at-point ()
  (interactive)
