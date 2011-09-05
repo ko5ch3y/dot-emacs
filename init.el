@@ -183,6 +183,13 @@ otherwise raises an error."
 (setq-default tab-stop-list (generate-tab-stop-list))
 
 
+(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
+(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
+(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
+(add-hook 'scheme-mode-hook (function gambit-mode))
+(setq-default scheme-program-name "gsi -:d-")
+
+
 (require 'gud)
 (gud-def gud-kill "k" nil)
 (gud-def gud-yes "y" nil)
@@ -253,34 +260,28 @@ otherwise raises an error."
 (define-key minibuffer-local-map "\M-h" 'anything-minibuffer-history)
 
 
-(vim:imap (kbd "RET") 'newline-and-indent)
-
-(vim:nmap ";" 'vim:ex-read-command)
-(vim:vmap ";" 'vim:ex-read-command)
-
-(vim:imap "`" 'self-insert-command)
-
-(vim:nmap "-" 'comment-uncomment-line)
-(vim:vmap "-" 'comment-or-uncomment-region)
-(vim:nmap "_" 'paredit-comment-dwim)
-
-(vim:imap [C-tab] 'tab-to-tab-stop)
-(vim:vmap [tab] 'vim:cmd-indent)
-
 (vim:nmap "\M-a" 'align-current)
 (vim:vmap "\M-a" 'align)
 (vim:nmap "\M-A" 'align-regexp)
 (vim:vmap "\M-A" 'align-regexp)
 (vim:nmap "\C-B" 'gud-break)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-b" 'org-backward-same-level)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
 (vim:nmap "\M-c" 'vim:scroll-line-to-center)
 (vim:nmap "\C-C" 'gud-cont)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "C"    "c$")))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
+(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-C" 'gambit-continue)))
 (vim:nmap "D"    'paredit-kill)
 (vim:nmap "\M-d" 'kill-this-buffer)
 (vim:nmap "\C-d" 'paredit-forward-delete)
 (vim:nmap "\C-D" 'gud-down)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
 (vim:nmap "\M-e" 'anything-find-file)
 (vim:nmap "\C-F" 'gud-finish)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-f" 'org-forward-same-level)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
 (vim:nmap "\M-g" 'grep)
 (vim:nmap "H"    'windmove-left)
 (vim:imap "\M-h" 'paredit-backward)
@@ -288,6 +289,10 @@ otherwise raises an error."
 (vim:nmap "\M-H"  my-haskell-map)
 (vim:imap "\C-h" 'paredit-backward-delete)
 (vim:imap "\C-H" 'paredit-backward-delete)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-h" 'org-metaleft)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-h" 'org-metaleft)))
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\C-h" 'delete-backward-char)))
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\C-H" 'delete-backward-char)))
 (vim:nmap "\M-i" 'imenu)
 (vim:nmap "\C-I" 'gud-interrupt)
 (vim:nmap "J"    'windmove-down)
@@ -296,32 +301,46 @@ otherwise raises an error."
 (vim:imap "\M-J" 'paredit-backward-down)
 (vim:nmap "\M-J" 'paredit-backward-down)
 (vim:nmap "\C-j" 'paredit-join-sexps)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-j" 'org-metadown)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-j" 'org-metadown)))
 (vim:nmap "K"    'windmove-up)
 (vim:imap "\M-k" 'paredit-forward-up)
 (vim:nmap "\M-k" 'paredit-forward-up)
 (vim:imap "\M-K" 'paredit-backward-up)
 (vim:nmap "\M-K" 'paredit-backward-up)
 (vim:nmap "\C-K" 'gud-kill-yes)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-k" 'org-metaup)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-k" 'org-metaup)))
 (vim:nmap "L"    'windmove-right)
 (vim:imap "\M-l" 'paredit-forward)
 (vim:nmap "\M-l" 'paredit-forward)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-l" 'org-metaright)))
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-l" 'org-metaright)))
+(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-L" 'gambit-leap-continuation)))
 (vim:nmap "\M-m" 'vim:cmd-make)
 (vim:nmap "\C-M" 'gud-restart)
 (vim:nmap "\M-n" 'vim:cmd-next-error)
 (vim:nmap "\M-N" 'vim:cmd-next-jump)
 (vim:imap "\M-N" 'vim:cmd-next-jump)
 (vim:nmap "\C-N" 'gud-next)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-n" 'outline-next-visible-heading)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-n" 'outline-next-visible-heading)))
+(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-N" 'gambit-crawl-backtrace-newer)))
 (vim:nmap "\M-o" 'occur)
 (vim:nmap "\M-O" 'ff-find-other-file)
+(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-O" 'gambit-crawl-backtrace-older)))
 (vim:nmap "\M-p" 'vim:cmd-prev-error)
 (vim:imap "\M-P" 'vim:cmd-prev-jump)
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (vim:nmap "\C-P" 'gud-print)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-p" 'outline-previous-visible-heading)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
 (vim:nmap "\M-r" 'switch-to-buffer)
 (vim:nmap "\C-R" 'gud-remove)
 (vim:nmap "\M-s" 'paredit-splice-string)
 (vim:nmap "\M-S" 'paredit-split-sexp)
 (vim:nmap "\C-S" 'gud-step)
+(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-S" 'gambit-step-continuation)))
 (vim:nmap "ts"   'anything-gtags-select)
 (vim:nmap "tt"   'anything-gtags-resume)
 (vim:nmap "Tc"   'transpose-chars)
@@ -333,8 +352,11 @@ otherwise raises an error."
 (vim:nmap "\C-T" 'gud-tbreak)
 (vim:nmap "\C-u" 'gud-until)
 (vim:nmap "\C-U" 'gud-up)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-u" 'outline-up-heading)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-u" 'outline-up-heading)))
 (vim:nmap "\M-w" 'save-buffer)
 (vim:imap "\C-w" 'paredit-backward-kill-word)
+(add-hook 'org-mode-hook (lambda () (vim:local-imap "\C-w" 'vim:cmd-delete-bwd-word)))
 (vim:nmap "Y"    "y$")
 (vim:imap "\M-z" 'vim:insert-mode-exit)
 (vim:vmap "\M-z" 'vim:visual-mode-exit)
@@ -356,41 +378,36 @@ otherwise raises an error."
 (vim:imap "\M-}" 'paredit-forward-barf-sexp)
 (vim:nmap "\M-}" 'paredit-forward-barf-sexp)
 (vim:imap "\M- " 'yas/expand)
+(vim:nmap ";"    'vim:ex-read-command)
+(vim:vmap ";"    'vim:ex-read-command)
+(vim:imap "`"    'self-insert-command)
+(vim:nmap "-"    'comment-uncomment-line)
+(vim:vmap "-"    'comment-or-uncomment-region)
+(vim:nmap "_"    'paredit-comment-dwim)
+
+(vim:imap [C-tab] 'tab-to-tab-stop)
+(vim:vmap [tab] 'vim:cmd-indent)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap [tab]  'org-cycle)))
+(vim:imap (kbd "RET") 'newline-and-indent)
+
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m"    "make")
+
+
+;; scheme-send-definition
+;; scheme-send-region
+;; scheme-send-last-sexp
+;; scheme-load-file
+;; switch-to-scheme
+;; scheme-expand-current-form
+;; scheme-send-definition-and-go
+;; scheme-send-region-and-go
+;; scheme-compile-file
+;; scheme-compile-definition
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
-
-(defun my-org-mode-hook ()
-  (vim:local-nmap [tab]  'org-cycle)
-  (vim:local-nmap "C"    "c$")
-  (vim:local-nmap "D"    "d$")
-  (vim:local-nmap "\C-d" 'vim:cmd-delete-char)
-  (vim:local-imap "\M-h" 'org-metaleft)
-  (vim:local-nmap "\M-h" 'org-metaleft)
-  (vim:local-imap "\C-h" 'delete-backward-char)
-  (vim:local-imap "\C-H" 'delete-backward-char)
-  (vim:local-imap "\M-k" 'org-metaup)
-  (vim:local-nmap "\M-k" 'org-metaup)
-  (vim:local-nmap "\M-l" 'org-metaright)
-  (vim:local-imap "\M-l" 'org-metaright)
-  (vim:local-imap "\M-j" 'org-metadown)
-  (vim:local-nmap "\M-j" 'org-metadown)
-  (vim:local-imap "\M-n" 'outline-next-visible-heading)
-  (vim:local-nmap "\M-n" 'outline-next-visible-heading)
-  (vim:local-imap "\M-p" 'outline-previous-visible-heading)
-  (vim:local-nmap "\M-p" 'outline-previous-visible-heading)
-  (vim:local-imap "\M-u" 'outline-up-heading)
-  (vim:local-nmap "\M-u" 'outline-up-heading)
-  (vim:local-imap "\M-f" 'org-forward-same-level)
-  (vim:local-nmap "\M-f" 'org-forward-same-level)
-  (vim:local-imap "\M-b" 'org-backward-same-level)
-  (vim:local-nmap "\M-b" 'org-backward-same-level)
-  (vim:local-imap "\C-w" 'vim:cmd-delete-bwd-word))
-
-(add-hook 'org-mode-hook 'my-org-mode-hook)
 
 (defun common-lisp-hook ()
   (setq standard-indent 2)
@@ -413,31 +430,6 @@ otherwise raises an error."
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
 
-(autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
-(autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
-(add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
-(add-hook 'scheme-mode-hook (function gambit-mode))
-(setq-default scheme-program-name "gsi -:d-")
-
-(defun my-gambit-mode-hook ()
-  (vim:local-nmap "\M-C" 'gambit-continue)
-  (vim:local-nmap "\M-L" 'gambit-leap-continuation)
-  (vim:local-nmap "\M-N" 'gambit-crawl-backtrace-newer)
-  (vim:local-nmap "\M-O" 'gambit-crawl-backtrace-older)
-  (vim:local-nmap "\M-S" 'gambit-step-continuation))
-;; scheme-send-definition
-;; scheme-send-region
-;; scheme-send-last-sexp
-;; scheme-load-file
-;; switch-to-scheme
-;; scheme-expand-current-form
-;; scheme-send-definition-and-go
-;; scheme-send-region-and-go
-;; scheme-compile-file
-;; scheme-compile-definition
-
-(add-hook 'scheme-mode-hook 'my-gambit-mode-hook)
-
 (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
 (define-minor-mode my-keys-minor-mode
   "A minor mode so that my key settings override annoying major modes."
@@ -448,19 +440,13 @@ otherwise raises an error."
 
 (define-key key-translation-map [?\C-h] [?\C-?])
 (define-key key-translation-map [?\C-\S-h] [?\C-?])
+(define-key read-expression-map [(tab)] 'hippie-expand)
 
 (require 'cc-mode)
 (setq-default c-default-style
               '((java-mode . "java")
                 (other . "linux"))
               c-basic-offset 4)
-
-;; (defun my-c-initialization-hook ()
-  ;; (define-key c-mode-base-map [tab] 'indent-for-tab-command))
-;; (add-hook 'c-initialization-hook 'my-c-initialization-hook)
-
-;; (define-key c-mode-map [tab] 'indent-for-tab-command)
-(define-key read-expression-map [(tab)] 'hippie-expand)
 
 
 (defun now ()
@@ -485,7 +471,6 @@ otherwise raises an error."
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
-;; (define-key ac-completing-map " " 'ac-complete)
 (setq-default ac-auto-show-menu 0)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
