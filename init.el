@@ -358,7 +358,6 @@ otherwise raises an error."
 (vim:nmap "zq"   'save-buffers-kill-terminal)
 (vim:nmap "zR" 'gud-remove)
 (vim:nmap "zs" 'paredit-splice-string)
-(vim:nmap "zs"   'start-server)
 (vim:nmap "zS" 'paredit-split-sexp)
 (vim:nmap "zT" 'gud-tbreak)
 (vim:nmap "zu" 'gud-until)
