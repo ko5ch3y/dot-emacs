@@ -389,6 +389,7 @@ otherwise raises an error."
 (vim:vmap [tab] 'vim:cmd-indent)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap [tab]  'org-cycle)))
 (vim:imap (kbd "RET") 'newline-and-indent)
+(vim:nmap (kbd "RET") 'newline-and-indent)
 
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m"    "make")
