@@ -61,6 +61,9 @@
 (setq-default gtags-path-style 'relative)
 
 
+;; (require 'autopair)
+;; (autopair-global-mode t)
+
 (require 'paredit)
 (add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
