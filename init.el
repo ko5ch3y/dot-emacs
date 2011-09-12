@@ -298,6 +298,11 @@ otherwise raises an error."
 (define-key anything-map "\M-p" 'anything-previous-line)
 (define-key anything-map "\C-p" 'previous-history-element)
 (define-key anything-map "\M-r" 'anything-select-3rd-action)
+(define-key anything-map "\M-h" 'paredit-backward-delete)
+(define-key anything-map "\M-H" 'paredit-backward-delete)
+
+(define-key anything-find-files-map "\M-h" 'paredit-backward-delete)
+(define-key anything-find-files-map "\M-H" 'paredit-backward-delete)
 
 (define-key minibuffer-local-map "\C-p" 'previous-history-element)
 (define-key minibuffer-local-map "\C-n" 'next-history-element)
