@@ -1,3 +1,6 @@
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
 (load "~/.emacs.d/elpa/package.el")
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
@@ -5,11 +8,10 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-
 
 (require 'auto-install)
 (setq-default url-proxy-services '(("http" . "localhost:3128")))
+(add-to-list 'load-path "~/.emacs.d/auto-install")
 
 
 (setq server-name "terminal")
@@ -279,6 +281,17 @@ otherwise raises an error."
 (define-key my-gud-map "\M-t" 'gud-tbreak)
 (define-key my-gud-map "\M-u" 'gud-until)
 
+;; scheme-send-definition
+;; scheme-send-region
+;; scheme-send-last-sexp
+;; scheme-load-file
+;; switch-to-scheme
+;; scheme-expand-current-form
+;; scheme-send-definition-and-go
+;; scheme-send-region-and-go
+;; scheme-compile-file
+;; scheme-compile-definition
+
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
@@ -380,17 +393,6 @@ otherwise raises an error."
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m"    "make")
 
-
-;; scheme-send-definition
-;; scheme-send-region
-;; scheme-send-last-sexp
-;; scheme-load-file
-;; switch-to-scheme
-;; scheme-expand-current-form
-;; scheme-send-definition-and-go
-;; scheme-send-region-and-go
-;; scheme-compile-file
-;; scheme-compile-definition
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
