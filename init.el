@@ -105,7 +105,7 @@
   "Moves to the `count'th previous error."
   (next-error (- (or count 1))))
 
-(defun comment-uncomment-line ()
+(defun comment-or-uncomment-line ()
   (interactive)
   (vim:visual-toggle-linewise)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position))
@@ -222,8 +222,7 @@ otherwise raises an error."
   (paredit-kill)
   (vim:insert-mode))
 
-(defvar meta-t-map (make-sparse-keymap))
-(setq my-tab-map meta-t-map)
+(defvar my-tab-map (make-sparse-keymap))
 
 (define-key my-tab-map "c"    'vim:cmd-tab-new)
 (define-key my-tab-map "d"    'vim:cmd-tab-close)
@@ -238,8 +237,7 @@ otherwise raises an error."
 (define-key my-tab-map "\M-p" 'vim:cmd-tab-previous)
 (define-key my-tab-map "\M-t" 'elscreen-toggle)
 
-(defvar meta-shift-h-map (make-sparse-keymap))
-(setq my-haskell-map meta-shift-h-map)
+(defvar my-haskell-map (make-sparse-keymap))
 
 (define-key my-haskell-map "d" 'inferior-haskell-find-definition)
 (define-key my-haskell-map "i" 'inferior-haskell-info)
@@ -263,9 +261,9 @@ otherwise raises an error."
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "C"    "c$")))
-(add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (vim:nmap "D"    'paredit-kill)
 (vim:nmap "\C-d" 'paredit-forward-delete)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
 (vim:nmap "\M-e" 'anything-find-file)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
@@ -362,7 +360,7 @@ otherwise raises an error."
 (vim:nmap ";"    'vim:ex-read-command)
 (vim:vmap ";"    'vim:ex-read-command)
 (vim:imap "`"    'self-insert-command)
-(vim:nmap "-"    'comment-uncomment-line)
+(vim:nmap "-"    'comment-or-uncomment-line)
 (vim:vmap "-"    'comment-or-uncomment-region)
 (vim:nmap "_"    'paredit-comment-dwim)
 
