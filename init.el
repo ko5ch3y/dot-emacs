@@ -255,7 +255,9 @@ otherwise raises an error."
 (define-key minibuffer-local-map "\C-n" 'next-history-element)
 (define-key minibuffer-local-map "\M-p" 'anything-previous-line)
 (define-key minibuffer-local-map "\M-n" 'anything-next-line)
-(define-key minibuffer-local-map "\M-h" 'anything-minibuffer-history)
+(define-key minibuffer-local-map "\M-l" 'anything-minibuffer-history)
+(define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
+(define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
 
 (defvar my-gud-map (make-sparse-keymap))
 
