@@ -300,9 +300,11 @@ otherwise raises an error."
 (define-key anything-map "\M-r" 'anything-select-3rd-action)
 (define-key anything-map "\M-h" 'paredit-backward-delete)
 (define-key anything-map "\M-H" 'paredit-backward-delete)
+(define-key anything-map "\M-w" 'paredit-backward-kill-word)
 
 (define-key anything-find-files-map "\M-h" 'paredit-backward-delete)
 (define-key anything-find-files-map "\M-H" 'paredit-backward-delete)
+(define-key anything-find-files-map "\M-w" 'paredit-backward-kill-word)
 
 (define-key minibuffer-local-map "\C-p" 'previous-history-element)
 (define-key minibuffer-local-map "\C-n" 'next-history-element)
@@ -311,6 +313,7 @@ otherwise raises an error."
 (define-key minibuffer-local-map "\M-l" 'anything-minibuffer-history)
 (define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
 (define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
+(define-key minibuffer-local-map "\M-w" 'paredit-backward-kill-word)
 
 (defvar my-gud-map (make-sparse-keymap))
 
