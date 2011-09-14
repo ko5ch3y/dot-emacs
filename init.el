@@ -359,7 +359,7 @@ otherwise raises an error."
 (vim:nmap "C"    'paredit-change)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "C"    "c$")))
 (vim:nmap "D"    'paredit-kill)
-(vim:nmap "\C-d" 'paredit-forward-delete)
+(vim:nmap "\M-d" 'paredit-forward-delete)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
