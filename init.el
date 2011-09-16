@@ -31,7 +31,8 @@
 (setq compilation-finish-functions 'compile-autoclose)
 (defun compile-autoclose (buffer string)
   (cond ((string-match "finished" string)
-         (kill-buffer "*compilation*")
+         (bury-buffer "*compilation*")
+         (replace-buffer-in-windows "*compilation*")
          (message "Build successful."))
         (t
          (message "Compilation exited abnormally: %s" string))))
