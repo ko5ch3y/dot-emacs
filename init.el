@@ -458,7 +458,6 @@ otherwise raises an error."
 (vim:vmap "-"    'comment-or-uncomment-region)
 (vim:nmap "_"    'paredit-comment-dwim)
 
-(vim:imap [backtab] 'auto-complete)
 (vim:vmap [tab] 'vim:cmd-indent)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap [tab]  'org-cycle)))
 (vim:imap [C-tab] 'tab-to-tab-stop)
