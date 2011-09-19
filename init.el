@@ -246,7 +246,7 @@ otherwise raises an error."
 (setq-default standard-indent 4)
 (setq-default tab-width 4)
 ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
-(setq-default tab-always-indent 'complete)
+(setq-default tab-always-indent t)
 (setq-default tab-stop-list (generate-tab-stop-list))
 
 
