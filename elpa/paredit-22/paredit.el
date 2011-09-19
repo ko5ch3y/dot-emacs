@@ -857,7 +857,7 @@ Each predicate should examine only text before the point, if ENDP is
                      (lisp-indent-line)
                      (throw 'return nil))
                     (t (delete-indentation)))))))
-      (paredit-delete-leading-whitespace)))
+      (if nil (paredit-delete-leading-whitespace))))
 
 (defun paredit-missing-close ()
   (save-excursion
