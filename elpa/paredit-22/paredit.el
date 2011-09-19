@@ -244,8 +244,6 @@ Signal an error if no clause matches."
 
 ;;;; Minor Mode Definition
 
-(defvar paredit-delete-leading-whitespace-p t)
-
 (defvar paredit-mode-map (make-sparse-keymap)
   "Keymap for the paredit minor mode.")
 
@@ -847,9 +845,7 @@ Each predicate should examine only text before the point, if ENDP is
                      ;; Can't call PAREDIT-DELETE-LEADING-WHITESPACE
                      ;; here -- we must return from SAVE-EXCURSION
                      ;; first.
-                     (if paredit-delete-leading-whitespace-p
-                         (throw 'return t)
-                       (throw 'return nil)))
+                     (throw 'return t))
                     ((save-excursion (forward-line -1)
                                      (end-of-line)
                                      (paredit-in-comment-p))

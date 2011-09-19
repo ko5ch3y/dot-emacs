@@ -72,8 +72,7 @@
 
 
 (require 'paredit)
-(add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)
-                                        (setq paredit-delete-leading-space-p nil)))
+(add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
 (add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
 (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
