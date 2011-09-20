@@ -73,11 +73,8 @@
 
 
 (require 'paredit)
-(add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)))
-(add-hook 'js-mode                    (lambda () (paredit-mode t)))
-(add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
-(add-hook 'lisp-mode-hook             (lambda () (paredit-mode t)))
-(add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode t)))
+(add-hook 'find-file-hook             (lambda () (paredit-mode t)))
+(add-hook 'fundamental-mode-hook      (lambda () (paredit-mode t)))
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
 (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
 (add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t)))
