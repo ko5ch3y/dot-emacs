@@ -33,7 +33,6 @@
   (cond ((string-match "finished" string)
          (bury-buffer "*compilation*")
          (replace-buffer-in-windows "*compilation*")
-         (switch-to-buffer-other-window vim:var-make-previous-buffer)
          (message "Build successful."))
         (t
          (message "Compilation exited abnormally: %s" string))))
@@ -146,20 +145,21 @@
   (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
                   :register register))
 
-(defvar vim:var-make-previous-buffer nil)
 (vim:defcmd vim:cmd-make (nonrepeatable argument)
   "Executes compile or recompile."
-  (if argument
+  (let ((previous-buffer (current-buffer)))
+    (if argument
+        ((lambda ()
+           (compile (concat "make " argument))
+           (switch-to-buffer-other-window "*compilation*")
+           (vim:motion-go-to-first-non-blank-end)
+           (switch-to-buffer-other-window previous-buffer)))
       ((lambda ()
-         (setq vim:var-make-previous-buffer (current-buffer))
-         (compile (concat "make " argument))
+         (recompile)
          (switch-to-buffer-other-window "*compilation*")
-         (vim:motion-go-to-first-non-blank-end)))
-    ((lambda ()
-       (setq vim:var-make-previous-buffer (current-buffer))
-       (recompile)
-       (switch-to-buffer-other-window "*compilation*")
-       (vim:motion-go-to-first-non-blank-end)))))
+         (vim:motion-go-to-first-non-blank-end)
+         (switch-to-buffer-other-window previous-buffer))))))
+
 
 (vim:defcmd vim:cmd-next-error (nonrepeatable count)
   "Moves to the `count'th next error."
