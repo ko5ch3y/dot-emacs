@@ -365,6 +365,10 @@ otherwise raises an error."
 ;; scheme-compile-file
 ;; scheme-compile-definition
 
+(defvar my-egg-map (make-sparse-keymap))
+(define-key my-egg-map "\M-e" 'egg-next-action)
+(define-key my-egg-map "\M-c" 'egg-commit-log-edit)
+
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
@@ -373,6 +377,7 @@ otherwise raises an error."
 (vim:nmap "\M-d" 'paredit-forward-delete)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
+(vim:nmap "\M-e"  my-egg-map)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
 (vim:nmap "\M-g"  my-gud-map)
 (vim:nmap "H"    'windmove-left)
