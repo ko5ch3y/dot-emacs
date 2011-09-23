@@ -68,7 +68,8 @@
           (lambda ()
             (define-key (cdr (car autopair-emulation-alist)) [return] nil)
             (define-key (cdr (car autopair-emulation-alist)) (kbd "RET") nil)))
-(autopair-global-mode t)
+;; (autopair-global-mode t)
+(add-hook 'c-mode-common-hook (lambda () (autopair-mode t)))
 
 
 (require 'paredit)
