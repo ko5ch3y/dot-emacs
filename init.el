@@ -123,6 +123,13 @@
 (yas/global-mode t)
 
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/egg")
+(require 'egg)
+(setq-default egg-buffer-hide-sub-blocks-on-start nil)
+(setq-default egg-enable-tooltip t)
+(setq-default egg-refresh-index-in-backround t)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (require 'vim)
 (vim-mode 1)
@@ -283,13 +290,6 @@ otherwise raises an error."
   (vim:insert-mode))
 
 (defvar my-tab-map (make-sparse-keymap))
-
-(define-key my-tab-map "c"    'vim:cmd-tab-new)
-(define-key my-tab-map "d"    'vim:cmd-tab-close)
-(define-key my-tab-map "o"    'vim:cmd-tab-close-other)
-(define-key my-tab-map "n"    'vim:cmd-tab-next)
-(define-key my-tab-map "p"    'vim:cmd-tab-previous)
-(define-key my-tab-map "t"    'elscreen-toggle)
 (define-key my-tab-map "\M-c" 'vim:cmd-tab-new)
 (define-key my-tab-map "\M-d" 'vim:cmd-tab-close)
 (define-key my-tab-map "\M-o" 'vim:cmd-tab-close-other)
@@ -298,7 +298,6 @@ otherwise raises an error."
 (define-key my-tab-map "\M-t" 'elscreen-toggle)
 
 (defvar my-haskell-map (make-sparse-keymap))
-
 (define-key my-haskell-map "d" 'inferior-haskell-find-definition)
 (define-key my-haskell-map "i" 'inferior-haskell-info)
 (define-key my-haskell-map "l" 'inferior-haskell-load-file)
@@ -337,7 +336,6 @@ otherwise raises an error."
 (define-key minibuffer-local-map "\M-w" 'paredit-backward-kill-word)
 
 (defvar my-gud-map (make-sparse-keymap))
-
 (define-key my-gud-map "\M-b" 'gud-break)
 (define-key my-gud-map "\M-c" 'gud-cont)
 (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
@@ -518,28 +516,20 @@ otherwise raises an error."
 (define-key key-translation-map [?\C-\S-h] [?\C-?])
 (define-key read-expression-map [(tab)] 'hippie-expand)
 
+
 (require 'cc-mode)
 (setq-default c-default-style
               '((java-mode . "java")
                 (other . "linux"))
               c-basic-offset 4)
 
+(require 'qi-mode)
+(add-to-list 'auto-mode-alist '("\\.qml$" . js-mode))
 
-(defun now ()
-  "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%Y-%m-%d %-I:%M %p")))
-
-(defun today ()
-  "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%Y-%m-%d")))
-
-(defun short-date ()
-  "Insert string for today's date formatted like 110801."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%y%m%d")))
-
+(require 'whitespace)
+(global-whitespace-mode t)
+(setq-default whitespace-style
+        '(face tabs tab-mark))
 
 (set-frame-font "Monospace 10")
 ;; (set-face-attribute 'default nil :weight 'bold)
@@ -559,19 +549,10 @@ otherwise raises an error."
  '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
 
-(require 'whitespace)
-(global-whitespace-mode t)
-(setq-default whitespace-style
-        '(face tabs tab-mark))
-
-
-(ido-mode 0)
-(iswitchb-mode 0)
 
 (setq-default read-file-name-completion-ignore-case t)
 (setq-default backup-inhibited t)
 (setq-default auto-save-default nil)
-;; (setq-default initial-buffer-choice t)
 (setq-default inhibit-read-only t)
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)
@@ -580,25 +561,13 @@ otherwise raises an error."
 (setq-default next-line-add-newlines nil)
 (setq-default visible-bell t)
 (fset 'yes-or-no-p 'y-or-n-p)
-
 (setq-default show-paren-delay 0)
 (setq-default show-paren-style 'mixed)
-
 (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHI -e ")
-
-;; (add-hook 'emacs-lisp-mode-hook
-          ;; '(lambda ()
-             ;; Automatically byte-compile emacs-lisp files upon save
-             ;; (add-hook 'after-save-hook 'emacs-lisp-byte-compile t t)))
-
-
-(require 'qi-mode)
-(add-to-list 'auto-mode-alist '("\\.qml$" . js-mode))
-
+(setq initial-scratch-message "")
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (global-linum-mode t)
 (setq-default fill-column 80)
-
 
 (defun no-junk-please-were-unixish ()
   (let ((coding-str (symbol-name buffer-file-coding-system)))
@@ -607,8 +576,23 @@ otherwise raises an error."
             (concat (substring coding-str 0 (match-beginning 0)) "-unix"))
       (message "CODING: %s" coding-str)
       (set-buffer-file-coding-system (intern coding-str)) )))
-
 (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
+
+
+(defun now ()
+  "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y-%m-%d %-I:%M %p")))
+
+(defun today ()
+  "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y-%m-%d")))
+
+(defun short-date ()
+  "Insert string for today's date formatted like 110801."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%y%m%d")))
 
 
 (vim:define-keymap vim-gdb-mode "vim gdb mode" :map-command gmap)
@@ -627,3 +611,5 @@ otherwise raises an error."
 (require 'c-eldoc)
 (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+
+
