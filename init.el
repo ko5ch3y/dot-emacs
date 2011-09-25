@@ -417,6 +417,7 @@ otherwise raises an error."
 (vim:imap "\M-w" 'paredit-backward-kill-word)
 (add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-w" 'vim:cmd-delete-bwd-word)))
 (vim:nmap "Y"    "y$")
+(vim:imap "\C-z" 'vim:activate-emacs-mode)
 (vim:nmap "za" 'align-current)
 (vim:vmap "za" 'align)
 (vim:nmap "zA" 'align-regexp)
