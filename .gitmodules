@@ -1,0 +1,18 @@
+[submodule "site-lisp/anything-config"]
+	path = site-lisp/anything-config
+	url = git://repo.or.cz/anything-config.git
+[submodule "site-lisp/color-theme-github"]
+	path = site-lisp/color-theme-github
+	url = git://github.com/dudleyf/color-theme-github.git
+[submodule "site-lisp/auto-complete-clang"]
+	path = site-lisp/auto-complete-clang
+	url = git://github.com/brianjcj/auto-complete-clang.git
+[submodule "site-lisp/org-mode"]
+	path = site-lisp/org-mode
+	url = git://orgmode.org/org-mode.git
+[submodule "site-lisp/auto-complete"]
+	path = site-lisp/auto-complete
+	url = git://github.com/m2ym/auto-complete.git
+[submodule "site-lisp/egg"]
+	path = site-lisp/egg
+	url = git://github.com/byplayer/egg.git
