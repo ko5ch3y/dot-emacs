@@ -304,13 +304,15 @@ otherwise raises an error."
 (define-key my-haskell-map "t" 'inferior-haskell-type)
 
 (define-key anything-map "\M-e" 'anything-execute-persistent-action)
+(define-key anything-map "\M-h" 'paredit-backward-delete)
+(define-key anything-map "\M-H" 'paredit-backward-delete)
 (define-key anything-map "\M-n" 'anything-next-line)
 (define-key anything-map "\C-n" 'next-history-element)
 (define-key anything-map "\M-o" 'anything-buffer-switch-other-window)
 (define-key anything-map "\M-p" 'anything-previous-line)
 (define-key anything-map "\C-p" 'previous-history-element)
-(define-key anything-map "\M-h" 'paredit-backward-delete)
-(define-key anything-map "\M-H" 'paredit-backward-delete)
+(define-key anything-map "\M-r" 'anything-buffer-revert-persistent)
+(define-key anything-map "\M-s" 'anything-buffer-save-persistent)
 (define-key anything-map "\M-w" 'paredit-backward-kill-word)
 
 (define-key anything-find-files-map "\M-e" 'anything-execute-persistent-action)
