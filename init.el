@@ -289,26 +289,12 @@ otherwise raises an error."
   (paredit-kill)
   (vim:insert-mode))
 
-(defvar my-tab-map (make-sparse-keymap))
-(define-key my-tab-map "\M-c" 'vim:cmd-tab-new)
-(define-key my-tab-map "\M-d" 'vim:cmd-tab-close)
-(define-key my-tab-map "\M-o" 'vim:cmd-tab-close-other)
-(define-key my-tab-map "\M-n" 'vim:cmd-tab-next)
-(define-key my-tab-map "\M-p" 'vim:cmd-tab-previous)
-(define-key my-tab-map "\M-t" 'elscreen-toggle)
-
-(defvar my-haskell-map (make-sparse-keymap))
-(define-key my-haskell-map "d" 'inferior-haskell-find-definition)
-(define-key my-haskell-map "i" 'inferior-haskell-info)
-(define-key my-haskell-map "l" 'inferior-haskell-load-file)
-(define-key my-haskell-map "t" 'inferior-haskell-type)
-
 (define-key anything-map "\M-e" 'anything-execute-persistent-action)
 (define-key anything-map "\M-h" 'paredit-backward-delete)
 (define-key anything-map "\M-H" 'paredit-backward-delete)
 (define-key anything-map "\M-n" 'anything-next-line)
 (define-key anything-map "\C-n" 'next-history-element)
-(define-key anything-map "\M-o" 'anything-buffer-switch-other-window)
+(define-key anything-map "\M-o" 'anything-ff-run-switch-other-window)
 (define-key anything-map "\M-p" 'anything-previous-line)
 (define-key anything-map "\C-p" 'previous-history-element)
 (define-key anything-map "\M-r" 'anything-buffer-revert-persistent)
@@ -336,6 +322,20 @@ otherwise raises an error."
 (define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
 (define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
 (define-key minibuffer-local-map "\M-w" 'paredit-backward-kill-word)
+
+(defvar my-tab-map (make-sparse-keymap))
+(define-key my-tab-map "\M-c" 'vim:cmd-tab-new)
+(define-key my-tab-map "\M-d" 'vim:cmd-tab-close)
+(define-key my-tab-map "\M-o" 'vim:cmd-tab-close-other)
+(define-key my-tab-map "\M-n" 'vim:cmd-tab-next)
+(define-key my-tab-map "\M-p" 'vim:cmd-tab-previous)
+(define-key my-tab-map "\M-t" 'elscreen-toggle)
+
+(defvar my-haskell-map (make-sparse-keymap))
+(define-key my-haskell-map "d" 'inferior-haskell-find-definition)
+(define-key my-haskell-map "i" 'inferior-haskell-info)
+(define-key my-haskell-map "l" 'inferior-haskell-load-file)
+(define-key my-haskell-map "t" 'inferior-haskell-type)
 
 (defvar my-gud-map (make-sparse-keymap))
 (define-key my-gud-map "\M-b" 'gud-break)
@@ -374,6 +374,10 @@ otherwise raises an error."
 (define-key my-egg-map "l" 'egg-log)
 (define-key my-egg-map "s" 'egg-status)
 
+(defvar my-tag-map (make-sparse-keymap))
+(define-key my-tag-map "s" 'anything-gtags-select)
+(define-key my-tag-map "t" 'anything-gtags-resume)
+
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
@@ -409,8 +413,6 @@ otherwise raises an error."
 (vim:nmap "\M-p" 'vim:cmd-prev-error)
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
-(vim:nmap "ts"   'anything-gtags-select)
-(vim:nmap "tt"   'anything-gtags-resume)
 (vim:nmap "Tc"   'transpose-chars)
 (vim:nmap "Tl"   'transpose-lines)
 (vim:nmap "Tp"   'transpose-paragraphs)
@@ -442,6 +444,7 @@ otherwise raises an error."
 (vim:nmap "zr" 'anything)
 (vim:nmap "zs" 'paredit-splice-sexp)
 (vim:nmap "zS" 'paredit-split-sexp)
+(vim:nmap "zt"  my-tag-map)
 (vim:nmap "zv"   'split-window-vertically)
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zx"   'delete-window)
@@ -622,5 +625,3 @@ otherwise raises an error."
 (require 'c-eldoc)
 (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
 (add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
-
-
