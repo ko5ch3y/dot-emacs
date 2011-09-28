@@ -342,6 +342,7 @@ otherwise raises an error."
 (define-key my-gud-map "\M-c" 'gud-cont)
 (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
 (define-key my-gud-map "\M-f" 'gud-finish)
+(define-key my-gud-map "\M-g" (lambda () (interactive) (switch-to-buffer "*gud*")))
 (define-key my-gud-map "\M-i" 'gud-interrupt)
 (define-key my-gud-map "\M-k" 'gud-kill-yes)
 (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-l" 'gambit-leap-continuation)))
@@ -368,10 +369,10 @@ otherwise raises an error."
 ;; scheme-compile-definition
 
 (defvar my-egg-map (make-sparse-keymap))
-(define-key my-egg-map "\M-e" 'egg-next-action)
-(define-key my-egg-map "\M-c" 'egg-commit-log-edit)
-(define-key my-egg-map "\M-l" 'egg-log)
-(define-key my-egg-map "\M-s" 'egg-status)
+(define-key my-egg-map "c" 'egg-commit-log-edit)
+(define-key my-egg-map "g" 'egg-next-action)
+(define-key my-egg-map "l" 'egg-log)
+(define-key my-egg-map "s" 'egg-status)
 
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
@@ -381,7 +382,6 @@ otherwise raises an error."
 (vim:nmap "\M-d" 'paredit-forward-delete)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
-(vim:nmap "\M-e"  my-egg-map)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
 (vim:nmap "\M-g"  my-gud-map)
 (vim:nmap "H"    'windmove-left)
@@ -429,7 +429,8 @@ otherwise raises an error."
 (vim:nmap "zc" 'vim:scroll-line-to-center)
 (vim:nmap "zd" 'kill-this-buffer)
 (vim:nmap "ze" 'anything-find-files)
-(vim:nmap "zg" 'grep)
+(vim:nmap "zg"  my-egg-map)
+(vim:nmap "zG" 'grep)
 (vim:nmap "zh"   'split-window-horizontally)
 (vim:nmap "zi" 'anything-imenu)
 (vim:nmap "zk"   'kill-compilation)
