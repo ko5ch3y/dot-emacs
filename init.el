@@ -553,6 +553,9 @@ otherwise raises an error."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(egg-diff-add ((((class color) (background light)) (:foreground "#009926"))))
+ '(egg-diff-del ((((class color) (background light)) (:foreground "#DD1144"))))
+
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
  '(rainbow-delimiters-depth-3-face ((t (:foreground "orange"))))
