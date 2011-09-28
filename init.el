@@ -370,6 +370,8 @@ otherwise raises an error."
 (defvar my-egg-map (make-sparse-keymap))
 (define-key my-egg-map "\M-e" 'egg-next-action)
 (define-key my-egg-map "\M-c" 'egg-commit-log-edit)
+(define-key my-egg-map "\M-l" 'egg-log)
+(define-key my-egg-map "\M-s" 'egg-status)
 
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
