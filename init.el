@@ -14,9 +14,23 @@
 (add-to-list 'load-path "~/.emacs.d/auto-install")
 
 
+(defun fix-server ()
+  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+
+(defun start-server ()
+  (interactive)
+  (server-mode t)
+  (fix-server))
+
+(defun open-client-other-window ()
+  (let ((server-buf (current-buffer)))
+    (bury-buffer)
+    (switch-to-buffer-other-window server-buf)))
+
 (setq server-name "terminal")
 
 (when window-system
+  ;; (add-hook 'server-switch-hook open-client-other-window)
   (global-hl-line-mode 0)
   (require 'color-theme)
   (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
@@ -214,14 +228,6 @@ otherwise raises an error."
   (interactive)
   (let ((tab-always-indent t))
     (indent-for-tab-command nil)))
-
-(defun fix-server ()
-  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
-
-(defun start-server ()
-  (interactive)
-  (server-mode t)
-  (fix-server))
 
 (defun find-tag-at-point ()
  (interactive)
