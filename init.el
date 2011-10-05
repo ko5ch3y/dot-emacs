@@ -398,9 +398,9 @@ otherwise raises an error."
 (define-key my-geiser-map "R" 'geiser-eval-region-and-go)
 
 (defvar my-shell-map (make-sparse-keymap))
-(define-key my-shell-map "\M-s" 'multi-term)
-(define-key my-shell-map "\M-n" 'multi-term-next)
-(define-key my-shell-map "\M-p" 'multi-term-prev)
+(define-key my-shell-map "\M-s" 'multi-shell-new)
+(define-key my-shell-map "\M-n" 'multi-shell-next)
+(define-key my-shell-map "\M-p" 'multi-shell-prev)
 
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
