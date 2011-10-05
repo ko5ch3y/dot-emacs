@@ -262,6 +262,11 @@ otherwise raises an error."
 (setq-default geiser-active-implementations '(guile))
 
 
+(require 'multi-shell)
+;; (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
+;; (setq-default comint-prompt-read-only t)
+
+
 (require 'gud)
 (gud-def gud-kill "k" nil)
 (gud-def gud-yes "y" nil)
@@ -392,6 +397,11 @@ otherwise raises an error."
 (define-key my-geiser-map "r" 'geiser-eval-region)
 (define-key my-geiser-map "R" 'geiser-eval-region-and-go)
 
+(defvar my-shell-map (make-sparse-keymap))
+(define-key my-shell-map "\M-s" 'multi-term)
+(define-key my-shell-map "\M-n" 'multi-term-next)
+(define-key my-shell-map "\M-p" 'multi-term-prev)
+
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
@@ -427,6 +437,7 @@ otherwise raises an error."
 (vim:nmap "\M-p" 'vim:cmd-prev-error)
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
+(vim:nmap "\M-s"  my-shell-map)
 (vim:nmap "Tc"   'transpose-chars)
 (vim:nmap "Tl"   'transpose-lines)
 (vim:nmap "Tp"   'transpose-paragraphs)
@@ -582,6 +593,13 @@ otherwise raises an error."
  '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
  '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
 
+(custom-set-variables
+  ;; custom-set-variables was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector ["#000000" "#DD1144" "#009926" "#990000" "#445588" "#990073" "#0086B3" "#999988"]))
+
 
 (setq-default read-file-name-completion-ignore-case t)
 (setq-default backup-inhibited t)
@@ -589,6 +607,7 @@ otherwise raises an error."
 (setq-default inhibit-read-only t)
 (global-auto-revert-mode 1)
 (setq-default scroll-margin 10)
+(add-hook 'term-mode-hook '(lambda () (setq scroll-margin 0)))
 (setq-default scroll-step 1)
 (setq-default require-final-newline t)
 (setq-default next-line-add-newlines nil)
