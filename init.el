@@ -446,6 +446,7 @@ otherwise raises an error."
 (vim:nmap "\M-p" 'vim:cmd-prev-error)
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-q" 'fill-paragraph)))
 (vim:nmap "\M-s"  my-shell-map)
 (vim:nmap "Tc"   'transpose-chars)
 (vim:nmap "Tl"   'transpose-lines)
