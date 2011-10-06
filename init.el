@@ -268,7 +268,7 @@ otherwise raises an error."
 (setq-default geiser-active-implementations '(guile))
 
 
-(require 'multi-shell)
+(require 'multi-term)
 ;; (add-hook 'shell-mode-hook '(lambda () (toggle-truncate-lines 1)))
 ;; (setq-default comint-prompt-read-only t)
 
@@ -403,10 +403,10 @@ otherwise raises an error."
 (define-key my-geiser-map "r" 'geiser-eval-region)
 (define-key my-geiser-map "R" 'geiser-eval-region-and-go)
 
-(defvar my-shell-map (make-sparse-keymap))
-(define-key my-shell-map "\M-s" 'multi-shell-new)
-(define-key my-shell-map "\M-n" 'multi-shell-next)
-(define-key my-shell-map "\M-p" 'multi-shell-prev)
+(defvar my-term-map (make-sparse-keymap))
+(define-key my-term-map "\M-s" 'multi-term)
+(define-key my-term-map "\M-n" 'multi-term-next)
+(define-key my-term-map "\M-p" 'multi-term-prev)
 
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
@@ -447,7 +447,7 @@ otherwise raises an error."
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-q" 'fill-paragraph)))
-(vim:nmap "\M-s"  my-shell-map)
+(vim:nmap "\M-s"  my-term-map)
 (vim:nmap "Tc"   'transpose-chars)
 (vim:nmap "Tl"   'transpose-lines)
 (vim:nmap "Tp"   'transpose-paragraphs)
@@ -457,6 +457,9 @@ otherwise raises an error."
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-u" 'outline-up-heading)))
 (vim:imap "\M-w" 'paredit-backward-kill-word)
 (add-hook 'org-mode-hook (lambda () (vim:local-imap "\M-w" 'vim:cmd-delete-bwd-word)))
+(add-hook 'term-mode-hook (lambda ()
+                            (vim:local-imap "\M-x" 'anything-execute-extended-command)
+                            (vim:local-nmap "\M-x" 'anything-execute-extended-command)))
 (vim:nmap "Y"    "y$")
 (vim:imap "\C-z" 'vim:activate-emacs-mode)
 (vim:nmap "za" 'align-current)
@@ -525,9 +528,9 @@ otherwise raises an error."
 (vim:imap [C-tab] 'tab-to-tab-stop)
 (vim:imap (kbd "RET") 'newline-and-indent)
 (vim:nmap (kbd "RET") 'newline-and-indent)
-(add-hook 'shell-mode-hook (lambda ()
-                             (vim:local-imap (kbd "RET") 'comint-send-input)
-                             (vim:local-nmap (kbd "RET") 'comint-send-input)))
+(add-hook 'term-mode-hook (lambda ()
+                             (vim:local-imap (kbd "RET") 'term-send-input)
+                             (vim:local-nmap (kbd "RET") 'term-send-input)))
 
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m"    "make")
