@@ -296,9 +296,12 @@ otherwise raises an error."
 
 (defun gud-restart ()
   (interactive)
-  (gud-interrupt)
-  (sleep-for 0.1)
-  (gud-run-yes))
+  (let ((previous-buffer (current-buffer)))
+    (switch-to-buffer-other-window "*gud*")
+    (gud-interrupt)
+    (sleep-for 0.1)
+    (gud-run-yes)
+    (switch-to-buffer-other-window previous-buffer)))
 
 (defun paredit-change ()
   (interactive)
