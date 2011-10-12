@@ -648,6 +648,15 @@ otherwise raises an error."
       (set-buffer-file-coding-system (intern coding-str)) )))
 (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
 
+(mapcar (lambda (mode-hook)
+          (add-hook mode-hook 'flyspell-prog-mode))
+        '(c-mode-common-hook
+          emacs-lisp-mode-hook
+          js-mode-hook
+          asm-mode-hook
+          egg-mode-hook
+          java-mode-hook))
+
 
 (defun now ()
   "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
