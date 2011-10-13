@@ -616,7 +616,22 @@ otherwise raises an error."
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#000000" "#DD1144" "#009926" "#990000" "#445588" "#990073" "#0086B3" "#999988"]))
+ '(ansi-color-names-vector ["#000000" "#DD1144" "#009926" "#990000" "#445588" "#990073" "#0086B3" "#999988"])
+ '(comint-buffer-maximum-size 100000)
+ '(comint-completion-addsuffix t)
+ '(comint-get-old-input (lambda nil "") t)
+ '(comint-input-ignoredups t)
+ '(comint-input-ring-size 5000)
+ '(comint-move-point-for-output nil)
+ '(comint-prompt-read-only nil)
+ '(comint-scroll-show-maximum-output t)
+ '(comint-scroll-to-bottom-on-input t)
+ '(egg-buffer-hide-help-on-start nil)
+ '(egg-buffer-hide-section-type-on-start (quote ((egg-status-buffer-mode . :diff) (egg-diff-buffer-mode . :diff))))
+ '(egg-buffer-hide-sub-blocks-on-start nil)
+ '(egg-quit-window-actions (quote ((egg-status-buffer-mode restore-windows) (egg-log-buffer-mode restore-windows) (egg-commit-buffer-mode restore-windows) (egg-reflog-buffer-mode restore-windows) (egg-diff-buffer-mode restore-windows) (egg-file-log-buffer-mode restore-windows))))
+ '(protect-buffer-bury-p nil)
+ '(tramp-default-method "ssh"))
 
 
 (setq-default read-file-name-completion-ignore-case t)
