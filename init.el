@@ -590,9 +590,7 @@ otherwise raises an error."
 (setq-default whitespace-style
         '(face tabs tab-mark))
 
-(require 'vline)
 (require 'hl-line)
-(vline-global-mode t)
 (global-hl-line-mode t)
 
 (set-frame-font "Monospace 10")
