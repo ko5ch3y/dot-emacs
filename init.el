@@ -590,6 +590,11 @@ otherwise raises an error."
 (setq-default whitespace-style
         '(face tabs tab-mark))
 
+(require 'vline)
+(require 'hl-line)
+(vline-global-mode t)
+(global-hl-line-mode t)
+
 (set-frame-font "Monospace 10")
 ;; (set-face-attribute 'default nil :weight 'bold)
 ;; (require 'rainbow-delimiters)
@@ -600,6 +605,9 @@ otherwise raises an error."
   ;; If there is more than one, they won't work right.
  '(egg-diff-add ((((class color) (background light)) (:foreground "#009926"))))
  '(egg-diff-del ((((class color) (background light)) (:foreground "#DD1144"))))
+
+ '(hl-line ((t (:background "#F3F3FF"))))
+ '(vline ((t (:background "#F5F5FF"))))
 
  '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
  '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
