@@ -14,6 +14,10 @@
 (add-to-list 'load-path "~/.emacs.d/auto-install")
 
 
+(require 'tramp)
+(setq-default tramp-default-method "ssh")
+
+
 (defun fix-server ()
   (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
