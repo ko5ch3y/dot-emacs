@@ -35,7 +35,7 @@
 
 (when window-system
   ;; (add-hook 'server-switch-hook open-client-other-window)
-  (global-hl-line-mode 0)
+  (global-hl-line-mode t)
   (require 'color-theme)
   (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
   (require 'color-theme-github)
@@ -593,9 +593,6 @@ otherwise raises an error."
 (global-whitespace-mode t)
 (setq-default whitespace-style '(face tabs tab-mark))
 
-
-(require 'hl-line)
-(global-hl-line-mode t)
 
 (set-frame-font "Monospace 10")
 ;; (set-face-attribute 'default nil :weight 'bold)
