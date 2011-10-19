@@ -718,4 +718,4 @@ otherwise raises an error."
 (require 'eldoc)
 (require 'c-eldoc)
 (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+(add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode)
