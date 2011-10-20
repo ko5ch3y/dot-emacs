@@ -25,19 +25,16 @@
                     ("elpa" . "http://tromey.com/elpa/")))
     (add-to-list 'package-archives source t))
   (package-initialize))
-(my-package-setup)
 
 
 (defun my-auto-install-setup ()
   (require 'auto-install)
   (setq-default url-proxy-services '(("http" . "localhost:3128"))))
-(my-auto-install-setup)
 
 
 (defun my-tramp-setup ()
   (require 'tramp)
   (setq-default tramp-default-method "ssh"))
-(my-tramp-setup)
 
 
 (defun fix-server ()
@@ -55,7 +52,6 @@
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
-(my-server-setup)
 
 (defun my-window-system-setup ()
   (when window-system
@@ -64,10 +60,6 @@
     (require 'color-theme)
     (require 'color-theme-github)
     (setq server-name "gui")))
-(my-window-system-setup)
-
-
-(require 'undo-tree)
 
 
 (winner-mode t)
@@ -85,7 +77,6 @@
   (setq-default elscreen-prefix-key "`")
   (setq-default elscreen-startup-command-line-processing nil)
   (load "elscreen" "ElScreen" t))
-(my-elscreen-setup)
 
 
 (defun my-org-mode-setup ()
@@ -94,7 +85,6 @@
   (setq-default initial-major-mode 'org-mode)
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
-(my-org-mode-setup)
 
 
 (defun my-anything-setup ()
@@ -102,7 +92,6 @@
   (require 'anything-gtags)
   (setq-default anything-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative))
-(my-anything-setup)
 
 
 (defun my-autopair-setup ()
@@ -114,7 +103,6 @@
               (define-key (cdr (car autopair-emulation-alist)) (kbd "RET") nil)))
   ;; (autopair-global-mode t)
   (add-hook 'c-mode-common-hook (lambda () (autopair-mode t))))
-(my-autopair-setup)
 
 
 (defun my-paredit-setup ()
@@ -124,7 +112,6 @@
   (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
   (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
   (add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t))))
-(my-paredit-setup)
 
 (defun my-auto-complete-setup ()
   (require 'auto-complete-config)
@@ -151,17 +138,14 @@
   (add-hook 'css-mode-hook 'ac-css-mode-setup)
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
   (global-auto-complete-mode t))
-(my-auto-complete-setup)
 
 (defun my-ac-anything2-setup ()
   (require 'ac-anything2)
   (define-key ac-complete-mode-map "\M-s" 'ac-anything2))
-(my-ac-anything2-setup)
 
 (defun my-auto-complete-clang-setup ()
   (require 'auto-complete-clang)
   (setq-default ac-clang-auto-save nil))
-(my-auto-complete-clang-setup)
 
 (defun my-yasnippet-setup ()
   (require 'yasnippet)
@@ -169,7 +153,6 @@
   (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
   ;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
   (yas/global-mode t))
-(my-yasnippet-setup)
 
 
 (defun my-egg-setup ()
@@ -177,7 +160,6 @@
   (setq-default egg-buffer-hide-sub-blocks-on-start nil)
   (setq-default egg-enable-tooltip t)
   (setq-default egg-refresh-index-in-backround t))
-(my-egg-setup)
 
 
 (defun my-vim-mode-setup ()
@@ -195,37 +177,36 @@
                   (reftex-select-bib-mode . window)
                   (completion-list-mode . normal)
                   (help-mode . normal)
-                  (Info-mode . motion))))
-(my-vim-mode-setup)
+                  (Info-mode . motion)))
 
-(vim:defcmd vim:cmd-delete-bwd-word (count register)
-  "Deletes the next count characters."
-  (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
-                  :register register))
+  (vim:defcmd vim:cmd-delete-bwd-word (count register)
+    "Deletes the next count characters."
+    (vim:cmd-delete :motion (vim:motion-bwd-word :count 1)
+                    :register register))
 
-(vim:defcmd vim:cmd-make (nonrepeatable argument)
-  "Executes compile or recompile."
-  (let ((previous-buffer (current-buffer)))
-    (if argument
+  (vim:defcmd vim:cmd-make (nonrepeatable argument)
+    "Executes compile or recompile."
+    (let ((previous-buffer (current-buffer)))
+      (if argument
+          ((lambda ()
+             (compile (concat "make " argument))
+             (switch-to-buffer-other-window "*compilation*")
+             (vim:motion-go-to-first-non-blank-end)
+             (switch-to-buffer-other-window previous-buffer)))
         ((lambda ()
-           (compile (concat "make " argument))
+           (recompile)
            (switch-to-buffer-other-window "*compilation*")
            (vim:motion-go-to-first-non-blank-end)
-           (switch-to-buffer-other-window previous-buffer)))
-      ((lambda ()
-         (recompile)
-         (switch-to-buffer-other-window "*compilation*")
-         (vim:motion-go-to-first-non-blank-end)
-         (switch-to-buffer-other-window previous-buffer))))))
+           (switch-to-buffer-other-window previous-buffer))))))
 
 
-(vim:defcmd vim:cmd-next-error (nonrepeatable count)
-  "Moves to the `count'th next error."
-  (next-error count))
+  (vim:defcmd vim:cmd-next-error (nonrepeatable count)
+    "Moves to the `count'th next error."
+    (next-error count))
 
-(vim:defcmd vim:cmd-prev-error (nonrepeatable count)
-  "Moves to the `count'th previous error."
-  (next-error (- (or count 1))))
+  (vim:defcmd vim:cmd-prev-error (nonrepeatable count)
+    "Moves to the `count'th previous error."
+    (next-error (- (or count 1)))))
 
 (defun comment-or-uncomment-line ()
   (interactive)
@@ -283,7 +264,6 @@ otherwise raises an error."
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
   (autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
   (setq-default scheme-indent-function 'scheme-smart-indent-function))
-(my-scheme-complete-setup)
 
 (defun my-tab-and-indent-setup ()
   (setq-default indent-line-function 'indent-according-to-mode)
@@ -293,7 +273,6 @@ otherwise raises an error."
   ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
   (setq-default tab-always-indent t)
   (setq-default tab-stop-list (generate-tab-stop-list)))
-(my-tab-and-indent-setup)
 
 
 (defun my-gambit-setup ()
@@ -302,20 +281,17 @@ otherwise raises an error."
   (add-hook 'inferior-scheme-mode-hook (function gambit-inferior-mode))
   (add-hook 'scheme-mode-hook (function gambit-mode))
   (setq-default scheme-program-name "gsi -:d-"))
-(my-gambit-setup)
 
 
 (defun my-geiser-setup ()
   (require 'geiser)
   (setq-default geiser-active-implementations '(guile)))
-(my-geiser-setup)
 
 
 (defun my-gud-setup ()
   (require 'gud)
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil))
-(my-gud-setup)
 
 (defun gud-kill-yes ()
   (interactive)
@@ -373,7 +349,6 @@ otherwise raises an error."
   (define-key anything-find-files-map "\M-r" 'anything-select-3rd-action)
   (define-key anything-find-files-map "\M-u" 'anything-find-files-down-one-level)
   (define-key anything-find-files-map "\M-w" 'paredit-backward-kill-word))
-(my-anything-map-setup)
 
 (defun my-minibuffer-map-setup ()
   (define-key minibuffer-local-map "\C-p" 'previous-history-element)
@@ -384,7 +359,6 @@ otherwise raises an error."
   (define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
   (define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
   (define-key minibuffer-local-map "\M-w" 'paredit-backward-kill-word))
-(my-minibuffer-map-setup)
 
 (defvar my-tab-map (make-sparse-keymap))
 (defun my-tab-map-setup ()
@@ -394,7 +368,6 @@ otherwise raises an error."
   (define-key my-tab-map "\M-n" 'vim:cmd-tab-next)
   (define-key my-tab-map "\M-p" 'vim:cmd-tab-previous)
   (define-key my-tab-map "\M-t" 'elscreen-toggle))
-(my-tab-map-setup)
 
 (defvar my-haskell-map (make-sparse-keymap))
 (defun my-haskell-map-setup ()
@@ -402,7 +375,6 @@ otherwise raises an error."
   (define-key my-haskell-map "i" 'inferior-haskell-info)
   (define-key my-haskell-map "l" 'inferior-haskell-load-file)
   (define-key my-haskell-map "t" 'inferior-haskell-type))
-(my-haskell-map-setup)
 
 (defvar my-gud-map (make-sparse-keymap))
 (defun my-gud-map-setup ()
@@ -434,7 +406,6 @@ otherwise raises an error."
 ;; scheme-send-region-and-go
 ;; scheme-compile-file
 ;; scheme-compile-definition
-(my-gud-map-setup)
 
 (defvar my-egg-map (make-sparse-keymap))
 (defun my-egg-map-setup ()
@@ -442,13 +413,11 @@ otherwise raises an error."
   (define-key my-egg-map "g" 'egg-next-action)
   (define-key my-egg-map "l" 'egg-log)
   (define-key my-egg-map "s" 'egg-status))
-(my-egg-map-setup)
 
 (defvar my-tag-map (make-sparse-keymap))
 (defun my-tag-map-setup ()
   (define-key my-tag-map "s" 'anything-gtags-select)
   (define-key my-tag-map "t" 'anything-gtags-resume))
-(my-tag-map-setup)
 
 (defvar my-geiser-map (make-sparse-keymap))
 (defun my-geiser-map-setup ()
@@ -459,7 +428,6 @@ otherwise raises an error."
   (define-key my-geiser-map "D" 'geiser-eval-definition-and-go)
   (define-key my-geiser-map "r" 'geiser-eval-region)
   (define-key my-geiser-map "R" 'geiser-eval-region-and-go))
-(my-geiser-map-setup)
 
 
 (defun my-vim-map-setup ()
@@ -586,7 +554,6 @@ otherwise raises an error."
 
   (vim:emap "make" 'vim:cmd-make)
   (vim:emap "m"    "make"))
-(my-vim-map-setup)
 
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -625,7 +592,6 @@ otherwise raises an error."
   (define-key key-translation-map [?\C-h] [?\C-?])
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
   (define-key read-expression-map [(tab)] 'hippie-expand))
-(my-misc-map-setup)
 
 
 (defun my-cc-mode-setup ()
@@ -634,18 +600,15 @@ otherwise raises an error."
                 '((java-mode . "java")
                   (other . "linux"))
                 c-basic-offset 4))
-(my-cc-mode-setup)
 
 (defun my-qi-mode-setup ()
   (require 'qi-mode)
   (add-to-list 'auto-mode-alist '("\\.qml$" . js-mode)))
-(my-qi-mode-setup)
 
 (defun my-whitespace-setup ()
   (require 'whitespace)
   (global-whitespace-mode t)
   (setq-default whitespace-style '(face tabs tab-mark)))
-(my-whitespace-setup)
 
 
 (set-frame-font "Monospace 10")
@@ -703,6 +666,7 @@ otherwise raises an error."
       (set-buffer-file-coding-system (intern coding-str)) )))
 
 (defun my-misc-setup ()
+  (require 'undo-tree)
   (setq-default read-file-name-completion-ignore-case t)
   (setq-default backup-inhibited t)
   (setq-default auto-save-default nil)
@@ -731,7 +695,6 @@ otherwise raises an error."
             asm-mode-hook
             egg-mode-hook
             java-mode-hook)))
-(my-misc-setup)
 
 
 (defun now ()
@@ -760,4 +723,41 @@ otherwise raises an error."
   (require 'c-eldoc)
   (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
   (add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode))
+
+
+(my-package-setup)
+(my-auto-install-setup)
+(my-tramp-setup)
+(my-server-setup)
+(my-window-system-setup)
+(my-elscreen-setup)
+(my-org-mode-setup)
+(my-anything-setup)
+(my-autopair-setup)
+(my-paredit-setup)
+(my-auto-complete-setup)
+(my-ac-anything2-setup)
+(my-auto-complete-clang-setup)
+(my-yasnippet-setup)
+(my-egg-setup)
+(my-vim-mode-setup)
+(my-scheme-complete-setup)
+(my-tab-and-indent-setup)
+(my-gambit-setup)
+(my-geiser-setup)
+(my-gud-setup)
+(my-anything-map-setup)
+(my-minibuffer-map-setup)
+(my-tab-map-setup)
+(my-haskell-map-setup)
+(my-gud-map-setup)
+(my-egg-map-setup)
+(my-tag-map-setup)
+(my-geiser-map-setup)
+(my-vim-map-setup)
+(my-misc-map-setup)
+(my-cc-mode-setup)
+(my-qi-mode-setup)
+(my-whitespace-setup)
+(my-misc-setup)
 (my-eldoc-setup)
