@@ -37,18 +37,150 @@
   (setq-default tramp-default-method "ssh"))
 
 
-(defun fix-server ()
-  (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
+(defun my-misc-function-setup ()
+  (defun fix-server ()
+    (remove-hook 'kill-buffer-query-functions 'server-kill-buffer-query-function))
 
-(defun start-server ()
-  (interactive)
-  (server-mode t)
-  (fix-server))
+  (defun start-server ()
+    (interactive)
+    (server-mode t)
+    (fix-server))
 
-(defun open-client-other-window ()
-  (let ((server-buf (current-buffer)))
-    (bury-buffer)
-    (switch-to-buffer-other-window server-buf)))
+  (defun open-client-other-window ()
+    (let ((server-buf (current-buffer)))
+      (bury-buffer)
+      (switch-to-buffer-other-window server-buf)))
+  (defun compile-autoclose (buffer string)
+    (cond ((string-match "finished" string)
+           (bury-buffer "*compilation*")
+           (replace-buffer-in-windows "*compilation*")
+           (message "Build successful."))
+          (t
+           (message "Compilation exited abnormally: %s" string))))
+
+  (defun comment-or-uncomment-line ()
+    (interactive)
+    (vim:visual-toggle-linewise)
+    (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (vim:visual-toggle-linewise)
+    (vim:motion-down :count 1))
+
+  (defun find-tags-file ()
+    "recursively searches each parent directory for a file named `TAGS' and returns the
+path to that file or nil if a tags file is not found. Returns nil if the buffer is
+not visiting a file"
+    (labels
+        ((find-tags-file-r (path)
+                           (let* ((parent (file-name-directory path))
+                                  (possible-tags-file (concat parent "TAGS")))
+                             (cond
+                              ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
+                              ((string= "/TAGS" possible-tags-file) (error "no TAGS file found"))
+                              (t (find-tags-file-r (directory-file-name parent)))))))
+
+      (if (buffer-file-name)
+          (catch 'found-it
+            (find-tags-file-r (buffer-file-name)))
+        (error "buffer is not visiting a file"))))
+
+  (defun set-tags-file-path ()
+    "calls `find-tags-file' to recursively search up the directory tree to find
+a file named `tags'. If found, calls `visit-tags-table' with that path as an argument
+otherwise raises an error."
+    (interactive)
+    (visit-tags-table (find-tags-file)))
+
+  (defun indent-line ()
+    (interactive)
+    (let ((tab-always-indent t))
+      (indent-for-tab-command nil)))
+
+  (defun find-tag-at-point ()
+    (interactive)
+    (find-tag (thing-at-point 'symbol)))
+
+  (defun find-tag-at-point-other-window ()
+    (interactive)
+    (find-tag-other-window (thing-at-point 'symbol)))
+
+  (defun generate-tab-stop-list ()
+    (let ((result (list)))
+      (dotimes (n 10 result)
+        (setq result (cons (* (+ 1 n) standard-indent) result)))
+      (reverse result)))
+  (defun gud-kill-yes ()
+    (interactive)
+    (gud-kill nil)
+    (sleep-for 0.1)
+    (gud-yes nil))
+
+  (defun gud-run-yes ()
+    (interactive)
+    (gud-run nil)
+    (sleep-for 0.1)
+    (gud-yes nil))
+
+  (defun gud-interrupt ()
+    (interactive)
+    (set-buffer (get-buffer "*gud*"))
+    (comint-interrupt-subjob))
+
+  (defun gud-restart ()
+    (interactive)
+    (let ((previous-buffer (current-buffer)))
+      (switch-to-buffer-other-window "*gud*")
+      (gud-interrupt)
+      (sleep-for 0.1)
+      (gud-run-yes)
+      (switch-to-buffer-other-window previous-buffer)))
+
+  (defun paredit-change ()
+    (interactive)
+    (paredit-kill)
+    (vim:insert-mode))
+
+  (defun common-lisp-hook ()
+    (setq standard-indent 2)
+    (setq tab-stop-list (generate-tab-stop-list)))
+  (defun my-scheme-mode-hook ()
+    (mapc (lambda (sym)
+            (put sym 'scheme-indent-function 'defun))
+          (list 'call/cc 'c-lambda 'module-map))
+
+    (define-key scheme-mode-map "\t" 'scheme-complete-or-indent)
+
+    (make-local-variable 'eldoc-documentation-function)
+    (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
+    (eldoc-mode))
+
+  (defun no-junk-please-were-unixish ()
+    (let ((coding-str (symbol-name buffer-file-coding-system)))
+      (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
+        (setq coding-str
+              (concat (substring coding-str 0 (match-beginning 0)) "-unix"))
+        (message "CODING: %s" coding-str)
+        (set-buffer-file-coding-system (intern coding-str)) )))
+
+  (defun now ()
+    "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
+    (interactive)                 ; permit invocation in minibuffer
+    (insert (format-time-string "%Y-%m-%d %-I:%M %p")))
+
+  (defun time ()
+    "Insert string for the current time ISO formatted like '2:34 PM'."
+    (interactive)                 ; permit invocation in minibuffer
+    (insert (format-time-string "%-I:%M %p")))
+
+  (defun today ()
+    "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
+    (interactive)                 ; permit invocation in minibuffer
+    (insert (format-time-string "%Y-%m-%d")))
+
+  (defun short-date ()
+    "Insert string for today's date formatted like 110801."
+    (interactive)                 ; permit invocation in minibuffer
+    (insert (format-time-string "%y%m%d"))))
+
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
@@ -64,13 +196,6 @@
 
 (winner-mode t)
 (setq-default compilation-finish-functions 'compile-autoclose)
-(defun compile-autoclose (buffer string)
-  (cond ((string-match "finished" string)
-         (bury-buffer "*compilation*")
-         (replace-buffer-in-windows "*compilation*")
-         (message "Build successful."))
-        (t
-         (message "Compilation exited abnormally: %s" string))))
 
 
 (defun my-elscreen-setup ()
@@ -208,57 +333,8 @@
     "Moves to the `count'th previous error."
     (next-error (- (or count 1)))))
 
-(defun comment-or-uncomment-line ()
-  (interactive)
-  (vim:visual-toggle-linewise)
-  (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-  (vim:visual-toggle-linewise)
-  (vim:motion-down :count 1))
 
 
-(defun find-tags-file ()
-  "recursively searches each parent directory for a file named `TAGS' and returns the
-path to that file or nil if a tags file is not found. Returns nil if the buffer is
-not visiting a file"
-  (labels
-      ((find-tags-file-r (path)
-         (let* ((parent (file-name-directory path))
-                (possible-tags-file (concat parent "TAGS")))
-           (cond
-             ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
-             ((string= "/TAGS" possible-tags-file) (error "no TAGS file found"))
-             (t (find-tags-file-r (directory-file-name parent)))))))
-
-    (if (buffer-file-name)
-        (catch 'found-it
-          (find-tags-file-r (buffer-file-name)))
-        (error "buffer is not visiting a file"))))
-
-(defun set-tags-file-path ()
-  "calls `find-tags-file' to recursively search up the directory tree to find
-a file named `tags'. If found, calls `visit-tags-table' with that path as an argument
-otherwise raises an error."
-  (interactive)
-  (visit-tags-table (find-tags-file)))
-
-(defun indent-line ()
-  (interactive)
-  (let ((tab-always-indent t))
-    (indent-for-tab-command nil)))
-
-(defun find-tag-at-point ()
- (interactive)
- (find-tag (thing-at-point 'symbol)))
-
-(defun find-tag-at-point-other-window ()
- (interactive)
- (find-tag-other-window (thing-at-point 'symbol)))
-
-(defun generate-tab-stop-list ()
-  (let ((result (list)))
-    (dotimes (n 10 result)
-      (setq result (cons (* (+ 1 n) standard-indent) result)))
-    (reverse result)))
 
 (defun my-scheme-complete-setup ()
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
@@ -292,37 +368,6 @@ otherwise raises an error."
   (require 'gud)
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil))
-
-(defun gud-kill-yes ()
-  (interactive)
-  (gud-kill nil)
-  (sleep-for 0.1)
-  (gud-yes nil))
-
-(defun gud-run-yes ()
-  (interactive)
-  (gud-run nil)
-  (sleep-for 0.1)
-  (gud-yes nil))
-
-(defun gud-interrupt ()
-  (interactive)
-  (set-buffer (get-buffer "*gud*"))
-  (comint-interrupt-subjob))
-
-(defun gud-restart ()
-  (interactive)
-  (let ((previous-buffer (current-buffer)))
-    (switch-to-buffer-other-window "*gud*")
-    (gud-interrupt)
-    (sleep-for 0.1)
-    (gud-run-yes)
-    (switch-to-buffer-other-window previous-buffer)))
-
-(defun paredit-change ()
-  (interactive)
-  (paredit-kill)
-  (vim:insert-mode))
 
 (defun my-anything-map-setup ()
   (define-key anything-map "\M-e" 'anything-execute-persistent-action)
@@ -560,23 +605,9 @@ otherwise raises an error."
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 (add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
 
-(defun common-lisp-hook ()
-  (setq standard-indent 2)
-  (setq tab-stop-list (generate-tab-stop-list)))
 
 (add-hook 'lisp-mode-hook       'common-lisp-hook)
 (add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
-
-(defun my-scheme-mode-hook ()
-  (mapc (lambda (sym)
-          (put sym 'scheme-indent-function 'defun))
-        (list 'call/cc 'c-lambda 'module-map))
-
-  (define-key scheme-mode-map "\t" 'scheme-complete-or-indent)
-
-  (make-local-variable 'eldoc-documentation-function)
-  (setq eldoc-documentation-function 'scheme-get-current-symbol-info)
-  (eldoc-mode))
 
 (add-hook 'scheme-mode-hook 'common-lisp-hook)
 (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
@@ -657,14 +688,6 @@ otherwise raises an error."
  '(protect-buffer-bury-p nil))
 
 
-(defun no-junk-please-were-unixish ()
-  (let ((coding-str (symbol-name buffer-file-coding-system)))
-    (when (string-match "-\\(?:dos\\|mac\\)$" coding-str)
-      (setq coding-str
-            (concat (substring coding-str 0 (match-beginning 0)) "-unix"))
-      (message "CODING: %s" coding-str)
-      (set-buffer-file-coding-system (intern coding-str)) )))
-
 (defun my-misc-setup ()
   (require 'undo-tree)
   (setq-default read-file-name-completion-ignore-case t)
@@ -697,26 +720,6 @@ otherwise raises an error."
             java-mode-hook)))
 
 
-(defun now ()
-  "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%Y-%m-%d %-I:%M %p")))
-
-(defun time ()
-  "Insert string for the current time ISO formatted like '2:34 PM'."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%-I:%M %p")))
-
-(defun today ()
-  "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%Y-%m-%d")))
-
-(defun short-date ()
-  "Insert string for today's date formatted like 110801."
-  (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%y%m%d")))
-
 
 (defun my-eldoc-setup ()
   (require 'eldoc)
@@ -726,6 +729,7 @@ otherwise raises an error."
 
 
 (my-package-setup)
+(my-misc-function-setup)
 (my-auto-install-setup)
 (my-tramp-setup)
 (my-server-setup)
