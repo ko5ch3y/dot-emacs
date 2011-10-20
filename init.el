@@ -1,5 +1,20 @@
 
+(add-to-list 'load-path "~/.emacs.d/auto-install")
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/egg")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/geiser/elisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+
 
 (load "~/.emacs.d/elpa/package.el")
 (defun my-package-setup ()
@@ -11,7 +26,6 @@
 (my-package-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/auto-install")
 (defun my-auto-install-setup ()
   (require 'auto-install)
   (setq-default url-proxy-services '(("http" . "localhost:3128"))))
@@ -46,7 +60,6 @@
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode t)
     (require 'color-theme)
-    (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
     (require 'color-theme-github)
     (setq server-name "gui")))
 (my-window-system-setup)
@@ -66,7 +79,6 @@
          (message "Compilation exited abnormally: %s" string))))
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
 (defun my-elscreen-setup ()
   (setq-default elscreen-prefix-key "`")
   (setq-default elscreen-startup-command-line-processing nil)
@@ -74,9 +86,6 @@
 (my-elscreen-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
 (defun my-org-mode-setup ()
   (require 'org-install)
   (require 'org-mw)
@@ -86,8 +95,6 @@
 (my-org-mode-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (defun my-anything-setup ()
   (require 'anything-startup)
   (require 'anything-gtags)
@@ -117,7 +124,6 @@
   (add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t))))
 (my-paredit-setup)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
 (defun my-auto-complete-setup ()
   (require 'auto-complete-config)
   (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
@@ -150,13 +156,11 @@
   (define-key ac-complete-mode-map "\M-s" 'ac-anything2))
 (my-ac-anything2-setup)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
 (defun my-auto-complete-clang-setup ()
   (require 'auto-complete-clang)
   (setq-default ac-clang-auto-save nil))
 (my-auto-complete-clang-setup)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
 (defun my-yasnippet-setup ()
   (require 'yasnippet)
   (yas/initialize)
@@ -166,7 +170,6 @@
 (my-yasnippet-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/egg")
 (defun my-egg-setup ()
   (require 'egg)
   (setq-default egg-buffer-hide-sub-blocks-on-start nil)
@@ -175,7 +178,6 @@
 (my-egg-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (defun my-vim-mode-setup ()
   (require 'vim)
   (require 'vim-elscreen)
@@ -301,7 +303,6 @@ otherwise raises an error."
 (my-gambit-setup)
 
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/geiser/elisp")
 (defun my-geiser-setup ()
   (require 'geiser)
   (setq-default geiser-active-implementations '(guile)))
