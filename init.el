@@ -18,8 +18,8 @@
 (setq load-path (append load-path my-load-path))
 
 
-(load "~/.emacs.d/elpa/package.el")
 (defun my-package-setup ()
+  (load "~/.emacs.d/elpa/package.el")
   (require 'package)
   (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                     ("elpa" . "http://tromey.com/elpa/")))
