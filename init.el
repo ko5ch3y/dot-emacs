@@ -1,19 +1,21 @@
 
-(add-to-list 'load-path "~/.emacs.d/auto-install")
-(add-to-list 'load-path "~/.emacs.d/site-lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/egg")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/elscreen")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/geiser/elisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/contrib/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/org-mode/lisp")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+(defvar my-load-path
+  (list "~/.emacs.d/auto-install"
+        "~/.emacs.d/site-lisp"
+        "~/.emacs.d/site-lisp/anything-config"
+        "~/.emacs.d/site-lisp/anything-config/extensions"
+        "~/.emacs.d/site-lisp/auto-complete"
+        "~/.emacs.d/site-lisp/auto-complete-clang"
+        "~/.emacs.d/site-lisp/color-theme-github"
+        "~/.emacs.d/site-lisp/egg"
+        "~/.emacs.d/site-lisp/elscreen"
+        "~/.emacs.d/site-lisp/geiser/elisp"
+        "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL"
+        "~/.emacs.d/site-lisp/org-mode/contrib/lisp"
+        "~/.emacs.d/site-lisp/org-mode/lisp"
+        "~/.emacs.d/site-lisp/vim-mode"
+        "~/.emacs.d/site-lisp/yasnippet-0.6.1c"))
+(setq load-path (append load-path my-load-path))
 
 
 (load "~/.emacs.d/elpa/package.el")
