@@ -26,16 +26,13 @@
     (add-to-list 'package-archives source t))
   (package-initialize))
 
-
 (defun my-auto-install-setup ()
   (require 'auto-install)
   (setq-default url-proxy-services '(("http" . "localhost:3128"))))
 
-
 (defun my-tramp-setup ()
   (require 'tramp)
   (setq-default tramp-default-method "ssh"))
-
 
 (defun my-misc-function-setup ()
   (defun fix-server ()
@@ -50,6 +47,7 @@
     (let ((server-buf (current-buffer)))
       (bury-buffer)
       (switch-to-buffer-other-window server-buf)))
+
   (defun compile-autoclose (buffer string)
     (cond ((string-match "finished" string)
            (bury-buffer "*compilation*")
@@ -65,49 +63,17 @@
     (vim:visual-toggle-linewise)
     (vim:motion-down :count 1))
 
-  (defun find-tags-file ()
-    "recursively searches each parent directory for a file named `TAGS' and returns the
-path to that file or nil if a tags file is not found. Returns nil if the buffer is
-not visiting a file"
-    (labels
-        ((find-tags-file-r (path)
-                           (let* ((parent (file-name-directory path))
-                                  (possible-tags-file (concat parent "TAGS")))
-                             (cond
-                              ((file-exists-p possible-tags-file) (throw 'found-it possible-tags-file))
-                              ((string= "/TAGS" possible-tags-file) (error "no TAGS file found"))
-                              (t (find-tags-file-r (directory-file-name parent)))))))
-
-      (if (buffer-file-name)
-          (catch 'found-it
-            (find-tags-file-r (buffer-file-name)))
-        (error "buffer is not visiting a file"))))
-
-  (defun set-tags-file-path ()
-    "calls `find-tags-file' to recursively search up the directory tree to find
-a file named `tags'. If found, calls `visit-tags-table' with that path as an argument
-otherwise raises an error."
-    (interactive)
-    (visit-tags-table (find-tags-file)))
-
   (defun indent-line ()
     (interactive)
     (let ((tab-always-indent t))
       (indent-for-tab-command nil)))
-
-  (defun find-tag-at-point ()
-    (interactive)
-    (find-tag (thing-at-point 'symbol)))
-
-  (defun find-tag-at-point-other-window ()
-    (interactive)
-    (find-tag-other-window (thing-at-point 'symbol)))
 
   (defun generate-tab-stop-list ()
     (let ((result (list)))
       (dotimes (n 10 result)
         (setq result (cons (* (+ 1 n) standard-indent) result)))
       (reverse result)))
+
   (defun gud-kill-yes ()
     (interactive)
     (gud-kill nil)
@@ -139,9 +105,10 @@ otherwise raises an error."
     (paredit-kill)
     (vim:insert-mode))
 
-  (defun common-lisp-hook ()
+  (defun my-lisp-mode-hook ()
     (setq standard-indent 2)
     (setq tab-stop-list (generate-tab-stop-list)))
+
   (defun my-scheme-mode-hook ()
     (mapc (lambda (sym)
             (put sym 'scheme-indent-function 'defun))
@@ -181,7 +148,6 @@ otherwise raises an error."
     (interactive)                 ; permit invocation in minibuffer
     (insert (format-time-string "%y%m%d"))))
 
-
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
 
@@ -193,16 +159,10 @@ otherwise raises an error."
     (require 'color-theme-github)
     (setq server-name "gui")))
 
-
-(winner-mode t)
-(setq-default compilation-finish-functions 'compile-autoclose)
-
-
 (defun my-elscreen-setup ()
   (setq-default elscreen-prefix-key "`")
   (setq-default elscreen-startup-command-line-processing nil)
   (load "elscreen" "ElScreen" t))
-
 
 (defun my-org-mode-setup ()
   (require 'org-install)
@@ -211,13 +171,11 @@ otherwise raises an error."
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
 
-
 (defun my-anything-setup ()
   (require 'anything-startup)
   (require 'anything-gtags)
   (setq-default anything-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative))
-
 
 (defun my-autopair-setup ()
   (require 'autopair)
@@ -228,7 +186,6 @@ otherwise raises an error."
               (define-key (cdr (car autopair-emulation-alist)) (kbd "RET") nil)))
   ;; (autopair-global-mode t)
   (add-hook 'c-mode-common-hook (lambda () (autopair-mode t))))
-
 
 (defun my-paredit-setup ()
   (require 'paredit)
@@ -279,13 +236,11 @@ otherwise raises an error."
   ;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
   (yas/global-mode t))
 
-
 (defun my-egg-setup ()
   (require 'egg)
   (setq-default egg-buffer-hide-sub-blocks-on-start nil)
   (setq-default egg-enable-tooltip t)
   (setq-default egg-refresh-index-in-backround t))
-
 
 (defun my-vim-mode-setup ()
   (require 'vim)
@@ -324,7 +279,6 @@ otherwise raises an error."
            (vim:motion-go-to-first-non-blank-end)
            (switch-to-buffer-other-window previous-buffer))))))
 
-
   (vim:defcmd vim:cmd-next-error (nonrepeatable count)
     "Moves to the `count'th next error."
     (next-error count))
@@ -332,9 +286,6 @@ otherwise raises an error."
   (vim:defcmd vim:cmd-prev-error (nonrepeatable count)
     "Moves to the `count'th previous error."
     (next-error (- (or count 1)))))
-
-
-
 
 (defun my-scheme-complete-setup ()
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
@@ -350,7 +301,6 @@ otherwise raises an error."
   (setq-default tab-always-indent t)
   (setq-default tab-stop-list (generate-tab-stop-list)))
 
-
 (defun my-gambit-setup ()
   (autoload 'gambit-inferior-mode "gambit" "Hook Gambit mode into cmuscheme.")
   (autoload 'gambit-mode "gambit" "Hook Gambit mode into scheme.")
@@ -358,16 +308,123 @@ otherwise raises an error."
   (add-hook 'scheme-mode-hook (function gambit-mode))
   (setq-default scheme-program-name "gsi -:d-"))
 
-
 (defun my-geiser-setup ()
   (require 'geiser)
   (setq-default geiser-active-implementations '(guile)))
-
 
 (defun my-gud-setup ()
   (require 'gud)
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil))
+
+(defun my-haskell-mode-setup ()
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+  (add-hook 'haskell-mode-hook 'my-haskell-mode-hook))
+
+(defun my-cc-mode-setup ()
+  (require 'cc-mode)
+  (setq-default c-default-style
+                '((java-mode . "java")
+                  (other . "linux"))
+                c-basic-offset 4))
+
+(defun my-qi-mode-setup ()
+  (require 'qi-mode)
+  (add-to-list 'auto-mode-alist '("\\.qml$" . js-mode)))
+
+(defun my-whitespace-setup ()
+  (require 'whitespace)
+  (global-whitespace-mode t)
+  (setq-default whitespace-style '(face tabs tab-mark)))
+
+(defun my-misc-setup ()
+  (require 'undo-tree)
+  (winner-mode t)
+  (setq-default compilation-finish-functions 'compile-autoclose)
+  (setq-default read-file-name-completion-ignore-case t)
+  (setq-default backup-inhibited t)
+  (setq-default auto-save-default nil)
+  (setq-default inhibit-read-only t)
+  (global-auto-revert-mode 1)
+  (setq-default scroll-margin 10)
+  (add-hook 'term-mode-hook '(lambda () (setq scroll-margin 0)))
+  (setq-default scroll-step 1)
+  (setq-default require-final-newline t)
+  (setq-default next-line-add-newlines nil)
+  (setq-default visible-bell t)
+  (fset 'yes-or-no-p 'y-or-n-p)
+  (setq-default show-paren-delay 0)
+  (setq-default show-paren-style 'mixed)
+  (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHI -e ")
+  (setq initial-scratch-message "")
+  (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (global-linum-mode t)
+  (setq-default fill-column 80)
+  (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
+  (mapcar (lambda (mode-hook)
+            (add-hook mode-hook 'flyspell-prog-mode))
+          '(c-mode-common-hook
+            emacs-lisp-mode-hook
+            js-mode-hook
+            asm-mode-hook
+            egg-mode-hook
+            java-mode-hook))
+  (add-hook 'lisp-mode-hook       'my-lisp-mode-hook)
+  (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
+  (add-hook 'scheme-mode-hook 'my-lisp-mode-hook)
+  (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
+  (set-frame-font "Monospace 10")
+  ;; (set-face-attribute 'default nil :weight 'bold)
+  ;; (require 'rainbow-delimiters)
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(egg-diff-add ((((class color) (background light)) (:foreground "#009926"))))
+   '(egg-diff-del ((((class color) (background light)) (:foreground "#DD1144"))))
+
+   '(hl-line ((t (:background "#F3F3FF"))))
+   '(vline ((t (:background "#F5F5FF"))))
+
+   '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
+   '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
+   '(rainbow-delimiters-depth-3-face ((t (:foreground "orange"))))
+   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple"))))
+   '(rainbow-delimiters-depth-5-face ((t (:foreground "brown"))))
+   '(rainbow-delimiters-depth-6-face ((t (:foreground "darkblue"))))
+   '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
+   '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
+   '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
+
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(ansi-color-names-vector ["#000000" "#DD1144" "#009926" "#990000" "#445588" "#990073" "#0086B3" "#999988"])
+   '(comint-buffer-maximum-size 100000)
+   '(comint-completion-addsuffix t)
+   '(comint-get-old-input (lambda nil "") t)
+   '(comint-input-ignoredups t)
+   '(comint-input-ring-size 5000)
+   '(comint-move-point-for-output nil)
+   '(comint-prompt-read-only nil)
+   '(comint-scroll-show-maximum-output t)
+   '(comint-scroll-to-bottom-on-input t)
+   '(egg-buffer-hide-help-on-start nil)
+   '(egg-buffer-hide-section-type-on-start (quote ((egg-status-buffer-mode . :diff) (egg-diff-buffer-mode . :diff))))
+   '(egg-buffer-hide-sub-blocks-on-start nil)
+   '(egg-quit-window-actions (quote ((egg-status-buffer-mode restore-windows) (egg-log-buffer-mode restore-windows) (egg-commit-buffer-mode restore-windows) (egg-reflog-buffer-mode restore-windows) (egg-diff-buffer-mode restore-windows) (egg-file-log-buffer-mode restore-windows))))
+   '(protect-buffer-bury-p nil)))
+
+(defun my-eldoc-setup ()
+  (require 'eldoc)
+  (require 'c-eldoc)
+  (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
+  (add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode))
+
 
 (defun my-anything-map-setup ()
   (define-key anything-map "\M-e" 'anything-execute-persistent-action)
@@ -473,7 +530,6 @@ otherwise raises an error."
   (define-key my-geiser-map "D" 'geiser-eval-definition-and-go)
   (define-key my-geiser-map "r" 'geiser-eval-region)
   (define-key my-geiser-map "R" 'geiser-eval-region-and-go))
-
 
 (defun my-vim-map-setup ()
   (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
@@ -600,145 +656,17 @@ otherwise raises an error."
   (vim:emap "make" 'vim:cmd-make)
   (vim:emap "m"    "make"))
 
-
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-(add-hook 'haskell-mode-hook 'my-haskell-mode-hook)
-
-
-(add-hook 'lisp-mode-hook       'common-lisp-hook)
-(add-hook 'emacs-lisp-mode-hook 'common-lisp-hook)
-
-(add-hook 'scheme-mode-hook 'common-lisp-hook)
-(add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
-
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t "" 'my-keys-minor-mode-map)
-(my-keys-minor-mode 1)
-
 (defun my-misc-map-setup ()
+  (defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    t "" 'my-keys-minor-mode-map)
+  (my-keys-minor-mode 1)
+
   (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
   (define-key key-translation-map [?\C-h] [?\C-?])
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
   (define-key read-expression-map [(tab)] 'hippie-expand))
-
-
-(defun my-cc-mode-setup ()
-  (require 'cc-mode)
-  (setq-default c-default-style
-                '((java-mode . "java")
-                  (other . "linux"))
-                c-basic-offset 4))
-
-(defun my-qi-mode-setup ()
-  (require 'qi-mode)
-  (add-to-list 'auto-mode-alist '("\\.qml$" . js-mode)))
-
-(defun my-whitespace-setup ()
-  (require 'whitespace)
-  (global-whitespace-mode t)
-  (setq-default whitespace-style '(face tabs tab-mark)))
-
-
-(set-frame-font "Monospace 10")
-;; (set-face-attribute 'default nil :weight 'bold)
-;; (require 'rainbow-delimiters)
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(egg-diff-add ((((class color) (background light)) (:foreground "#009926"))))
- '(egg-diff-del ((((class color) (background light)) (:foreground "#DD1144"))))
-
- '(hl-line ((t (:background "#F3F3FF"))))
- '(vline ((t (:background "#F5F5FF"))))
-
- '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
- '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
- '(rainbow-delimiters-depth-3-face ((t (:foreground "orange"))))
- '(rainbow-delimiters-depth-4-face ((t (:foreground "purple"))))
- '(rainbow-delimiters-depth-5-face ((t (:foreground "brown"))))
- '(rainbow-delimiters-depth-6-face ((t (:foreground "darkblue"))))
- '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
- '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
- '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
-
-(custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector ["#000000" "#DD1144" "#009926" "#990000" "#445588" "#990073" "#0086B3" "#999988"])
- '(comint-buffer-maximum-size 100000)
- '(comint-completion-addsuffix t)
- '(comint-get-old-input (lambda nil "") t)
- '(comint-input-ignoredups t)
- '(comint-input-ring-size 5000)
- '(comint-move-point-for-output nil)
- '(comint-prompt-read-only nil)
- '(comint-scroll-show-maximum-output t)
- '(comint-scroll-to-bottom-on-input t)
- '(egg-buffer-hide-help-on-start nil)
- '(egg-buffer-hide-section-type-on-start (quote ((egg-status-buffer-mode . :diff) (egg-diff-buffer-mode . :diff))))
- '(egg-buffer-hide-sub-blocks-on-start nil)
- '(egg-quit-window-actions (quote ((egg-status-buffer-mode restore-windows) (egg-log-buffer-mode restore-windows) (egg-commit-buffer-mode restore-windows) (egg-reflog-buffer-mode restore-windows) (egg-diff-buffer-mode restore-windows) (egg-file-log-buffer-mode restore-windows))))
- '(protect-buffer-bury-p nil))
-
-
-(defun my-misc-setup ()
-  (require 'undo-tree)
-  (setq-default read-file-name-completion-ignore-case t)
-  (setq-default backup-inhibited t)
-  (setq-default auto-save-default nil)
-  (setq-default inhibit-read-only t)
-  (global-auto-revert-mode 1)
-  (setq-default scroll-margin 10)
-  (add-hook 'term-mode-hook '(lambda () (setq scroll-margin 0)))
-  (setq-default scroll-step 1)
-  (setq-default require-final-newline t)
-  (setq-default next-line-add-newlines nil)
-  (setq-default visible-bell t)
-  (fset 'yes-or-no-p 'y-or-n-p)
-  (setq-default show-paren-delay 0)
-  (setq-default show-paren-style 'mixed)
-  (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHI -e ")
-  (setq initial-scratch-message "")
-  (add-hook 'before-save-hook 'delete-trailing-whitespace)
-  (global-linum-mode t)
-  (setq-default fill-column 80)
-  (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
-  (mapcar (lambda (mode-hook)
-            (add-hook mode-hook 'flyspell-prog-mode))
-          '(c-mode-common-hook
-            emacs-lisp-mode-hook
-            js-mode-hook
-            asm-mode-hook
-            egg-mode-hook
-            java-mode-hook)))
-
-
-
-(defun my-eldoc-setup ()
-  (require 'eldoc)
-  (require 'c-eldoc)
-  (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
-  (add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode))
-
-
-(defun my-map-setup ()
-  (my-anything-map-setup)
-  (my-egg-map-setup)
-  (my-geiser-map-setup)
-  (my-gud-map-setup)
-  (my-haskell-map-setup)
-  (my-minibuffer-map-setup)
-  (my-misc-map-setup)
-  (my-tab-map-setup)
-  (my-tag-map-setup)
-  (my-vim-map-setup))
 
 
 (my-package-setup)
@@ -757,6 +685,7 @@ otherwise raises an error."
 (my-gambit-setup)
 (my-geiser-setup)
 (my-gud-setup)
+(my-haskell-mode-setup)
 (my-misc-setup)
 (my-org-mode-setup)
 (my-paredit-setup)
@@ -770,4 +699,13 @@ otherwise raises an error."
 (my-window-system-setup)
 (my-yasnippet-setup)
 
-(my-map-setup)
+(my-anything-map-setup)
+(my-egg-map-setup)
+(my-geiser-map-setup)
+(my-gud-map-setup)
+(my-haskell-map-setup)
+(my-minibuffer-map-setup)
+(my-misc-map-setup)
+(my-tab-map-setup)
+(my-tag-map-setup)
+(my-vim-map-setup)
