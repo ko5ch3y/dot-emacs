@@ -623,6 +623,7 @@
   (vim:nmap "-"    'comment-or-uncomment-line)
   (vim:vmap "-"    'comment-or-uncomment-region)
   (vim:nmap "_"    'paredit-comment-dwim)
+  (vim:imap "\\"   'self-insert-command)
 
   (vim:vmap [tab] 'vim:cmd-indent)
   (vim:imap [C-tab] 'tab-to-tab-stop)
