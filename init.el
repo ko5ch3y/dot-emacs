@@ -189,7 +189,8 @@
 
 (defun my-paredit-setup ()
   (require 'paredit)
-  ;; (add-hook 'find-file-hook             (lambda () (paredit-mode t)))
+  (add-hook 'find-file-hook             (lambda () (if (not (eq major-mode 'org-mode))
+                                                       (paredit-mode t))))
   (add-hook 'fundamental-mode-hook      (lambda () (paredit-mode t)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
   (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
