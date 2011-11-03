@@ -671,6 +671,7 @@
   (my-keys-minor-mode 1)
 
   (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+  (define-key my-keys-minor-mode-map (kbd "M-z") 'universal-argument)
   (define-key key-translation-map [?\C-h] [?\C-?])
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
   (define-key read-expression-map [(tab)] 'hippie-expand))
