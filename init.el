@@ -625,6 +625,7 @@
   (vim:nmap "_"    'paredit-comment-dwim)
   (vim:imap "\\"   'self-insert-command)
 
+  (vim:omap "\t" nil)
   (vim:vmap [tab] 'vim:cmd-indent)
   (vim:imap [C-tab] 'tab-to-tab-stop)
   (vim:imap (kbd "RET") 'newline-and-indent)
