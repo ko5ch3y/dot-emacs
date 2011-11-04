@@ -623,7 +623,6 @@
   (vim:nmap "-"    'comment-or-uncomment-line)
   (vim:vmap "-"    'comment-or-uncomment-region)
   (vim:nmap "_"    'paredit-comment-dwim)
-  (vim:imap "\\"   'self-insert-command)
 
   (vim:omap "\t" nil)
   (vim:vmap [tab] 'vim:cmd-indent)
@@ -673,6 +672,7 @@
 
   (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
   (define-key my-keys-minor-mode-map (kbd "M-z") 'universal-argument)
+  (define-key paredit-mode-map "\\" nil)
   (define-key key-translation-map [?\C-h] [?\C-?])
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
   (define-key read-expression-map [(tab)] 'hippie-expand))
