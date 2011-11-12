@@ -69,6 +69,49 @@
 (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
 (add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t)))
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(setq-default ac-auto-show-menu 0)
+
+(require 'ac-anything2)
+(define-key ac-complete-mode-map "\M-s" 'ac-anything2)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
+(require 'auto-complete-clang)
+(setq-default ac-clang-auto-save nil)
+
+(defun my-ac-config ()
+  (setq-default ac-clang-flags (list "-I/usr/include"
+                                     "-I/usr/local/include"
+                                     "-I/usr/include/QtCore"
+                                     "-I/usr/include/QtGui"))
+  (setq-default ac-sources '(ac-source-abbrev
+                             ac-source-dictionary
+                             ac-source-functions
+                             ac-source-variables
+                             ac-source-symbols
+                             ac-source-features
+                             ac-source-yasnippet
+                             ac-source-words-in-same-mode-buffers))
+  (define-key ac-completing-map "\t" 'ac-complete)
+  (setq-default ac-ignore-case t)
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+(my-ac-config)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
+(yas/global-mode t)
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (require 'vim)
@@ -452,49 +495,6 @@ otherwise raises an error."
   "Insert string for today's date formatted like 110801."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%y%m%d")))
-
-
-(require 'autopair)
-(autopair-global-mode t)
-
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(setq-default ac-auto-show-menu 0)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
-;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
-(yas/global-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
-(require 'auto-complete-clang)
-(setq-default ac-clang-auto-save nil)
-
-(defun my-ac-config ()
-  (setq-default ac-clang-flags (list "-I/usr/include"
-                                     "-I/usr/local/include"
-                                     "-I/usr/include/QtCore"
-                                     "-I/usr/include/QtGui"))
-  (setq-default ac-sources '(ac-source-abbrev
-                             ac-source-dictionary
-                             ac-source-functions
-                             ac-source-variables
-                             ac-source-symbols
-                             ac-source-features
-                             ac-source-yasnippet
-                             ac-source-words-in-same-mode-buffers))
-  (define-key ac-completing-map "\t" 'ac-complete)
-  (setq-default ac-ignore-case t)
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  (add-hook 'css-mode-hook 'ac-css-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-(my-ac-config)
 
 
 (set-frame-font "Monospace 10")
