@@ -11,6 +11,7 @@
 (when window-system
   (global-hl-line-mode 0)
   (require 'color-theme)
+  (add-to-list 'load-path "~/.emacs.d/site-lisp/color-theme-github")
   (require 'color-theme-github))
 
 
