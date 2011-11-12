@@ -1,3 +1,6 @@
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
+
 (load "~/.emacs.d/elpa/package.el")
 (require 'package)
 (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
@@ -5,11 +8,10 @@
   (add-to-list 'package-archives source t))
 (package-initialize)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/")
-
 
 (require 'auto-install)
 (setq-default url-proxy-services '(("http" . "localhost:3128")))
+(add-to-list 'load-path "~/.emacs.d/auto-install")
 
 
 (setq server-name "terminal")
@@ -59,6 +61,9 @@
 (setq-default gtags-path-style 'relative)
 
 
+;; (require 'autopair)
+;; (autopair-global-mode t)
+
 (require 'paredit)
 (add-hook 'c-mode-common-hook         (lambda () (paredit-mode t)))
 (add-hook 'scheme-mode-hook           (lambda () (paredit-mode t)))
@@ -66,6 +71,49 @@
 (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode t)))
 (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode t)))
 (add-hook 'minibuffer-setup-hook      (lambda () (paredit-mode t)))
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete")
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+(setq-default ac-auto-show-menu 0)
+
+(require 'ac-anything2)
+(define-key ac-complete-mode-map "\M-s" 'ac-anything2)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
+(require 'auto-complete-clang)
+(setq-default ac-clang-auto-save nil)
+
+(defun my-ac-config ()
+  (setq-default ac-clang-flags (list "-I/usr/include"
+                                     "-I/usr/local/include"
+                                     "-I/usr/include/QtCore"
+                                     "-I/usr/include/QtGui"))
+  (setq-default ac-sources '(ac-source-abbrev
+                             ac-source-dictionary
+                             ac-source-functions
+                             ac-source-variables
+                             ac-source-symbols
+                             ac-source-features
+                             ac-source-yasnippet
+                             ac-source-words-in-same-mode-buffers))
+  (define-key ac-completing-map "\t" 'ac-complete)
+  (setq-default ac-ignore-case t)
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+(my-ac-config)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
+(yas/global-mode t)
 
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
@@ -105,7 +153,7 @@
   "Moves to the `count'th previous error."
   (next-error (- (or count 1))))
 
-(defun comment-uncomment-line ()
+(defun comment-or-uncomment-line ()
   (interactive)
   (vim:visual-toggle-linewise)
   (comment-or-uncomment-region (line-beginning-position) (line-end-position))
@@ -222,8 +270,7 @@ otherwise raises an error."
   (paredit-kill)
   (vim:insert-mode))
 
-(defvar meta-t-map (make-sparse-keymap))
-(setq my-tab-map meta-t-map)
+(defvar my-tab-map (make-sparse-keymap))
 
 (define-key my-tab-map "c"    'vim:cmd-tab-new)
 (define-key my-tab-map "d"    'vim:cmd-tab-close)
@@ -238,8 +285,7 @@ otherwise raises an error."
 (define-key my-tab-map "\M-p" 'vim:cmd-tab-previous)
 (define-key my-tab-map "\M-t" 'elscreen-toggle)
 
-(defvar meta-shift-h-map (make-sparse-keymap))
-(setq my-haskell-map meta-shift-h-map)
+(defvar my-haskell-map (make-sparse-keymap))
 
 (define-key my-haskell-map "d" 'inferior-haskell-find-definition)
 (define-key my-haskell-map "i" 'inferior-haskell-info)
@@ -252,23 +298,61 @@ otherwise raises an error."
 (define-key anything-map "\M-p" 'anything-previous-line)
 (define-key anything-map "\C-p" 'previous-history-element)
 (define-key anything-map "\M-r" 'anything-select-3rd-action)
+(define-key anything-map "\M-h" 'paredit-backward-delete)
+(define-key anything-map "\M-H" 'paredit-backward-delete)
+
+(define-key anything-find-files-map "\M-h" 'paredit-backward-delete)
+(define-key anything-find-files-map "\M-H" 'paredit-backward-delete)
 
 (define-key minibuffer-local-map "\C-p" 'previous-history-element)
 (define-key minibuffer-local-map "\C-n" 'next-history-element)
 (define-key minibuffer-local-map "\M-p" 'anything-previous-line)
 (define-key minibuffer-local-map "\M-n" 'anything-next-line)
-(define-key minibuffer-local-map "\M-h" 'anything-minibuffer-history)
+(define-key minibuffer-local-map "\M-l" 'anything-minibuffer-history)
+(define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
+(define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
+
+(defvar my-gud-map (make-sparse-keymap))
+
+(define-key my-gud-map "\M-b" 'gud-break)
+(define-key my-gud-map "\M-c" 'gud-cont)
+(add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
+(define-key my-gud-map "\M-f" 'gud-finish)
+(define-key my-gud-map "\M-i" 'gud-interrupt)
+(define-key my-gud-map "\M-k" 'gud-kill-yes)
+(add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-l" 'gambit-leap-continuation)))
+(define-key my-gud-map "\M-m" 'gud-restart)
+(define-key my-gud-map "\M-n" 'gud-next)
+(add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-n" 'gambit-crawl-backtrace-newer)))
+(add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-o" 'gambit-crawl-backtrace-older)))
+(define-key my-gud-map "\M-p" 'gud-print)
+(define-key my-gud-map "\M-r" 'gud-remove)
+(define-key my-gud-map "\M-s" 'gud-step)
+(add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-s" 'gambit-step-continuation)))
+(define-key my-gud-map "\M-t" 'gud-tbreak)
+(define-key my-gud-map "\M-u" 'gud-until)
+
+;; scheme-send-definition
+;; scheme-send-region
+;; scheme-send-last-sexp
+;; scheme-load-file
+;; switch-to-scheme
+;; scheme-expand-current-form
+;; scheme-send-definition-and-go
+;; scheme-send-region-and-go
+;; scheme-compile-file
+;; scheme-compile-definition
 
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "C"    "c$")))
-(add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (vim:nmap "D"    'paredit-kill)
 (vim:nmap "\C-d" 'paredit-forward-delete)
+(add-hook 'org-mode-hook (lambda () (vim:local-nmap "D"    "d$")))
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\C-d" 'vim:cmd-delete-char)))
-(vim:nmap "\M-e" 'anything-find-file)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-f" 'org-forward-same-level)))
+(vim:nmap "\M-g"  my-gud-map)
 (vim:nmap "H"    'windmove-left)
 (vim:imap "\M-h" 'paredit-backward-delete)
 (vim:nmap "\M-h" 'paredit-backward)
@@ -284,23 +368,16 @@ otherwise raises an error."
 (vim:nmap "K"    'windmove-up)
 (vim:nmap "\M-k" 'paredit-forward-up)
 (vim:nmap "\M-K" 'paredit-backward-up)
-(vim:nmap "\C-K" 'gud-kill-yes)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-k" 'org-metaup)))
 (vim:nmap "L"    'windmove-right)
 (vim:nmap "\M-l" 'paredit-forward)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-l" 'org-metaright)))
 (vim:nmap "\M-n" 'vim:cmd-next-error)
 (vim:nmap "\M-N" 'vim:cmd-next-jump)
-(vim:nmap "\C-N" 'gud-next)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-n" 'outline-next-visible-heading)))
-(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-N" 'gambit-crawl-backtrace-newer)))
-(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-O" 'gambit-crawl-backtrace-older)))
 (vim:nmap "\M-p" 'vim:cmd-prev-error)
 (vim:nmap "\M-P" 'vim:cmd-prev-jump)
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-p" 'outline-previous-visible-heading)))
-(vim:nmap "\M-r" 'switch-to-buffer)
-(vim:nmap "\C-S" 'gud-step)
-(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "\M-S" 'gambit-step-continuation)))
 (vim:nmap "ts"   'anything-gtags-select)
 (vim:nmap "tt"   'anything-gtags-resume)
 (vim:nmap "Tc"   'transpose-chars)
@@ -317,30 +394,21 @@ otherwise raises an error."
 (vim:vmap "za" 'align)
 (vim:nmap "zA" 'align-regexp)
 (vim:vmap "zA" 'align-regexp)
-(vim:nmap "zB" 'gud-break)
 (vim:nmap "zc" 'vim:scroll-line-to-center)
-(vim:nmap "zC" 'gud-cont)
-(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "zC" 'gambit-continue)))
 (vim:nmap "zd" 'kill-this-buffer)
-(vim:nmap "zF" 'gud-finish)
+(vim:nmap "ze" 'anything-find-file)
 (vim:nmap "zg" 'grep)
 (vim:nmap "zh"   'split-window-horizontally)
 (vim:nmap "zi" 'imenu)
-(vim:nmap "zI" 'gud-interrupt)
 (vim:nmap "zk"   'kill-compilation)
 (vim:nmap "zl"   'vim:cmd-nohighlight)
-(add-hook 'scheme-mode-hook (lambda () (vim:local-nmap "zL" 'gambit-leap-continuation)))
 (vim:nmap "zm" 'vim:cmd-make)
-(vim:nmap "zM" 'gud-restart)
 (vim:nmap "zo" 'occur)
 (vim:nmap "zO" 'ff-find-other-file)
-(vim:nmap "zP" 'gud-print)
 (vim:nmap "zq"   'save-buffers-kill-terminal)
-(vim:nmap "zR" 'gud-remove)
+(vim:nmap "zr" 'switch-to-buffer)
 (vim:nmap "zs" 'paredit-splice-string)
 (vim:nmap "zS" 'paredit-split-sexp)
-(vim:nmap "zT" 'gud-tbreak)
-(vim:nmap "zu" 'gud-until)
 (vim:nmap "zv"   'split-window-vertically)
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zx"   'delete-window)
@@ -368,7 +436,7 @@ otherwise raises an error."
 (vim:nmap ";"    'vim:ex-read-command)
 (vim:vmap ";"    'vim:ex-read-command)
 (vim:imap "`"    'self-insert-command)
-(vim:nmap "-"    'comment-uncomment-line)
+(vim:nmap "-"    'comment-or-uncomment-line)
 (vim:vmap "-"    'comment-or-uncomment-region)
 (vim:nmap "_"    'paredit-comment-dwim)
 
@@ -382,17 +450,6 @@ otherwise raises an error."
 (vim:emap "make" 'vim:cmd-make)
 (vim:emap "m"    "make")
 
-
-;; scheme-send-definition
-;; scheme-send-region
-;; scheme-send-last-sexp
-;; scheme-load-file
-;; switch-to-scheme
-;; scheme-expand-current-form
-;; scheme-send-definition-and-go
-;; scheme-send-region-and-go
-;; scheme-compile-file
-;; scheme-compile-definition
 
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
@@ -452,49 +509,6 @@ otherwise raises an error."
   "Insert string for today's date formatted like 110801."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%y%m%d")))
-
-
-(require 'autopair)
-(autopair-global-mode t)
-
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
-(setq-default ac-auto-show-menu 0)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
-(require 'yasnippet)
-(yas/initialize)
-(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
-;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
-(yas/global-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
-(require 'auto-complete-clang)
-(setq-default ac-clang-auto-save nil)
-
-(defun my-ac-config ()
-  (setq-default ac-clang-flags (list "-I/usr/include"
-                                     "-I/usr/local/include"
-                                     "-I/usr/include/QtCore"
-                                     "-I/usr/include/QtGui"))
-  (setq-default ac-sources '(ac-source-abbrev
-                             ac-source-dictionary
-                             ac-source-functions
-                             ac-source-variables
-                             ac-source-symbols
-                             ac-source-features
-                             ac-source-yasnippet
-                             ac-source-words-in-same-mode-buffers))
-  (define-key ac-completing-map "\t" 'ac-complete)
-  (setq-default ac-ignore-case t)
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  (add-hook 'css-mode-hook 'ac-css-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-(my-ac-config)
 
 
 (set-frame-font "Monospace 10")
