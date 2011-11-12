@@ -1,0 +1,4 @@
+site-lisp/anything-config     = [git] git://repo.or.cz/anything-config.git
+site-lisp/color-theme-github  = [git] git://github.com/dudleyf/color-theme-github.git
+site-lisp/auto-complete-clang = [git] git://github.com/brianjcj/auto-complete-clang.git
+site-lisp/org-mode            = [git] git://orgmode.org/org-mode.git
