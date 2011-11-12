@@ -122,6 +122,11 @@
 (yas/global-mode t)
 
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/egg")
+(require 'egg)
+(setq-default egg-enable-tooltip t)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/vim-mode")
 (require 'vim)
 (vim-mode 1)
