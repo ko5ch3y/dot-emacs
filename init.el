@@ -257,6 +257,11 @@ otherwise raises an error."
 (setq-default scheme-program-name "gsi -:d-")
 
 
+(add-to-list 'load-path "~/.emacs.d/site-lisp/geiser/elisp")
+(require 'geiser)
+(setq-default geiser-active-implementations '(guile))
+
+
 (require 'gud)
 (gud-def gud-kill "k" nil)
 (gud-def gud-yes "y" nil)
@@ -378,6 +383,15 @@ otherwise raises an error."
 (define-key my-tag-map "s" 'anything-gtags-select)
 (define-key my-tag-map "t" 'anything-gtags-resume)
 
+(defvar my-geiser-map (make-sparse-keymap))
+(define-key my-geiser-map "s" 'geiser-mode-switch-to-repl)
+(define-key my-geiser-map "S" 'geiser-mode-switch-to-repl-and-enter)
+(define-key my-geiser-map "l" 'geiser-eval-last-sexp)
+(define-key my-geiser-map "d" 'geiser-eval-definition)
+(define-key my-geiser-map "D" 'geiser-eval-definition-and-go)
+(define-key my-geiser-map "r" 'geiser-eval-region)
+(define-key my-geiser-map "R" 'geiser-eval-region-and-go)
+
 
 (add-hook 'org-mode-hook (lambda () (vim:local-nmap "\M-b" 'org-backward-same-level)))
 (vim:nmap "C"    'paredit-change)
@@ -448,6 +462,8 @@ otherwise raises an error."
 (vim:nmap "zv"   'split-window-vertically)
 (vim:nmap "zw" 'save-buffer)
 (vim:nmap "zx"   'delete-window)
+(vim:nmap "zz"    my-geiser-map)
+(vim:vmap "zz"    my-geiser-map)
 (vim:imap "\M-z" 'vim:insert-mode-exit)
 (vim:nmap "\M-z" 'vim:insert-mode-exit)
 (vim:vmap "\M-z" 'vim:visual-mode-exit)
