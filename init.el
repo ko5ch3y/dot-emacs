@@ -236,6 +236,16 @@ otherwise raises an error."
 (my-ac-config)
 
 
+(setq load-path (cons "~/.emacs.d/site-lisp/org-mode/lisp" load-path))
+(setq load-path (cons "~/.emacs.d/site-lisp/org-mode/contrib/lisp" load-path))
+(require 'org-install)
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(vim:nmap "'l" 'org-store-link)
+(vim:nmap "'c" 'org-capture)
+(vim:nmap "'a" 'org-agenda)
+(vim:nmap "'b" 'org-iswitchb)
+
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
 (require 'anything-startup)
