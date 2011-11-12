@@ -204,9 +204,35 @@ otherwise raises an error."
 (autopair-global-mode t)
 
 (require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
 (ac-config-default)
 ;; (define-key ac-completing-map " " 'ac-complete)
 (setq ac-auto-show-menu 0)
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+(require 'yasnippet)
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/auto-complete-clang")
+(require 'auto-complete-clang)
+
+(defun my-ac-cc-mode-setup ()
+  ;; (setq ac-sources (append '(ac-source-clang) ac-sources))
+  (setq ac-sources (append '(ac-source-yasnippet) ac-sources)))
+(add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+
+(defun my-ac-config ()
+  (setq ac-clang-flags (split-string "-I/usr/include -I/usr/local/include -I/usr/include/QtCore"))
+  (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+  (add-hook 'css-mode-hook 'ac-css-mode-setup)
+  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+  (global-auto-complete-mode t))
+(my-ac-config)
+
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config")
 (add-to-list 'load-path "~/.emacs.d/site-lisp/anything-config/extensions")
