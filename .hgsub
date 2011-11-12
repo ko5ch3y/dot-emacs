@@ -3,3 +3,4 @@ site-lisp/color-theme-github  = [git] git://github.com/dudleyf/color-theme-githu
 site-lisp/auto-complete-clang = [git] git://github.com/brianjcj/auto-complete-clang.git
 site-lisp/org-mode            = [git] git://orgmode.org/org-mode.git
 site-lisp/auto-complete       = [git] git://github.com/m2ym/auto-complete.git
+site-lisp/egg                 = [git] git://github.com/bogolisk/egg.git
