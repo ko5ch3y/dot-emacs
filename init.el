@@ -363,14 +363,15 @@
   (global-linum-mode t)
   (setq-default fill-column 80)
   (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
-  (mapcar (lambda (mode-hook)
-            (add-hook mode-hook 'flyspell-prog-mode))
-          '(c-mode-common-hook
-            emacs-lisp-mode-hook
-            js-mode-hook
-            asm-mode-hook
-            egg-mode-hook
-            java-mode-hook))
+  ;; (mapcar (lambda (mode-hook)
+            ;; (add-hook mode-hook 'flyspell-prog-mode))
+          ;; '(c-mode-common-hook
+            ;; emacs-lisp-mode-hook
+            ;; js-mode-hook
+            ;; asm-mode-hook
+            ;; egg-mode-hook
+            ;; java-mode-hook))
+  (add-hook 'find-file-hook       'flyspell-mode-off)
   (add-hook 'lisp-mode-hook       'my-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook 'my-lisp-mode-hook)
