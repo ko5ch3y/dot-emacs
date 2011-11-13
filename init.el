@@ -524,13 +524,14 @@
 
 (defvar my-geiser-map (make-sparse-keymap))
 (defun my-geiser-map-setup ()
-  (define-key my-geiser-map "s" 'geiser-mode-switch-to-repl)
-  (define-key my-geiser-map "S" 'geiser-mode-switch-to-repl-and-enter)
-  (define-key my-geiser-map "l" 'geiser-eval-last-sexp)
+  (define-key my-geiser-map "b" 'geiser-load-current-buffer)
   (define-key my-geiser-map "d" 'geiser-eval-definition)
   (define-key my-geiser-map "D" 'geiser-eval-definition-and-go)
+  (define-key my-geiser-map "l" 'geiser-eval-last-sexp)
   (define-key my-geiser-map "r" 'geiser-eval-region)
-  (define-key my-geiser-map "R" 'geiser-eval-region-and-go))
+  (define-key my-geiser-map "R" 'geiser-eval-region-and-go)
+  (define-key my-geiser-map "s" 'geiser-mode-switch-to-repl)
+  (define-key my-geiser-map "S" 'geiser-mode-switch-to-repl-and-enter))
 
 (defun my-vim-map-setup ()
   (vim:nmap "C"    'paredit-change)
