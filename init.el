@@ -558,6 +558,7 @@
   (vim:nmap "\M-N" 'vim:cmd-next-jump)
   (vim:nmap "\M-p" 'vim:cmd-prev-error)
   (vim:nmap "\M-P" 'vim:cmd-prev-jump)
+  (vim:imap "\M-s"  nil)
   (vim:nmap "Tc"   'transpose-chars)
   (vim:nmap "Tl"   'transpose-lines)
   (vim:nmap "Tp"   'transpose-paragraphs)
