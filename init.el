@@ -179,6 +179,7 @@
 
 (defun my-autopair-setup ()
   (require 'autopair)
+  (require 'auto-pair+)
   (setq-default autopair-skip-whitespace t)
   (add-hook 'autopair-mode-hook
             (lambda ()
@@ -357,7 +358,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq-default show-paren-delay 0)
   (setq-default show-paren-style 'mixed)
-  (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHIR -e ")
+  (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHIR * -e ")
   (setq initial-scratch-message "")
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (global-linum-mode t)
