@@ -637,6 +637,8 @@
 (defun my-org-mode-vim-map-hook ()
   (vim:local-nmap "\M-b" 'org-backward-same-level)
   (vim:local-nmap "C"    "c$")
+  (vim:local-nmap "\M-c" 'org-shiftright)
+  (vim:local-nmap "\M-C" 'org-shiftleft)
   (vim:local-nmap "D"    "d$")
   (vim:local-nmap "\M-d" 'vim:cmd-delete-char)
   (vim:local-nmap "\M-f" 'org-forward-same-level)
