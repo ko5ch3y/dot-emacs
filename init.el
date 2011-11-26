@@ -10,12 +10,23 @@
         "~/.emacs.d/site-lisp/egg"
         "~/.emacs.d/site-lisp/elscreen"
         "~/.emacs.d/site-lisp/geiser/elisp"
+        "~/.emacs.d/site-lisp/monky"
         "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL"
         "~/.emacs.d/site-lisp/org-mode/contrib/lisp"
         "~/.emacs.d/site-lisp/org-mode/lisp"
         "~/.emacs.d/site-lisp/vim-mode"
         "~/.emacs.d/site-lisp/yasnippet-0.6.1c"))
 (setq load-path (append load-path my-load-path))
+
+
+(defun my-monky-setup ()
+  (require 'monky)
+  (setq-default monky-process-type 'cmdserver)
+  (setq-default monky-log-cutoff-length 10)
+
+  (set-face-attribute 'monky-diff-add nil :foreground "#009926")
+  (set-face-attribute 'monky-diff-del nil :foreground "#DD1144")
+  (set-face-attribute 'monky-log-sha1 nil :foreground "#0086B3"))
 
 
 (defun my-package-setup ()
@@ -699,6 +710,7 @@
 (my-gud-setup)
 (my-haskell-mode-setup)
 (my-misc-setup)
+(my-monky-setup)
 (my-org-mode-setup)
 (my-paredit-setup)
 (my-qi-mode-setup)
