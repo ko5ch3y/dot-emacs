@@ -28,7 +28,6 @@
   (set-face-attribute 'monky-diff-del nil :foreground "#DD1144")
   (set-face-attribute 'monky-log-sha1 nil :foreground "#0086B3"))
 
-
 (defun my-package-setup ()
   (load "~/.emacs.d/elpa/package.el")
   (require 'package)
@@ -250,7 +249,20 @@
   (require 'egg)
   (setq-default egg-buffer-hide-sub-blocks-on-start nil)
   (setq-default egg-enable-tooltip t)
-  (setq-default egg-refresh-index-in-backround t))
+  (setq-default egg-refresh-index-in-backround t)
+  (setq-default egg-buffer-hide-help-on-start nil)
+  (setq-default egg-buffer-hide-section-type-on-start '((egg-status-buffer-mode . :diff)
+                                                        (egg-diff-buffer-mode . :diff)))
+  (setq-default egg-buffer-hide-sub-blocks-on-start nil)
+  (setq-default egg-quit-window-actions '((egg-status-buffer-mode restore-windows)
+                                          (egg-log-buffer-mode restore-windows)
+                                          (egg-commit-buffer-mode restore-windows)
+                                          (egg-reflog-buffer-mode restore-windows)
+                                          (egg-diff-buffer-mode restore-windows)
+                                          (egg-file-log-buffer-mode restore-windows)))
+
+  (set-face-attribute 'egg-diff-add nil :foreground "#009926")
+  (set-face-attribute 'egg-diff-del nil :foreground "#DD1144"))
 
 (defun my-vim-mode-setup ()
   (require 'vim)
@@ -393,9 +405,6 @@
    ;; If you edit it by hand, you could mess it up, so be careful.
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
-   '(egg-diff-add ((((class color) (background light)) (:foreground "#009926"))))
-   '(egg-diff-del ((((class color) (background light)) (:foreground "#DD1144"))))
-
    '(hl-line ((t (:background "#F3F3FF"))))
    '(vline ((t (:background "#F5F5FF"))))
 
@@ -424,10 +433,6 @@
    '(comint-prompt-read-only nil)
    '(comint-scroll-show-maximum-output t)
    '(comint-scroll-to-bottom-on-input t)
-   '(egg-buffer-hide-help-on-start nil)
-   '(egg-buffer-hide-section-type-on-start (quote ((egg-status-buffer-mode . :diff) (egg-diff-buffer-mode . :diff))))
-   '(egg-buffer-hide-sub-blocks-on-start nil)
-   '(egg-quit-window-actions (quote ((egg-status-buffer-mode restore-windows) (egg-log-buffer-mode restore-windows) (egg-commit-buffer-mode restore-windows) (egg-reflog-buffer-mode restore-windows) (egg-diff-buffer-mode restore-windows) (egg-file-log-buffer-mode restore-windows))))
    '(protect-buffer-bury-p nil)))
 
 (defun my-eldoc-setup ()
