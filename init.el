@@ -165,6 +165,8 @@
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode t)
+    (set-face-attribute 'hl-line nil :background "#F3F3FF")
+    ;; (set-face-attribute 'vline nil :background "#F5F5FF")
     (require 'color-theme)
     (require 'color-theme-github)
     (setq server-name "gui")))
@@ -360,6 +362,18 @@
   (global-whitespace-mode t)
   (setq-default whitespace-style '(face tabs tab-mark)))
 
+(defun my-rainbow-delimiters-setup ()
+  (require 'rainbow-delimiters)
+  (set-face-attribute 'rainbow-delimiters-depth-1-face nil :foreground "red")
+  (set-face-attribute 'rainbow-delimiters-depth-2-face nil :foreground "violet")
+  (set-face-attribute 'rainbow-delimiters-depth-3-face nil :foreground "orange")
+  (set-face-attribute 'rainbow-delimiters-depth-4-face nil :foreground "purple")
+  (set-face-attribute 'rainbow-delimiters-depth-5-face nil :foreground "brown")
+  (set-face-attribute 'rainbow-delimiters-depth-6-face nil :foreground "darkblue")
+  (set-face-attribute 'rainbow-delimiters-depth-7-face nil :foreground "green")
+  (set-face-attribute 'rainbow-delimiters-depth-8-face nil :foreground "blue")
+  (set-face-attribute 'rainbow-delimiters-depth-9-face nil :foreground "cyan"))
+
 (defun my-misc-setup ()
   (require 'undo-tree)
   (winner-mode t)
@@ -383,40 +397,13 @@
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (global-linum-mode t)
   (setq-default fill-column 80)
-  (add-hook 'find-file-hooks 'no-junk-please-were-unixish)
-  ;; (mapcar (lambda (mode-hook)
-            ;; (add-hook mode-hook 'flyspell-prog-mode))
-          ;; '(c-mode-common-hook
-            ;; emacs-lisp-mode-hook
-            ;; js-mode-hook
-            ;; asm-mode-hook
-            ;; egg-mode-hook
-            ;; java-mode-hook))
+  (add-hook 'find-file-hook       'no-junk-please-were-unixish)
   (add-hook 'find-file-hook       'flyspell-mode-off)
   (add-hook 'lisp-mode-hook       'my-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
-  (add-hook 'scheme-mode-hook 'my-lisp-mode-hook)
-  (add-hook 'scheme-mode-hook 'my-scheme-mode-hook)
+  (add-hook 'scheme-mode-hook     'my-lisp-mode-hook)
+  (add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
   (set-frame-font "Monospace 10")
-  ;; (set-face-attribute 'default nil :weight 'bold)
-  ;; (require 'rainbow-delimiters)
-  (custom-set-faces
-   ;; custom-set-faces was added by Custom.
-   ;; If you edit it by hand, you could mess it up, so be careful.
-   ;; Your init file should contain only one such instance.
-   ;; If there is more than one, they won't work right.
-   '(hl-line ((t (:background "#F3F3FF"))))
-   '(vline ((t (:background "#F5F5FF"))))
-
-   '(rainbow-delimiters-depth-1-face ((t (:foreground "red"))))
-   '(rainbow-delimiters-depth-2-face ((t (:foreground "violet"))))
-   '(rainbow-delimiters-depth-3-face ((t (:foreground "orange"))))
-   '(rainbow-delimiters-depth-4-face ((t (:foreground "purple"))))
-   '(rainbow-delimiters-depth-5-face ((t (:foreground "brown"))))
-   '(rainbow-delimiters-depth-6-face ((t (:foreground "darkblue"))))
-   '(rainbow-delimiters-depth-7-face ((t (:foreground "green"))))
-   '(rainbow-delimiters-depth-8-face ((t (:foreground "blue"))))
-   '(rainbow-delimiters-depth-9-face ((t (:foreground "cyan")))))
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
@@ -719,6 +706,7 @@
 (my-org-mode-setup)
 (my-paredit-setup)
 (my-qi-mode-setup)
+;; (my-rainbow-delimiters-setup)
 (my-scheme-complete-setup)
 (my-server-setup)
 (my-tab-and-indent-setup)
