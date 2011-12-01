@@ -399,11 +399,13 @@
   (setq-default fill-column 80)
   (add-hook 'find-file-hook       'no-junk-please-were-unixish)
   (add-hook 'find-file-hook       'flyspell-mode-off)
+  (add-hook 'find-file-hook       '(lambda () (toggle-truncate-lines t)))
   (add-hook 'lisp-mode-hook       'my-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook     'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
   (set-frame-font "Monospace 10")
+  (global-visual-line-mode nil)
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
