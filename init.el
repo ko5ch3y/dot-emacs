@@ -406,6 +406,8 @@
   (add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
   (set-frame-font "Monospace 10")
   (global-visual-line-mode nil)
+  (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
+  (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
