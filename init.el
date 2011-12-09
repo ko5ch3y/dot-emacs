@@ -395,6 +395,7 @@
   (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHIR -e ")
   (setq initial-scratch-message "")
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
+  (add-hook 'diff-mode-hook '(lambda () (remove-hook 'before-save-hook 'delete-trailing-whitespace)))
   (global-linum-mode t)
   (setq-default fill-column 80)
   (add-hook 'find-file-hook       'no-junk-please-were-unixish)
