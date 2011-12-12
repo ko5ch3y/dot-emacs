@@ -493,6 +493,7 @@
   (define-key my-gud-map "\M-b" 'gud-break)
   (define-key my-gud-map "\M-c" 'gud-cont)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
+  (define-key my-gud-map "\M-d" 'gud-down)
   (define-key my-gud-map "\M-f" 'gud-finish)
   (define-key my-gud-map "\M-g" (lambda () (interactive) (switch-to-buffer "*gud*")))
   (define-key my-gud-map "\M-i" 'gud-interrupt)
@@ -506,8 +507,8 @@
   (define-key my-gud-map "\M-r" 'gud-remove)
   (define-key my-gud-map "\M-s" 'gud-step)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-s" 'gambit-step-continuation)))
-  (define-key my-gud-map "\M-t" 'gud-tbreak)
-  (define-key my-gud-map "\M-u" 'gud-until)
+  (define-key my-gud-map "\M-t" 'gud-until)
+  (define-key my-gud-map "\M-u" 'gud-up)
   (define-key my-gud-map "\M-w" 'gdb-many-windows))
 ;; scheme-send-definition
 ;; scheme-send-region
