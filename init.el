@@ -338,6 +338,7 @@
 
 (defun my-gud-setup ()
   (require 'gud)
+  (require 'gdb-ui)
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil)
   (setq-default gdb-many-windows t)
