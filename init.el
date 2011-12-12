@@ -339,7 +339,9 @@
 (defun my-gud-setup ()
   (require 'gud)
   (gud-def gud-kill "k" nil)
-  (gud-def gud-yes "y" nil))
+  (gud-def gud-yes "y" nil)
+  (setq-default gdb-many-windows t)
+  (setq-default gdb-use-separate-io-buffer t))
 
 (defun my-haskell-mode-setup ()
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
@@ -505,7 +507,8 @@
   (define-key my-gud-map "\M-s" 'gud-step)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-s" 'gambit-step-continuation)))
   (define-key my-gud-map "\M-t" 'gud-tbreak)
-  (define-key my-gud-map "\M-u" 'gud-until))
+  (define-key my-gud-map "\M-u" 'gud-until)
+  (define-key my-gud-map "\M-w" 'gdb-many-windows))
 ;; scheme-send-definition
 ;; scheme-send-region
 ;; scheme-send-last-sexp
