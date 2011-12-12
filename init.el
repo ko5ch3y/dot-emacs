@@ -343,6 +343,24 @@
   (setq-default gdb-many-windows t)
   (setq-default gdb-use-separate-io-buffer nil)
 
+  (defun gdb-restore-windows ()
+    "Restore the basic arrangement of windows used by gdba.
+This arrangement depends on the value of `gdb-many-windows'."
+    (interactive)
+    (pop-to-buffer gud-comint-buffer)	;Select the right window and frame.
+    (delete-other-windows)
+    (if gdb-many-windows
+        (gdb-setup-windows)
+      (when (or gud-last-last-frame gdb-show-main)
+        (split-window-horizontally)
+        (switch-to-buffer
+         (if gud-last-last-frame
+             (gud-find-file (car gud-last-last-frame))
+           (gud-find-file gdb-main-file)))
+        (setq gdb-source-window (selected-window))
+        (other-window 1)))))
+
+
 (defun my-haskell-mode-setup ()
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
   (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
