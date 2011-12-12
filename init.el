@@ -693,7 +693,11 @@
 
 (defun my-gud-mode-vim-map-setup ()
   (add-hook 'gud-mode-hook '(lambda ()
-                              (vim:local-imap (kbd "RET") 'comint-send-input))))
+                              (vim:local-imap (kbd "RET") 'comint-send-input)))
+  (add-hook 'gdb-frames-mode-hook '(lambda ()
+                                     (vim:local-nmap (kbd "RET") 'gdb-frames-select)))
+  (add-hook 'gdb-locals-mode-hook '(lambda ()
+                                     (vim:local-nmap (kbd "RET") 'gud-watch))))
 
 
 (my-package-setup)
