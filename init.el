@@ -341,7 +341,7 @@
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil)
   (setq-default gdb-many-windows t)
-  (setq-default gdb-use-separate-io-buffer t))
+  (setq-default gdb-use-separate-io-buffer nil)
 
 (defun my-haskell-mode-setup ()
   (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
