@@ -688,6 +688,10 @@
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
   (define-key read-expression-map [(tab)] 'hippie-expand))
 
+(defun my-gud-mode-vim-map-setup ()
+  (add-hook 'gud-mode-hook '(lambda ()
+                              (vim:local-imap (kbd "RET") 'comint-send-input))))
+
 
 (my-package-setup)
 (my-misc-function-setup)
@@ -725,6 +729,7 @@
 (my-egg-map-setup)
 (my-geiser-map-setup)
 (my-gud-map-setup)
+(my-gud-mode-vim-map-setup)
 (my-haskell-map-setup)
 (my-minibuffer-map-setup)
 (my-misc-map-setup)
