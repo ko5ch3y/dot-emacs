@@ -184,7 +184,7 @@
   (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
 
 (defun my-anything-setup ()
-  (require 'anything-startup)
+  (require 'anything-config)
   (require 'anything-gtags)
   (setq-default anything-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative))
