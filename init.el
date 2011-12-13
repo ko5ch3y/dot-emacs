@@ -600,6 +600,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (vim:imap "\M-w" 'paredit-backward-kill-word)
   (vim:imap "\M-x" 'anything-execute-extended-command)
   (vim:nmap "\M-x" 'anything-execute-extended-command)
+  (vim:vmap "\M-x" 'anything-execute-extended-command)
   (add-hook 'term-mode-hook (lambda ()
                               (vim:local-imap "\M-x" 'anything-execute-extended-command)
                               (vim:local-nmap "\M-x" 'anything-execute-extended-command)))
