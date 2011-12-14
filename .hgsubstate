@@ -3,6 +3,7 @@ a4cd6d60272fd0cf701899397b80c27227a9b550 site-lisp/anything-config
 9db79f4a88e22041c6cc1acfa834bb7ff8bec459 site-lisp/auto-complete-clang
 5fd51e00c82e90bc3305512f9e7f38bd6b975015 site-lisp/color-theme-github
 9ae5b190daa162e9bc67bc07e30254a35b168301 site-lisp/egg
+d201e43d3fffa47655a10aff705398024ad0757a site-lisp/evil
 3a6dfbf743cc56b7d454bc6c688cd983966acc6c site-lisp/geiser
 86a168e944a6212de3dc34a59511ea21293ea435 site-lisp/monky
 6b38912771d3a8c1fb79dc17e5ed97fe13900c9b site-lisp/org-mode
