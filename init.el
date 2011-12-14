@@ -625,6 +625,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (vim:nmap "zm" 'vim:cmd-make)
   (vim:nmap "zo" 'occur)
   (vim:nmap "zO" 'ff-find-other-file)
+  (vim:nmap "zp"   'pwd)
   (vim:nmap "zq"   'save-buffers-kill-terminal)
   (vim:nmap "zr" 'anything)
   (vim:nmap "zs" 'paredit-splice-sexp)
