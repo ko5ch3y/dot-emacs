@@ -423,6 +423,8 @@ This arrangement depends on the value of `gdb-many-windows'."
   (add-hook 'find-file-hook       'no-junk-please-were-unixish)
   (add-hook 'find-file-hook       'flyspell-mode-off)
   (add-hook 'find-file-hook       '(lambda () (toggle-truncate-lines t)))
+  (add-hook 'compilation-mode-hook 'visual-line-mode)
+  (add-hook 'grep-mode-hook       '(lambda () (toggle-truncate-lines t)))
   (add-hook 'lisp-mode-hook       'my-lisp-mode-hook)
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook     'my-lisp-mode-hook)
