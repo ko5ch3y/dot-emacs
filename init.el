@@ -150,7 +150,7 @@
   (defun paredit-change ()
     (interactive)
     (paredit-kill)
-    (evil-insert-mode))
+    (evil-insert-state))
 
   (defun my-lisp-mode-hook ()
     (setq standard-indent 2)
@@ -577,6 +577,8 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-imap "\M-h" 'paredit-backward-delete)
   (evil-nmap "\M-h" 'paredit-backward)
   (evil-imap "\M-H" 'paredit-backward-delete)
+  (evil-vmap "j"    'evil-join)
+  (evil-vmap "J"    'evil-join)
   (evil-nmap "J"    'windmove-down)
   (evil-nmap "\M-j" 'paredit-forward-down)
   (evil-nmap "\M-J" 'paredit-backward-down)
@@ -658,6 +660,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-nmap "_"    'paredit-comment-dwim)
 
   (evil-omap "\t" nil)
+  (evil-nmap [tab] 'indent-line)
   (evil-vmap [tab] 'indent-line)
   (evil-imap [C-tab] 'tab-to-tab-stop)
   (evil-imap (kbd "RET") 'newline-and-indent)
