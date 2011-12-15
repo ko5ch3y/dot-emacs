@@ -225,7 +225,8 @@
   (require 'anything-complete)
   (require 'anything-gtags)
   (setq-default anything-gtags-enable-initial-pattern t)
-  (setq-default gtags-path-style 'relative))
+  (setq-default gtags-path-style 'relative)
+  (setq-default anything-su-or-sudo "sudo"))
 
 (defun my-autopair-setup ()
   (require 'autopair)
