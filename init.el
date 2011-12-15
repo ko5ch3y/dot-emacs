@@ -585,7 +585,6 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-imap "\M-h" 'paredit-backward-delete)
   (evil-nmap "\M-h" 'paredit-backward)
   (evil-imap "\M-H" 'paredit-backward-delete)
-  (evil-vmap "j"    'evil-join)
   (evil-vmap "J"    'evil-join)
   (evil-nmap "J"    'windmove-down)
   (evil-nmap "\M-j" 'paredit-forward-down)
