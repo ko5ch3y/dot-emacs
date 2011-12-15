@@ -456,12 +456,20 @@ This arrangement depends on the value of `gdb-many-windows'."
 
 
 (defun my-anything-map-setup ()
+;;;###autoload
+  (defun anything-buffer-or-ff-run-switch-other-window ()
+    "Run switch to other window action from `anything-c-source-buffer+' or `anything-c-source-find-files'."
+    (interactive)
+    (if (eq nil (get-buffer (anything-get-selection)))
+        (anything-ff-run-switch-other-window)
+      (anything-buffer-switch-other-window)))
+
   (define-key anything-map "\M-e" 'anything-execute-persistent-action)
   (define-key anything-map "\M-h" 'paredit-backward-delete)
   (define-key anything-map "\M-H" 'paredit-backward-delete)
   (define-key anything-map "\M-n" 'anything-next-line)
   (define-key anything-map "\C-n" 'next-history-element)
-  (define-key anything-map "\M-o" 'anything-ff-run-switch-other-window)
+  (define-key anything-map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
   (define-key anything-map "\M-p" 'anything-previous-line)
   (define-key anything-map "\C-p" 'previous-history-element)
   (define-key anything-map "\M-r" 'anything-buffer-revert-persistent)
@@ -477,7 +485,6 @@ This arrangement depends on the value of `gdb-many-windows'."
   (define-key anything-find-files-map "\M-o" 'anything-ff-run-switch-other-window)
   (define-key anything-find-files-map "\M-p" 'anything-previous-line)
   (define-key anything-find-files-map "\C-p" 'previous-history-element)
-  (define-key anything-find-files-map "\M-r" 'anything-select-3rd-action)
   (define-key anything-find-files-map "\M-u" 'anything-find-files-down-one-level)
   (define-key anything-find-files-map "\M-w" 'paredit-backward-kill-word))
 
