@@ -309,7 +309,8 @@
   (require 'evil)
   (evil-mode 1)
 
-  (evil-set-initial-state 'completion-list-mode 'emacs))
+  (evil-set-initial-state 'completion-list-mode 'emacs)
+  (evil-set-initial-state 'occur-mode 'normal))
 
 (defun my-scheme-complete-setup ()
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
