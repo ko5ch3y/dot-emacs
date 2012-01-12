@@ -70,7 +70,7 @@
       ((lambda ()
          (compile (concat "make " argument))
          (switch-to-buffer-other-window "*compilation*")
-         (evil-last-non-blank)
+         (evil-goto-line)
          (switch-to-buffer-other-window previous-buffer)))))
 
   (defun remake ()
@@ -79,7 +79,7 @@
       ((lambda ()
          (recompile)
          (switch-to-buffer-other-window "*compilation*")
-         (evil-last-non-blank)
+         (evil-goto-line)
          (switch-to-buffer-other-window previous-buffer)))))
 
   (defun fix-server ()
