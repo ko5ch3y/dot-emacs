@@ -309,6 +309,8 @@
 (defun my-evil-mode-setup ()
   (require 'evil)
   (evil-mode 1)
+  (add-hook 'find-file-hook '(lambda ()
+                               (setq evil-shift-width standard-indent)))
 
   (evil-set-initial-state 'completion-list-mode 'emacs)
   (evil-set-initial-state 'occur-mode 'normal)
