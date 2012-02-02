@@ -109,7 +109,7 @@
     (interactive)
     (evil-visual-line)
     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
-    (evil-visual-line)
+    (evil-exit-visual-state)
     (evil-next-line))
 
   (defun indent-line ()
