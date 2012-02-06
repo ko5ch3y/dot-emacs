@@ -227,6 +227,12 @@
   (require 'anything-config)
   (require 'anything-complete)
   (require 'anything-gtags)
+
+  (add-hook 'anything-after-initialize-hook
+            #'(lambda ()
+                (with-current-buffer anything-buffer
+                  (visual-line-mode))))
+
   (setq-default anything-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative)
   (setq-default anything-su-or-sudo "sudo"))
