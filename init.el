@@ -46,6 +46,12 @@
 
 (defun my-tramp-setup ()
   (require 'tramp)
+
+  (setq-default vc-ignore-dir-regexp
+                (format "\\(%s\\)\\|\\(%s\\)"
+                        vc-ignore-dir-regexp
+                        tramp-file-name-regexp))
+
   (setq-default tramp-default-method "ssh"))
 
 (defun my-misc-function-setup ()
