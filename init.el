@@ -498,6 +498,12 @@ This arrangement depends on the value of `gdb-many-windows'."
   (define-key anything-c-buffer-map "\M-s" 'anything-buffer-save-persistent)
   (define-key anything-c-buffer-map "\M-w" 'paredit-backward-kill-word)
 
+  (define-key anything-generic-files-map "\M-n" 'anything-next-line)
+  (define-key anything-generic-files-map "\C-n" 'next-history-element)
+  (define-key anything-generic-files-map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
+  (define-key anything-generic-files-map "\M-p" 'anything-previous-line)
+  (define-key anything-generic-files-map "\C-p" 'previous-history-element)
+
   (define-key anything-find-files-map "\M-e" 'anything-execute-persistent-action)
   (define-key anything-find-files-map "\M-h" 'paredit-backward-delete)
   (define-key anything-find-files-map "\M-H" 'paredit-backward-delete)
