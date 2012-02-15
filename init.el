@@ -747,10 +747,10 @@ This arrangement depends on the value of `gdb-many-windows'."
   (define-key read-expression-map [(tab)] 'hippie-expand))
 
 (defun my-gud-mode-evil-map-setup ()
-  (add-hook 'gud-mode-hook        '(lambda () (evil-local-imap (kbd "RET") 'comint-send-input)))
-  (add-hook 'gdb-frames-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gdb-frames-select)))
-  (add-hook 'gdb-breakpoints-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gdb-goto-breakpoint)))
-  (add-hook 'gdb-locals-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gud-watch))))
+  (evil-define-key 'insert gud-mode-map (kbd "RET") 'comint-send-input)
+  (evil-define-key 'normal gdb-frames-mode-map (kbd "RET") 'gdb-frames-select)
+  (evil-define-key 'normal gdb-breakpoints-mode-map (kbd "RET") 'gdb-goto-breakpoint)
+  (evil-define-key 'normal gdb-locals-mode-map (kbd "RET") 'gud-watch))
 
 
 (my-package-setup)
