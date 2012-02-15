@@ -749,6 +749,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 (defun my-gud-mode-evil-map-setup ()
   (add-hook 'gud-mode-hook        '(lambda () (evil-local-imap (kbd "RET") 'comint-send-input)))
   (add-hook 'gdb-frames-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gdb-frames-select)))
+  (add-hook 'gdb-breakpoints-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gdb-goto-breakpoint)))
   (add-hook 'gdb-locals-mode-hook '(lambda () (evil-local-nmap (kbd "RET") 'gud-watch))))
 
 
