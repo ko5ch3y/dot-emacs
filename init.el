@@ -700,9 +700,10 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-nmap "-"    'comment-or-uncomment-line)
   (evil-vmap "-"    'comment-or-uncomment-region)
   (evil-nmap "_"    'paredit-comment-dwim)
-  (evil-nmap "0"    'evil-beginning-of-visual-line)
-  (evil-nmap "^"    'evil-first-non-blank-of-visual-line)
-  (evil-nmap "$"    'evil-end-of-visual-line)
+
+  (evil-define-key 'motion visual-line-mode-map
+    "$" 'evil-end-of-visual-line
+    "^" 'evil-beginning-of-visual-line)
 
   (evil-omap "\t" nil)
   (evil-nmap [tab] 'indent-line)
