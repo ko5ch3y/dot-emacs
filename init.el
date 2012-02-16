@@ -65,12 +65,14 @@
   (defun evil-omap (key def &optional keymap) (evil-map evil-operator-state-map key def keymap))
   (defun evil-vmap (key def &optional keymap) (evil-map evil-visual-state-map key def keymap))
   (defun evil-rmap (key def &optional keymap) (evil-map evil-replace-state-map key def keymap))
+  (defun evil-mmap (key def &optional keymap) (evil-map evil-motion-state-map key def keymap))
 
   (defun evil-local-nmap (key def) (define-key evil-normal-state-local-map key def))
   (defun evil-local-imap (key def) (define-key evil-insert-state-local-map key def))
   (defun evil-local-omap (key def) (define-key evil-operator-state-local-map key def))
   (defun evil-local-vmap (key def) (define-key evil-visual-state-local-map key def))
   (defun evil-local-rmap (key def) (define-key evil-replace-state-local-map key def))
+  (defun evil-local-mmap (key def) (define-key evil-motion-state-local-map key def))
 
   (defun make (argument)
     (interactive "Mmake: ")
