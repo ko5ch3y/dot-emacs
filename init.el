@@ -708,6 +708,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-imap [C-tab] 'tab-to-tab-stop)
   (evil-imap (kbd "RET") 'newline-and-indent)
   (evil-nmap (kbd "RET") 'newline-and-indent)
+  (evil-nmap (kbd "RET") 'occur-mode-goto-occurrence occur-mode-map))
 
 
 (defun my-org-mode-evil-map-setup ()
