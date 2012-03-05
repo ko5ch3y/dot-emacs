@@ -232,7 +232,6 @@
 
 (defun my-anything-setup ()
   (require 'anything-config)
-  (require 'anything-complete)
   (require 'anything-gtags)
 
   (add-hook 'anything-after-initialize-hook
