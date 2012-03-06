@@ -657,6 +657,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (evil-nmap "Y"    "y$")
   (evil-imap "\C-z" 'evil-emacs-state)
   (evil-nmap "za" 'align-current)
+  (evil-vmap "za" 'align-current)
   (evil-vmap "za" 'align)
   (evil-nmap "zA" 'align-regexp)
   (evil-vmap "zA" 'align-regexp)
