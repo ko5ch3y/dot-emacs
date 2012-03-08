@@ -529,14 +529,23 @@ This arrangement depends on the value of `gdb-many-windows'."
   (define-key anything-find-files-map "\M-w" 'paredit-backward-kill-word))
 
 (defun my-minibuffer-map-setup ()
-  (define-key minibuffer-local-map "\C-p" 'previous-history-element)
-  (define-key minibuffer-local-map "\C-n" 'next-history-element)
-  (define-key minibuffer-local-map "\M-p" 'anything-previous-line)
-  (define-key minibuffer-local-map "\M-n" 'anything-next-line)
-  (define-key minibuffer-local-map "\M-l" 'anything-minibuffer-history)
-  (define-key minibuffer-local-map "\M-h" 'paredit-backward-delete)
-  (define-key minibuffer-local-map "\M-H" 'paredit-backward-delete)
-  (define-key minibuffer-local-map "\M-w" 'paredit-backward-kill-word))
+  (dolist (map (list minibuffer-local-filename-completion-map
+                     minibuffer-local-completion-map
+                     minibuffer-local-must-match-filename-map
+                     minibuffer-local-filename-must-match-map
+                     minibuffer-local-map
+                     minibuffer-local-isearch-map
+                     minibuffer-local-must-match-map
+                     minibuffer-local-ns-map))
+    (define-key map "\C-p" 'previous-history-element)
+    (define-key map "\C-n" 'next-history-element)
+    (define-key map "\M-p" 'anything-previous-line)
+    (define-key map "\M-n" 'anything-next-line)
+    (define-key map "\M-l" 'anything-minibuffer-history)
+    (define-key map "\M-h" 'paredit-backward-delete)
+    (define-key map "\M-H" 'paredit-backward-delete)
+    (define-key map "\M-w" 'paredit-backward-kill-word)))
+
 
 (defvar my-tab-map (make-sparse-keymap))
 (defun my-tab-map-setup ()
