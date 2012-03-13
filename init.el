@@ -234,6 +234,8 @@
   (require 'anything-config)
   (require 'anything-gtags)
 
+  (ac-mode t)
+
   (add-hook 'anything-after-initialize-hook
             #'(lambda ()
                 (with-current-buffer anything-buffer
