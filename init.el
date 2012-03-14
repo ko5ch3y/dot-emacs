@@ -541,6 +541,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (define-key anything-c-grep-map "\M-h" 'paredit-backward-delete)
   (define-key anything-c-grep-map "\M-H" 'paredit-backward-delete)
   (define-key anything-c-grep-map "\M-w" 'paredit-backward-kill-word)
+  (define-key anything-c-grep-map "\M-s" 'anything-c-grep-run-save-buffer)
 
   (define-key anything-find-files-map "\M-e" 'anything-execute-persistent-action)
   (define-key anything-find-files-map "\M-l" 'anything-ff-run-switch-to-history)
