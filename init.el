@@ -609,6 +609,7 @@ the line, to capture multiline input. (This only has effect if
 
   (define-key anything-generic-files-map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
 
+  (define-key anything-c-buffer-map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
   (define-key anything-c-buffer-map "\M-r" 'anything-buffer-revert-persistent)
   (define-key anything-c-buffer-map "\M-s" 'anything-buffer-save-persistent)
   (define-key anything-c-buffer-map "\M-k" 'anything-buffer-run-kill-buffers)
