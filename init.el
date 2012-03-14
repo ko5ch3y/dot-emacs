@@ -616,6 +616,7 @@ the line, to capture multiline input. (This only has effect if
 
   (define-key anything-c-grep-map "\M-s" 'anything-c-grep-run-save-buffer)
 
+  (define-key anything-find-files-map "\M-g" 'anything-ff-run-grep)
   (define-key anything-find-files-map "\M-o" 'anything-ff-run-switch-other-window)
   (define-key anything-find-files-map "\M-u" 'anything-find-files-down-one-level)
   (define-key anything-find-files-map "\M-l" 'anything-ff-run-switch-to-history))
@@ -766,7 +767,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zc" 'evil-scroll-line-to-center)
   (evil-nmap "zd" 'kill-this-buffer)
   (evil-nmap "ze" 'anything-find-files)
-  (evil-nmap "zg" 'grep)
+  (evil-nmap "zg" 'anything-do-grep)
   (evil-nmap "zG"  my-egg-map)
   (evil-nmap "zh"   'split-window-horizontally)
   (evil-nmap "zi" 'anything-imenu)
