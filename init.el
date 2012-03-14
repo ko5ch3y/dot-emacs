@@ -528,6 +528,7 @@ This arrangement depends on the value of `gdb-many-windows'."
     "Add to shell-mode-hook to prevent jump-scrolling on newlines in shell buffers."
     (set (make-local-variable 'scroll-conservatively) 10))
   (add-hook 'shell-mode-hook 'set-scroll-conservatively)
+  (add-hook 'shell-mode-hook '(lambda () (setq scroll-margin 0)))
 
   ;; i think this is wrong, and it buries the shell when you run emacsclient from
   ;; it. temporarily removing.
