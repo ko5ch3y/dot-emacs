@@ -478,6 +478,14 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default c-eldoc-includes "`pkg-config QtCore QtGui --cflags` -I./ -I../ -I/usr/include")
   (add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode))
 
+(defun my-eshell-setup ()
+  (add-hook 'eshell-mode-hook
+            #'(lambda ()
+                (define-key eshell-mode-map
+                  [remap pcomplete] 'anything-esh-pcomplete)))
+
+  (add-hook 'shell-mode-hook '(lambda () (setq scroll-margin 0))))
+
 ;; Adapted from http://snarfed.org/why_i_run_shells_inside_emacs
 (defun my-shell-setup ()
   (require 'tramp)
@@ -897,7 +905,8 @@ the line, to capture multiline input. (This only has effect if
 (my-whitespace-setup)
 (my-window-system-setup)
 (my-yasnippet-setup)
-(my-shell-setup)
+;; (my-shell-setup)
+(my-eshell-setup)
 
 (my-anything-map-setup)
 (my-egg-map-setup)
