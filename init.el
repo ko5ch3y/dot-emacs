@@ -598,6 +598,12 @@ the line, to capture multiline input. (This only has effect if
         (anything-ff-run-switch-other-window)
       (anything-buffer-switch-other-window)))
 
+  ;; ported from v1.3.9 - latest change breaks recentf candidates
+  (defun anything-ff-run-switch-other-window ()
+    "Run switch to other window action from `anything-c-source-find-files'."
+    (interactive)
+    (anything-c-quit-and-execute-action 'find-file-other-window))
+
   (dolist (map (list anything-c-buffer-map
                      anything-kill-ring-map
                      anything-generic-files-map
