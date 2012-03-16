@@ -485,10 +485,17 @@ This arrangement depends on the value of `gdb-many-windows'."
   (add-hook 'c-mode-common-hook 'c-turn-on-eldoc-mode))
 
 (defun my-eshell-setup ()
+  (require 'eshell)
+  (require 'em-smart)
+
   (add-hook 'eshell-mode-hook
             #'(lambda ()
                 (define-key eshell-mode-map
                   [remap pcomplete] 'anything-esh-pcomplete)))
+
+  (setq-default eshell-where-to-jump 'begin)
+  (setq-default eshell-review-quick-commands nil)
+  (setq-default eshell-smart-space-goes-to-end t)
 
   (add-hook 'shell-mode-hook '(lambda () (setq scroll-margin 0))))
 
