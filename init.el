@@ -369,6 +369,12 @@
   (setq-default gdb-use-separate-io-buffer nil)
   (setq-default gdb-max-frames 100)
 
+  (add-hook 'change-major-mode-hook
+            (lambda ()
+              (if (not (eq "gud-mode" major-mode))
+                  (if (get-buffer "*gud*")
+                      (bury-buffer "*gud*")))))
+
   (defun gdb-restore-windows ()
     "Restore the basic arrangement of windows used by gdba.
 This arrangement depends on the value of `gdb-many-windows'."
