@@ -493,6 +493,12 @@ This arrangement depends on the value of `gdb-many-windows'."
                 (define-key eshell-mode-map
                   [remap pcomplete] 'anything-esh-pcomplete)))
 
+  (add-hook 'change-major-mode-hook
+            (lambda ()
+              (if (not (eq "eshell-mode" major-mode))
+                  (if (get-buffer "*eshell*")
+                      (bury-buffer "*eshell*")))))
+
   (setq-default eshell-where-to-jump 'begin)
   (setq-default eshell-review-quick-commands nil)
   (setq-default eshell-smart-space-goes-to-end t)
@@ -770,6 +776,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "\M-p" '(lambda () (interactive) (next-error -1)))
   (evil-nmap "\M-P" 'evil-jump-backward)
   (evil-imap "\M-s"  nil)
+  (evil-nmap "\M-s" 'eshell)
   (evil-nmap "Tc"   'transpose-chars)
   (evil-nmap "Tl"   'transpose-lines)
   (evil-nmap "Tp"   'transpose-paragraphs)
