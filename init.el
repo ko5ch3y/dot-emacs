@@ -488,6 +488,14 @@ This arrangement depends on the value of `gdb-many-windows'."
   (require 'eshell)
   (require 'em-smart)
 
+  (defun my-eshell-prompt-function ()
+    (let ((host (car (split-string (system-name) "[.]")))
+          (prompt (if (= (user-uid) 0) "# " "$ "))
+          (path (abbreviate-file-name (eshell/pwd))))
+      (concat "at " host " in " path
+              "\n"
+              prompt)))
+
   (add-hook 'eshell-mode-hook
             #'(lambda ()
                 (define-key eshell-mode-map
@@ -499,6 +507,7 @@ This arrangement depends on the value of `gdb-many-windows'."
                   (if (get-buffer "*eshell*")
                       (bury-buffer "*eshell*")))))
 
+  (setq-default eshell-prompt-function 'my-eshell-prompt-function)
   (setq-default eshell-where-to-jump 'begin)
   (setq-default eshell-review-quick-commands nil)
   (setq-default eshell-smart-space-goes-to-end t)
