@@ -658,6 +658,7 @@ the line, to capture multiline input. (This only has effect if
                      anything-generic-files-map
                      anything-c-grep-map
                      anything-find-files-map
+                     anything-occur-map
                      anything-map))
     (define-key map "\C-n" 'next-history-element)
     (define-key map "\C-p" 'previous-history-element)
@@ -837,7 +838,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zl"   'evil-ex-nohighlight)
   (evil-nmap "zm" 'remake)
   (evil-nmap "zM" 'make)
-  (evil-nmap "zo" 'occur)
+  (evil-nmap "zo" 'anything-occur)
   (evil-nmap "zO" 'ff-find-other-file)
   (evil-nmap "zp"   'pwd)
   (evil-nmap "zq"   'save-buffers-kill-terminal)
