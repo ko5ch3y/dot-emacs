@@ -490,7 +490,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (defun my-eshell-prompt-function ()
     (let ((host (car (split-string (system-name) "[.]")))
-          (prompt (if (= (user-uid) 0) "# " "$ "))
+          (prompt (if (= (user-uid) 0) "# " "> "))
           (path (abbreviate-file-name (eshell/pwd)))
           (fg-black   "\e[30m")
           (fg-red     "\e[31m")
