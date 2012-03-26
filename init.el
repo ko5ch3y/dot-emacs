@@ -657,6 +657,7 @@ the line, to capture multiline input. (This only has effect if
                      anything-kill-ring-map
                      anything-generic-files-map
                      anything-c-grep-map
+                     anything-c-read-file-map
                      anything-find-files-map
                      anything-occur-map
                      anything-map))
@@ -670,6 +671,7 @@ the line, to capture multiline input. (This only has effect if
     (define-key map "\M-W" 'paredit-backward-kill-word)
     (define-key map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
     (define-key map "\M-e" 'anything-execute-persistent-action)
+    (define-key map "\M-u" 'anything-find-files-down-one-level)
     (define-key map "\M-z" 'universal-argument))
 
   (define-key anything-c-buffer-map "\M-r" 'anything-buffer-revert-persistent)
@@ -679,7 +681,6 @@ the line, to capture multiline input. (This only has effect if
   (define-key anything-c-grep-map "\M-s" 'anything-c-grep-run-save-buffer)
 
   (define-key anything-find-files-map "\M-g" 'anything-ff-run-grep)
-  (define-key anything-find-files-map "\M-u" 'anything-find-files-down-one-level)
   (define-key anything-find-files-map "\M-l" 'anything-ff-run-switch-to-history))
 
 (defun my-minibuffer-map-setup ()
