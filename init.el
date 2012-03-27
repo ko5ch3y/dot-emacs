@@ -428,6 +428,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 
 (defun my-misc-setup ()
   (require 'undo-tree)
+
   (winner-mode t)
   (setq-default compilation-finish-functions 'compile-autoclose)
   (setq-default read-file-name-completion-ignore-case t)
@@ -460,6 +461,12 @@ This arrangement depends on the value of `gdb-many-windows'."
   (set-frame-font "Monospace 10")
   (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
   (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
+
+  (add-hook 'change-major-mode-hook
+            (lambda ()
+              (if (not (eq "grep-mode" major-mode))
+                  (if (get-buffer "*grep*")
+                      (bury-buffer "*grep*")))))
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
