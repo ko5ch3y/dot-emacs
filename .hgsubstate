@@ -1,9 +1,9 @@
-4f4097ecf3d16a3b2110f8d417a520f49280c904 site-lisp/anything-config
 9d40fc3b43fc16dd4a3a51fa6f062064cc9b272d site-lisp/auto-complete
 9db79f4a88e22041c6cc1acfa834bb7ff8bec459 site-lisp/auto-complete-clang
 5fd51e00c82e90bc3305512f9e7f38bd6b975015 site-lisp/color-theme-github
 9ae5b190daa162e9bc67bc07e30254a35b168301 site-lisp/egg
 3f87e9ba9bc4de608417343aab9a31bccf894e1e site-lisp/evil
 3a6dfbf743cc56b7d454bc6c688cd983966acc6c site-lisp/geiser
+34755a40588d778383f6d3932130a9592cf43eac site-lisp/helm
 86a168e944a6212de3dc34a59511ea21293ea435 site-lisp/monky
 6b38912771d3a8c1fb79dc17e5ed97fe13900c9b site-lisp/org-mode

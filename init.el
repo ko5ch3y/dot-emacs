@@ -2,8 +2,7 @@
 (defvar my-load-path
   (list "~/.emacs.d/auto-install"
         "~/.emacs.d/site-lisp"
-        "~/.emacs.d/site-lisp/anything-config"
-        "~/.emacs.d/site-lisp/anything-config/extensions"
+        "~/.emacs.d/site-lisp/helm"
         "~/.emacs.d/site-lisp/auto-complete"
         "~/.emacs.d/site-lisp/auto-complete-clang"
         "~/.emacs.d/site-lisp/color-theme-github"
@@ -230,20 +229,21 @@
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
 
-(defun my-anything-setup ()
-  (require 'anything-config)
-  (require 'anything-gtags)
+(defun my-helm-setup ()
+  (require 'helm-config)
+  (require 'helm-gtags)
+  (require 'helm-ring)
 
-  (ac-mode t)
+  (helm-mode t)
 
-  (add-hook 'anything-after-initialize-hook
+  (add-hook 'helm-after-initialize-hook
             #'(lambda ()
-                (with-current-buffer anything-buffer
+                (with-current-buffer helm-buffer
                   (visual-line-mode))))
 
-  (setq-default anything-gtags-enable-initial-pattern t)
+  (setq-default helm-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative)
-  (setq-default anything-su-or-sudo "sudo"))
+  (setq-default helm-su-or-sudo "sudo"))
 
 (defun my-autopair-setup ()
   (require 'autopair)
@@ -288,9 +288,9 @@
   (add-hook 'auto-complete-mode-hook 'ac-common-setup)
   (global-auto-complete-mode t))
 
-(defun my-ac-anything2-setup ()
-  (require 'ac-anything2)
-  (define-key ac-complete-mode-map "\M-s" 'ac-anything2))
+(defun my-ac-helm2-setup ()
+  (require 'ac-helm2)
+  (define-key ac-complete-mode-map "\M-s" 'ac-helm2))
 
 (defun my-auto-complete-clang-setup ()
   (require 'auto-complete-clang)
@@ -527,7 +527,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (add-hook 'eshell-mode-hook
             #'(lambda ()
                 (define-key eshell-mode-map
-                  [remap pcomplete] 'anything-esh-pcomplete)))
+                  [remap pcomplete] 'helm-esh-pcomplete)))
 
   (add-hook 'change-major-mode-hook
             (lambda ()
@@ -645,50 +645,50 @@ the line, to capture multiline input. (This only has effect if
   (load "comint.el.gz"))
 
 
-(defun my-anything-map-setup ()
+(defun my-helm-map-setup ()
 ;;;###autoload
-  (defun anything-buffer-or-ff-run-switch-other-window ()
-    "Run switch to other window action from `anything-c-source-buffer+' or `anything-c-source-find-files'."
+  (defun helm-buffer-or-ff-run-switch-other-window ()
+    "Run switch to other window action from `helm-c-source-buffer+' or `helm-c-source-find-files'."
     (interactive)
-    (if (eq nil (get-buffer (anything-get-selection)))
-        (anything-ff-run-switch-other-window)
-      (anything-buffer-switch-other-window)))
+    (if (eq nil (get-buffer (helm-get-selection)))
+        (helm-ff-run-switch-other-window)
+      (helm-buffer-switch-other-window)))
 
   ;; ported from v1.3.9 - latest change breaks recentf candidates
-  (defun anything-ff-run-switch-other-window ()
-    "Run switch to other window action from `anything-c-source-find-files'."
+  (defun helm-ff-run-switch-other-window ()
+    "Run switch to other window action from `helm-c-source-find-files'."
     (interactive)
-    (anything-c-quit-and-execute-action 'find-file-other-window))
+    (helm-c-quit-and-execute-action 'find-file-other-window))
 
-  (dolist (map (list anything-c-buffer-map
-                     anything-kill-ring-map
-                     anything-generic-files-map
-                     anything-c-grep-map
-                     anything-c-read-file-map
-                     anything-find-files-map
-                     anything-occur-map
-                     anything-map))
+  (dolist (map (list helm-c-buffer-map
+                     helm-kill-ring-map
+                     helm-generic-files-map
+                     helm-c-grep-map
+                     helm-c-read-file-map
+                     helm-find-files-map
+                     helm-occur-map
+                     helm-map))
     (define-key map "\C-n" 'next-history-element)
     (define-key map "\C-p" 'previous-history-element)
-    (define-key map "\M-n" 'anything-next-line)
-    (define-key map "\M-p" 'anything-previous-line)
+    (define-key map "\M-n" 'helm-next-line)
+    (define-key map "\M-p" 'helm-previous-line)
     (define-key map "\M-h" 'paredit-backward-delete)
     (define-key map "\M-H" 'paredit-backward-delete)
     (define-key map "\M-w" 'paredit-backward-kill-word)
     (define-key map "\M-W" 'paredit-backward-kill-word)
-    (define-key map "\M-o" 'anything-buffer-or-ff-run-switch-other-window)
-    (define-key map "\M-e" 'anything-execute-persistent-action)
-    (define-key map "\M-u" 'anything-find-files-down-one-level)
+    (define-key map "\M-o" 'helm-buffer-or-ff-run-switch-other-window)
+    (define-key map "\M-e" 'helm-execute-persistent-action)
+    (define-key map "\M-u" 'helm-find-files-down-one-level)
     (define-key map "\M-z" 'universal-argument))
 
-  (define-key anything-c-buffer-map "\M-r" 'anything-buffer-revert-persistent)
-  (define-key anything-c-buffer-map "\M-s" 'anything-buffer-save-persistent)
-  (define-key anything-c-buffer-map "\M-k" 'anything-buffer-run-kill-buffers)
+  (define-key helm-c-buffer-map "\M-r" 'helm-buffer-revert-persistent)
+  (define-key helm-c-buffer-map "\M-s" 'helm-buffer-save-persistent)
+  (define-key helm-c-buffer-map "\M-k" 'helm-buffer-run-kill-buffers)
 
-  (define-key anything-c-grep-map "\M-s" 'anything-c-grep-run-save-buffer)
+  (define-key helm-c-grep-map "\M-s" 'helm-c-grep-run-save-buffer)
 
-  (define-key anything-find-files-map "\M-g" 'anything-ff-run-grep)
-  (define-key anything-find-files-map "\M-l" 'anything-ff-run-switch-to-history))
+  (define-key helm-find-files-map "\M-g" 'helm-ff-run-grep)
+  (define-key helm-find-files-map "\M-l" 'helm-ff-run-switch-to-history))
 
 (defun my-minibuffer-map-setup ()
   (dolist (map (list minibuffer-local-filename-completion-map
@@ -701,9 +701,9 @@ the line, to capture multiline input. (This only has effect if
                      minibuffer-local-ns-map))
     (define-key map "\C-n" 'next-history-element)
     (define-key map "\C-p" 'previous-history-element)
-    (define-key map "\M-n" 'anything-next-line)
-    (define-key map "\M-p" 'anything-previous-line)
-    (define-key map "\M-l" 'anything-minibuffer-history)
+    (define-key map "\M-n" 'helm-next-line)
+    (define-key map "\M-p" 'helm-previous-line)
+    (define-key map "\M-l" 'helm-minibuffer-history)
     (define-key map "\M-h" 'paredit-backward-delete)
     (define-key map "\M-H" 'paredit-backward-delete)
     (define-key map "\M-w" 'paredit-backward-kill-word)
@@ -768,8 +768,8 @@ the line, to capture multiline input. (This only has effect if
 
 (defvar my-tag-map (make-sparse-keymap))
 (defun my-tag-map-setup ()
-  (define-key my-tag-map "s" 'anything-gtags-select)
-  (define-key my-tag-map "t" 'anything-gtags-resume))
+  (define-key my-tag-map "s" 'helm-gtags-select)
+  (define-key my-tag-map "t" 'helm-gtags-resume))
 
 (defvar my-geiser-map (make-sparse-keymap))
 (defun my-geiser-map-setup ()
@@ -823,10 +823,10 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "Tw"   'transpose-words)
   (evil-nmap "\M-t"  my-tab-map)
   (evil-imap "\M-w" 'paredit-backward-kill-word)
-  (evil-imap "\M-x" 'anything-M-x)
-  (evil-nmap "\M-x" 'anything-M-x)
-  (evil-vmap "\M-x" 'anything-M-x)
-  (evil-rmap "\M-x" 'anything-M-x)
+  (evil-imap "\M-x" 'helm-M-x)
+  (evil-nmap "\M-x" 'helm-M-x)
+  (evil-vmap "\M-x" 'helm-M-x)
+  (evil-rmap "\M-x" 'helm-M-x)
   (evil-nmap "Y"    "y$")
   (evil-imap "\C-z" 'evil-emacs-state)
   (evil-nmap "za" 'align-current)
@@ -836,21 +836,21 @@ the line, to capture multiline input. (This only has effect if
   (evil-vmap "zA" 'align-regexp)
   (evil-nmap "zc" 'evil-scroll-line-to-center)
   (evil-nmap "zd" 'kill-this-buffer)
-  (evil-nmap "ze" 'anything-find-files)
-  (evil-nmap "zg" 'anything-do-grep)
+  (evil-nmap "ze" 'helm-find-files)
+  (evil-nmap "zg" 'helm-do-grep)
   (evil-nmap "zG"  my-egg-map)
   (evil-nmap "zh"   'split-window-horizontally)
-  (evil-nmap "zi" 'anything-imenu)
+  (evil-nmap "zi" 'helm-imenu)
   (evil-nmap "zj" 'paredit-join-sexps)
   (evil-nmap "zk"   'kill-compilation)
   (evil-nmap "zl"   'evil-ex-nohighlight)
   (evil-nmap "zm" 'remake)
   (evil-nmap "zM" 'make)
-  (evil-nmap "zo" 'anything-occur)
+  (evil-nmap "zo" 'helm-occur)
   (evil-nmap "zO" 'ff-find-other-file)
   (evil-nmap "zp"   'pwd)
   (evil-nmap "zq"   'save-buffers-kill-terminal)
-  (evil-nmap "zr" 'anything)
+  (evil-nmap "zr" 'helm-for-files)
   (evil-nmap "zs" 'paredit-splice-sexp)
   (evil-nmap "zS" 'paredit-split-sexp)
   (evil-nmap "zt"  my-tag-map)
@@ -858,7 +858,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zV"   'visual-line-mode)
   (evil-nmap "zw" 'save-buffer)
   (evil-nmap "zx"   'delete-window)
-  (evil-nmap "zy"   'anything-show-kill-ring)
+  (evil-nmap "zy"   'helm-show-kill-ring)
   (evil-nmap "zz"    my-geiser-map)
   (evil-vmap "zz"    my-geiser-map)
   (evil-imap "\M-z" 'evil-normal-state)
@@ -942,8 +942,8 @@ the line, to capture multiline input. (This only has effect if
 (my-package-setup)
 (my-misc-function-setup)
 
-(my-ac-anything2-setup)
-(my-anything-setup)
+(my-ac-helm2-setup)
+(my-helm-setup)
 (my-auto-complete-clang-setup)
 (my-auto-complete-setup)
 (my-auto-install-setup)
@@ -973,7 +973,7 @@ the line, to capture multiline input. (This only has effect if
 ;; (my-shell-setup)
 (my-eshell-setup)
 
-(my-anything-map-setup)
+(my-helm-map-setup)
 (my-egg-map-setup)
 (my-evil-map-setup)
 (my-geiser-map-setup)
