@@ -373,7 +373,20 @@
             (lambda ()
               (if (not (eq "gud-mode" major-mode))
                   (if (get-buffer "*gud*")
-                      (bury-buffer "*gud*")))))
+                      (bury-buffer "*gud*")))
+              (if (not (eq "Buffer-menu-mode" major-mode))
+                  (if (get-buffer "*Buffer List*")
+                      (bury-buffer "*breakpoints of *")))
+              (if (not (eq "gdb-locals-mode" major-mode))
+                  (if (get-buffer "*locals of *")
+                      (bury-buffer "*locals of *")))
+              (if (not (eq "gdb-breakpoints-mode" major-mode))
+                  (if (get-buffer "*breakpoints of *")
+                      (bury-buffer "*breakpoints of *")))
+              (if (not (eq "gdb-frames-mode" major-mode))
+                  (if (get-buffer "*stack frames of *")
+                      (bury-buffer "*stack frames of *")))))
+
 
   (defun gdb-restore-windows ()
     "Restore the basic arrangement of windows used by gdba.
