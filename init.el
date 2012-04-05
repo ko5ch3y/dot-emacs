@@ -379,7 +379,7 @@
                       (bury-buffer "*gud*")))
               (if (not (eq "Buffer-menu-mode" major-mode))
                   (if (get-buffer "*Buffer List*")
-                      (bury-buffer "*breakpoints of *")))
+                      (bury-buffer "*Buffer List*")))
               (if (not (eq "gdb-locals-mode" major-mode))
                   (if (get-buffer "*locals of *")
                       (bury-buffer "*locals of *")))
