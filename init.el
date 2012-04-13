@@ -744,7 +744,19 @@ the line, to capture multiline input. (This only has effect if
 
 (defvar my-gud-map (make-sparse-keymap))
 (defun my-gud-map-setup ()
-  (define-key my-gud-map "\M-b" 'gud-break)
+  (defun my-gdb-many-windows ()
+    (interactive)
+    (let ((previous-buffer (current-buffer)))
+      ((lambda ()
+         (gdb-many-windows nil)
+         (replace-buffer-in-windows "*Buffer List*")
+         (switch-to-buffer-other-window previous-buffer)
+         (if gdb-many-windows
+             (progn
+               (split-window-horizontally)
+               (windmove-right))))))
+
+    (define-key my-gud-map "\M-b" 'gud-break))
   (define-key my-gud-map "\M-c" 'gud-cont)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
   (define-key my-gud-map "\M-d" 'gud-down)
@@ -763,7 +775,7 @@ the line, to capture multiline input. (This only has effect if
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-s" 'gambit-step-continuation)))
   (define-key my-gud-map "\M-t" 'gud-until)
   (define-key my-gud-map "\M-u" 'gud-up)
-  (define-key my-gud-map "\M-w" 'gdb-many-windows))
+  (define-key my-gud-map "\M-w" 'my-gdb-many-windows))
 ;; scheme-send-definition
 ;; scheme-send-region
 ;; scheme-send-last-sexp
