@@ -241,8 +241,8 @@
                 (with-current-buffer helm-buffer
                   (visual-line-mode))))
 
-  (set-face-attribute 'helm-overlay-line-face nil :background "#BCD5FA")
-  (set-face-attribute 'helm-selection nil :background "#BCD5FA")
+  (set-face-attribute 'helm-overlay-line-face nil :background "#BCD5FA" :underline nil)
+  (set-face-attribute 'helm-selection nil :background "#BCD5FA" :inherit)
 
   (setq-default helm-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative)
