@@ -148,12 +148,17 @@
 
   (defun gud-restart ()
     (interactive)
-    (let ((previous-buffer (current-buffer)))
-      (switch-to-buffer-other-window "*gud*")
+    (let ((previous-buffer (current-buffer))
+          (switch-back nil))
+      (if (not (eq 'gud-mode major-mode))
+          (progn
+            (setq switch-back t)
+            (switch-to-buffer-other-window "*gud*")))
       (gud-interrupt)
       (sleep-for 0.1)
       (gud-run-yes)
-      (switch-to-buffer-other-window previous-buffer)))
+      (if switch-back
+          (switch-to-buffer-other-window previous-buffer))))
 
   (defun paredit-change ()
     (interactive)
