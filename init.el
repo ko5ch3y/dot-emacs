@@ -379,19 +379,19 @@
 
   (add-hook 'change-major-mode-hook
             (lambda ()
-              (if (not (eq "gud-mode" major-mode))
+              (if (not (eq 'gud-mode major-mode))
                   (if (get-buffer "*gud*")
                       (bury-buffer "*gud*")))
-              (if (not (eq "Buffer-menu-mode" major-mode))
+              (if (not (eq 'Buffer-menu-mode major-mode))
                   (if (get-buffer "*Buffer List*")
                       (bury-buffer "*Buffer List*")))
-              (if (not (eq "gdb-locals-mode" major-mode))
+              (if (not (eq 'gdb-locals-mode major-mode))
                   (if (get-buffer "*locals of *")
                       (bury-buffer "*locals of *")))
-              (if (not (eq "gdb-breakpoints-mode" major-mode))
+              (if (not (eq 'gdb-breakpoints-mode major-mode))
                   (if (get-buffer "*breakpoints of *")
                       (bury-buffer "*breakpoints of *")))
-              (if (not (eq "gdb-frames-mode" major-mode))
+              (if (not (eq 'gdb-frames-mode major-mode))
                   (if (get-buffer "*stack frames of *")
                       (bury-buffer "*stack frames of *")))))
 
@@ -485,7 +485,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (add-hook 'change-major-mode-hook
             (lambda ()
-              (if (not (eq "grep-mode" major-mode))
+              (if (not (eq 'grep-mode major-mode))
                   (if (get-buffer "*grep*")
                       (bury-buffer "*grep*")))))
 
@@ -552,7 +552,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (add-hook 'change-major-mode-hook
             (lambda ()
-              (if (not (eq "eshell-mode" major-mode))
+              (if (not (eq 'eshell-mode major-mode))
                   (if (get-buffer "*eshell*")
                       (bury-buffer "*eshell*")))))
 
