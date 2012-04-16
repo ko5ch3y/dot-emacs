@@ -754,9 +754,9 @@ the line, to capture multiline input. (This only has effect if
          (if gdb-many-windows
              (progn
                (split-window-horizontally)
-               (windmove-right))))))
+               (windmove-right)))))))
 
-    (define-key my-gud-map "\M-b" 'gud-break))
+  (define-key my-gud-map "\M-b" 'gud-break)
   (define-key my-gud-map "\M-c" 'gud-cont)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
   (define-key my-gud-map "\M-d" 'gud-down)
