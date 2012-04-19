@@ -482,6 +482,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (set-frame-font "Monospace 10")
   (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
   (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
+  (column-number-mode t)
 
   (add-hook 'change-major-mode-hook
             (lambda ()
