@@ -755,12 +755,16 @@ the line, to capture multiline input. (This only has effect if
     (let ((previous-buffer (current-buffer)))
       ((lambda ()
          (gdb-many-windows nil)
-         (replace-buffer-in-windows "*Buffer List*")
-         (switch-to-buffer-other-window previous-buffer)
          (if gdb-many-windows
              (progn
-               (split-window-horizontally)
-               (windmove-right)))))))
+               (replace-buffer-in-windows "*Buffer List*")
+               (windmove-down)
+               (switch-to-buffer-other-window previous-buffer))
+           (progn
+             (switch-to-buffer previous-buffer)
+             (switch-to-buffer-other-window "*gud*")
+             (windmove-right)
+             (evil-scroll-line-to-center (line-number-at-pos))))))))
 
   (define-key my-gud-map "\M-b" 'gud-break)
   (define-key my-gud-map "\M-c" 'gud-cont)
