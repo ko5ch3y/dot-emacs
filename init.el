@@ -761,9 +761,8 @@ the line, to capture multiline input. (This only has effect if
                (windmove-down)
                (switch-to-buffer-other-window previous-buffer))
            (progn
-             (switch-to-buffer previous-buffer)
-             (switch-to-buffer-other-window "*gud*")
-             (windmove-right)
+             (switch-to-buffer "*gud*")
+             (switch-to-buffer-other-window previous-buffer)
              (evil-scroll-line-to-center (line-number-at-pos))))))))
 
   (define-key my-gud-map "\M-b" 'gud-break)
