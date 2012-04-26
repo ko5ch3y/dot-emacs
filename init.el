@@ -763,7 +763,8 @@ the line, to capture multiline input. (This only has effect if
             (windmove-down)
             (switch-to-buffer-other-window previous-buffer))
         (progn
-          (windmove-left)
+          (if (not (null (windmove-find-other-window 'left)))
+              (windmove-left))
           (switch-to-buffer "*gud*")
           (switch-to-buffer-other-window previous-buffer)
           (evil-scroll-line-to-center (line-number-at-pos))))))
