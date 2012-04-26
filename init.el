@@ -709,6 +709,9 @@ the line, to capture multiline input. (This only has effect if
 
   (define-key helm-c-grep-map "\M-s" 'helm-c-grep-run-save-buffer)
 
+  (define-key helm-c-gtags-map "\M-o" 'helm-select-2nd-action)
+  (define-key helm-c-gtags-map "\M-r" 'helm-select-3rd-action)
+
   (define-key helm-find-files-map "\M-g" 'helm-ff-run-grep)
   (define-key helm-find-files-map "\M-l" 'helm-ff-run-switch-to-history))
 

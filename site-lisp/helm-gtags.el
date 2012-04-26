@@ -148,6 +148,12 @@
   "Gtags Helm interface"
   :group 'helm)
 
+(defvar helm-c-gtags-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map helm-map)
+    (delq nil map))
+  "Keymap used in gtags sources.")
+
 (defcustom helm-gtags-enable-initial-pattern nil
   "*If non-nil, initial input of `helm-gtags-select' is current symbol."
   :group 'helm-gtags
@@ -179,7 +185,7 @@
   (let* ((initial-pattern (regexp-quote (or (thing-at-point 'symbol) ""))))
     (helm '(helm-c-source-gtags-select)
               (if helm-gtags-enable-initial-pattern initial-pattern)
-              "Find Tag: " nil)))
+              "Find Tag: " nil nil nil helm-c-gtags-map)))
 
 ;;;; `gtags-select-mode' replacement
 (defvar helm-gtags-hijack-gtags-select-mode t
