@@ -374,6 +374,7 @@
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil)
   (setq-default gdb-many-windows t)
+  (setq-default gdb-show-main t)
   (setq-default gdb-use-separate-io-buffer nil)
   (setq-default gdb-max-frames 100)
 
