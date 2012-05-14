@@ -1,20 +1,24 @@
 
+(defvar my-site-lisp "~/.emacs.d/site-lisp/")
+
 (defvar my-load-path
-  (list "~/.emacs.d/auto-install"
-        "~/.emacs.d/site-lisp"
-        "~/.emacs.d/site-lisp/helm"
-        "~/.emacs.d/site-lisp/auto-complete"
-        "~/.emacs.d/site-lisp/auto-complete-clang"
-        "~/.emacs.d/site-lisp/color-theme-github"
-        "~/.emacs.d/site-lisp/egg"
-        "~/.emacs.d/site-lisp/elscreen"
-        "~/.emacs.d/site-lisp/evil"
-        "~/.emacs.d/site-lisp/geiser/elisp"
-        "~/.emacs.d/site-lisp/monky"
-        "~/.emacs.d/site-lisp/org-mode/EXPERIMENTAL"
-        "~/.emacs.d/site-lisp/org-mode/contrib/lisp"
-        "~/.emacs.d/site-lisp/org-mode/lisp"
-        "~/.emacs.d/site-lisp/yasnippet-0.6.1c"))
+  (append (mapcar (lambda (x) (concat my-site-lisp x))
+                  (list ""
+                        "helm"
+                        "auto-complete"
+                        "auto-complete-clang"
+                        "color-theme-github"
+                        "egg"
+                        "elscreen"
+                        "evil"
+                        "fuel"
+                        "geiser/elisp"
+                        "monky"
+                        "org-mode/EXPERIMENTAL"
+                        "org-mode/contrib/lisp"
+                        "org-mode/lisp"
+                        "yasnippet-0.6.1c"))
+          (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
 
 
