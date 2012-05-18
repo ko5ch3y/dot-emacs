@@ -766,7 +766,6 @@ the line, to capture multiline input. (This only has effect if
       (gdb-many-windows nil)
       (if gdb-many-windows
           (progn
-            (replace-buffer-in-windows "*Buffer List*")
             (windmove-down)
             (switch-to-buffer-other-window previous-buffer))
         (progn
