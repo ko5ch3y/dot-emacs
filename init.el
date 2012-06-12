@@ -374,7 +374,9 @@
 
 (defun my-gud-setup ()
   (require 'gud)
-  (require 'gdb-ui)
+  (if (locate-library "gdb-mi")
+      (require 'gdb-mi)
+      (require 'gdb-ui))
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil)
   (setq-default gdb-show-main t)
