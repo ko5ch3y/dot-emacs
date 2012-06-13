@@ -782,7 +782,7 @@ the line, to capture multiline input. (This only has effect if
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-c" 'gambit-continue)))
   (define-key my-gud-map "\M-d" 'gud-down)
   (define-key my-gud-map "\M-f" 'gud-finish)
-  (define-key my-gud-map "\M-g" (lambda () (interactive) (switch-to-buffer "*gud*")))
+  (define-key my-gud-map "\M-g" (lambda () (interactive) (switch-to-buffer-other-window "*gud*")))
   (define-key my-gud-map "\M-i" 'gud-interrupt)
   (define-key my-gud-map "\M-k" 'gud-kill-yes)
   (add-hook 'scheme-mode-hook (lambda () (define-key my-gud-map "\M-l" 'gambit-leap-continuation)))
