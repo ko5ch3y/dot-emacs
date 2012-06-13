@@ -380,9 +380,8 @@
   (gud-def gud-kill "k" nil)
   (gud-def gud-yes "y" nil)
   (setq-default gdb-show-main t)
-  (setq-default gdb-use-separate-io-buffer nil)
+  (setq-default gdb-use-separate-io-buffer t)
   (setq-default gdb-max-frames 100)
-
   (add-hook 'change-major-mode-hook
             (lambda ()
               (if (not (eq 'gud-mode major-mode))
@@ -769,12 +768,21 @@ the line, to capture multiline input. (This only has effect if
       (if gdb-many-windows
           (progn
             (windmove-down)
-            (switch-to-buffer-other-window previous-buffer))
+            (replace-buffer-in-windows "*input/output of *")
+            (split-window-horizontally)
+            (switch-to-buffer "*input/output of *")
+            (windmove-right)
+            (switch-to-buffer previous-buffer))
         (progn
           (if (not (null (windmove-find-other-window 'left)))
               (windmove-left))
           (switch-to-buffer "*gud*")
-          (switch-to-buffer-other-window previous-buffer)
+          (split-window-vertically)
+          (windmove-down)
+          (switch-to-buffer "*input/output of *")
+          (evil-goto-line)
+          (windmove-right)
+          (switch-to-buffer previous-buffer)
           (evil-scroll-line-to-center (line-number-at-pos))))))
 
   (define-key my-gud-map "\M-b" 'gud-break)
