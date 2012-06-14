@@ -888,6 +888,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-vmap "zA" 'align-regexp)
   (evil-nmap "zb" 'helm-for-files)
   (evil-nmap "zc" 'evil-scroll-line-to-center)
+  (evil-nmap "zC" 'compilation-minor-mode)
   (evil-nmap "zd" 'kill-this-buffer)
   (evil-nmap "ze" 'helm-find-files)
   (evil-nmap "zg" 'helm-do-grep)
