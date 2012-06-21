@@ -355,8 +355,8 @@
 (defun my-tab-and-indent-setup ()
   (setq-default indent-line-function 'indent-according-to-mode)
   (setq-default indent-tabs-mode nil)
-  (setq-default standard-indent 4)
-  (setq-default tab-width 4)
+  (setq-default standard-indent 2)
+  (setq-default tab-width 2)
   ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
   (setq-default tab-always-indent t)
   (setq-default tab-stop-list (generate-tab-stop-list)))
@@ -429,7 +429,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default c-default-style
                 '((java-mode . "java")
                   (other . "linux"))
-                c-basic-offset 4))
+                c-basic-offset 2))
 
 (defun my-qi-mode-setup ()
   (require 'qi-mode)
