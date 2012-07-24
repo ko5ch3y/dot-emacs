@@ -23,10 +23,6 @@
 
 
 (defun my-monky-setup ()
-  (require 'evil)
-  (evil-mode t))
-
-(defun my-monky-setup ()
   (require 'monky)
   (setq-default monky-process-type 'cmdserver)
   (setq-default monky-log-cutoff-length 10)
