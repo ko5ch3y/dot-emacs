@@ -765,7 +765,7 @@ the line, to capture multiline input. (This only has effect if
           (progn
             (windmove-down)
             (split-window-horizontally)
-            (replace-buffer-in-windows "*Buffer List*")
+            ;; (replace-buffer-in-windows "*Buffer List*")
             (when gdb-use-separate-io-buffer
               (replace-buffer-in-windows "*input/output of *")
               (switch-to-buffer "*input/output of *"))
