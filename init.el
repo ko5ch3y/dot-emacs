@@ -12,7 +12,6 @@
                         "evil"
                         "fuel"
                         "geiser/elisp"
-                        "monky"
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
@@ -1011,7 +1010,7 @@ the line, to capture multiline input. (This only has effect if
 (my-gud-setup)
 (my-haskell-mode-setup)
 (my-misc-setup)
-(my-monky-setup)
+;; (my-monky-setup)
 (my-org-mode-setup)
 (my-paredit-setup)
 (my-qi-mode-setup)

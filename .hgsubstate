@@ -4,5 +4,4 @@
 3f87e9ba9bc4de608417343aab9a31bccf894e1e site-lisp/evil
 3a6dfbf743cc56b7d454bc6c688cd983966acc6c site-lisp/geiser
 35fdebcb43668867b3ec25fbd25cdb65035c28e2 site-lisp/helm
-86a168e944a6212de3dc34a59511ea21293ea435 site-lisp/monky
 6b38912771d3a8c1fb79dc17e5ed97fe13900c9b site-lisp/org-mode
