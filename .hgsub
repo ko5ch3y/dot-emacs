@@ -4,7 +4,6 @@ site-lisp/auto-complete-clang = [git] git://github.com/brianjcj/auto-complete-cl
 site-lisp/org-mode            = [git] git://orgmode.org/org-mode.git
 site-lisp/auto-complete       = [git] git://github.com/m2ym/auto-complete.git
 site-lisp/geiser              = [git] git://git.sv.gnu.org/geiser.git
-site-lisp/egg                 = [git] git://github.com/bogolisk/egg.git
 site-lisp/monky               = [git] git://github.com/ananthakumaran/monky.git
 
 site-lisp/evil                = https://bitbucket.org/lyro/evil

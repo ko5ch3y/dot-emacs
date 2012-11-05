@@ -8,7 +8,6 @@
                         "auto-complete"
                         "auto-complete-clang"
                         "color-theme-github"
-                        "egg"
                         "elscreen"
                         "evil"
                         "fuel"
@@ -891,7 +890,6 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zd" 'kill-this-buffer)
   (evil-nmap "ze" 'helm-find-files)
   (evil-nmap "zg" 'helm-do-grep)
-  (evil-nmap "zG"  my-egg-map)
   (evil-nmap "zh"   'split-window-horizontally)
   (evil-nmap "zi" 'helm-imenu)
   (evil-nmap "zj" 'paredit-join-sexps)
@@ -1003,7 +1001,7 @@ the line, to capture multiline input. (This only has effect if
 (my-auto-install-setup)
 (my-autopair-setup)
 (my-cc-mode-setup)
-(my-egg-setup)
+;; (my-egg-setup)
 (my-eldoc-setup)
 (my-elscreen-setup)
 (my-evil-mode-setup)
@@ -1029,7 +1027,7 @@ the line, to capture multiline input. (This only has effect if
 (my-eshell-setup)
 
 (my-helm-map-setup)
-(my-egg-map-setup)
+;; (my-egg-map-setup)
 (my-evil-map-setup)
 (my-geiser-map-setup)
 (my-gud-map-setup)
