@@ -189,22 +189,17 @@
   (defun now ()
     "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
     (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%Y-%m-%d %I:%M %p")))
+    (insert (format-time-string " %Y-%m-%d %I:%M %p")))
 
   (defun time ()
     "Insert string for the current time ISO formatted like '2:34 PM'."
     (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%I:%M %p")))
+    (insert (format-time-string " %I:%M %p")))
 
-  (defun today ()
+  (defun date ()
     "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
     (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%Y-%m-%d")))
-
-  (defun short-date ()
-    "Insert string for today's date formatted like 110801."
-    (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%y%m%d"))))
+    (insert (format-time-string " %Y-%m-%d"))))
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
@@ -887,6 +882,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zc" 'evil-scroll-line-to-center)
   (evil-nmap "zC" 'compilation-minor-mode)
   (evil-nmap "zd" 'kill-this-buffer)
+  (evil-nmap "zD" 'date)
   (evil-nmap "ze" 'helm-find-files)
   (evil-nmap "zg" 'helm-do-grep)
   (evil-nmap "zh"   'split-window-horizontally)
@@ -896,6 +892,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zl"   'evil-ex-nohighlight)
   (evil-nmap "zm" 'remake)
   (evil-nmap "zM" 'make)
+  (evil-nmap "zN" 'now)
   (evil-nmap "zo" 'helm-occur)
   (evil-nmap "zO" 'ff-find-other-file)
   (evil-nmap "zp"   'pwd)
@@ -905,6 +902,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zs" 'paredit-splice-sexp)
   (evil-nmap "zS" 'paredit-split-sexp)
   (evil-nmap "zt" 'helm-gtags-select)
+  (evil-nmap "zT" 'time)
   (evil-nmap "zv"   'split-window-vertically)
   (evil-nmap "zV"   'visual-line-mode)
   (evil-nmap "zw" 'save-buffer)
