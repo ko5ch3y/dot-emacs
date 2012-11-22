@@ -211,7 +211,7 @@
     (set-face-attribute 'hl-line nil :background "#F3F3FF")
     ;; (set-face-attribute 'vline nil :background "#F5F5FF")
     (require 'color-theme)
-    (require 'color-theme-github)
+    (require 'color-theme-my-way)
     (setq server-name "gui")))
 
 (defun my-elscreen-setup ()
@@ -239,8 +239,13 @@
                 (with-current-buffer helm-buffer
                   (visual-line-mode))))
 
-  (set-face-attribute 'helm-selection-line nil :background "#BCD5FA" :underline nil)
-  (set-face-attribute 'helm-selection nil :background "#BCD5FA" :underline nil)
+  ;;; github color theme
+  ;; (set-face-attribute 'helm-selection-line nil :background "#BCD5FA" :underline nil)
+  ;; (set-face-attribute 'helm-selection nil :background "#BCD5FA" :underline nil)
+
+  ;;; my way color theme
+  (set-face-attribute 'helm-selection-line nil :background "#9BCD25" :foreground "#323232" :underline nil)
+  (set-face-attribute 'helm-selection nil :background "#9BCD25" :foreground "#323232" :underline nil)
 
   (setq-default helm-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative)
@@ -459,7 +464,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default visible-bell t)
   (fset 'yes-or-no-p 'y-or-n-p)
   (setq-default show-paren-delay 0)
-  (setq-default show-paren-style 'expression)
+  (setq-default show-paren-style 'paren)
   (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHIR -e ")
   (setq initial-scratch-message "")
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
