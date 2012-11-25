@@ -25,7 +25,8 @@
      (font-lock-builtin-face ((t (:foreground "#A4CD28"))))
      (font-lock-keyword-face ((t (:foreground "#A4CD28"))))
      (font-lock-variable-name-face ((t (:foreground "#A4CD28"))))
-     (mode-line ((t (:background "#A4CD28" :box (:line-width 1 :style released-button)))))
+     (mode-line ((t (:foreground "#191919" :background "#323232" :box (:line-width 1 :color "#A4CD28")))))
+     (mode-line-inactive ((t (:foreground "#191919" :background "#323232" :box (:line-width 1 :color "#191919")))))
      ;(mode-line-buffer-id ((t (:foreground nil :background "#CD5907" :weight semi-bold))))
 
      ;; orange
@@ -81,8 +82,6 @@
      (escape-glyph ((t (:foreground "#E6DB74"))))
 
      (minibuffer-prompt ((t (:foreground "#89BDEF"))))
-     (mode-line-inactive ((t (:foreground "#BCBCBC" :background "#000000"
-                                          :box (:line-width 1 :color "#232526")))))
      (mode-line-mousable ((t (:foreground "#BCBCBC" :background "#000000"))))
      (mode-line-mousable-minor-mode ((t (:foreground "#BCBCBC" :background "#000000"))))
      (widget-inactive-face ((t (:background "#ff0000"))))
