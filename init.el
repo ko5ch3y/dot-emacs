@@ -208,8 +208,6 @@
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode t)
-    (set-face-attribute 'hl-line nil :background "#F3F3FF")
-    ;; (set-face-attribute 'vline nil :background "#F5F5FF")
     (require 'color-theme)
     (require 'color-theme-my-way)
     (setq server-name "gui")))
