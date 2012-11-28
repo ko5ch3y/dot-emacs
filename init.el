@@ -210,6 +210,7 @@
     (global-hl-line-mode t)
     (require 'color-theme)
     (require 'color-theme-my-way)
+    (color-theme-my-way)
     (setq server-name "gui")))
 
 (defun my-elscreen-setup ()
