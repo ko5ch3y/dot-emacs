@@ -17,8 +17,8 @@
       (background-mode . dark))
      (default ((t (:foreground "#CDCDCD" :background "#323232"))))
 
-     (region ((t (:background "#191919"))))
-     (hl-line ((t (:background "#282828"))))
+     (region ((t (:background "#000000"))))
+     (hl-line ((t (:background "#191919"))))
      (show-paren-match-face ((t (:background "#CD3D09"))))
 
      ;; green
