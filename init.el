@@ -10,7 +10,6 @@
                         "color-theme-github"
                         "elscreen"
                         "evil"
-                        "fuel"
                         "geiser/elisp"
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
@@ -664,9 +663,6 @@ the line, to capture multiline input. (This only has effect if
   ;; compiled) elisp to make the above advise stick.
   (load "comint.el.gz"))
 
-(defun my-fuel-setup ()
-  (load-file "~/data/factor/misc/fuel/fu.el"))
-
 
 (defun my-helm-map-setup ()
 ;;;###autoload
@@ -1005,7 +1001,6 @@ the line, to capture multiline input. (This only has effect if
 (my-eldoc-setup)
 (my-elscreen-setup)
 (my-evil-mode-setup)
-(my-fuel-setup)
 (my-gambit-setup)
 (my-geiser-setup)
 (my-gud-setup)
