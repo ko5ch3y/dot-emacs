@@ -685,7 +685,6 @@ the line, to capture multiline input. (This only has effect if
                      helm-c-grep-map
                      helm-c-read-file-map
                      helm-find-files-map
-                     helm-occur-map
                      helm-map))
     (define-key map "\C-n" 'next-history-element)
     (define-key map "\C-p" 'previous-history-element)
