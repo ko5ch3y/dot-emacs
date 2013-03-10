@@ -1,0 +1,21 @@
+[submodule "site-lisp/helm"]
+	path = site-lisp/helm
+	url = git://github.com/emacs-helm/helm.git
+[submodule "site-lisp/color-theme-github"]
+	path = site-lisp/color-theme-github
+	url = git://github.com/dudleyf/color-theme-github.git
+[submodule "site-lisp/auto-complete-clang"]
+	path = site-lisp/auto-complete-clang
+	url = git://github.com/brianjcj/auto-complete-clang.git
+[submodule "site-lisp/org-mode"]
+	path = site-lisp/org-mode
+	url = git://orgmode.org/org-mode.git
+[submodule "site-lisp/auto-complete"]
+	path = site-lisp/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git
+[submodule "site-lisp/geiser"]
+	path = site-lisp/geiser
+	url = git://git.sv.gnu.org/geiser.git
+[submodule "site-lisp/evil"]
+	path = site-lisp/evil
+	url = git://gitorious.org/evil/evil.git
