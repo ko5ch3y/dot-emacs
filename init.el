@@ -206,7 +206,7 @@
 (defun my-window-system-setup ()
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
-    (global-hl-line-mode t)
+    (global-hl-line-mode 0)
     (require 'color-theme)
     (require 'color-theme-my-way)
     (color-theme-my-way)
