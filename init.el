@@ -4,6 +4,7 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
+                        "starter-kit"
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
