@@ -211,6 +211,8 @@
     (global-hl-line-mode 0)
     (require 'color-theme)
     (load-theme 'solarized-light t)
+    (menu-bar-mode 0)
+    (tool-bar-mode 0)
     (setq server-name "gui")))
 
 (defun my-elscreen-setup ()
