@@ -477,7 +477,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (add-hook 'emacs-lisp-mode-hook 'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook     'my-lisp-mode-hook)
   (add-hook 'scheme-mode-hook     'my-scheme-mode-hook)
-  (set-frame-font "Monospace 10")
+  (set-frame-font "Source Code Pro 10")
   (add-to-list 'auto-mode-alist '("SConscript" . python-mode))
   (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
   (column-number-mode t)
