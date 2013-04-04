@@ -8,7 +8,7 @@
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
-                        "color-theme-github"
+                        "color-theme-solarized"
                         "elscreen"
                         "evil"
                         "geiser/elisp"
@@ -18,6 +18,7 @@
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
+(setq custom-theme-load-path (append custom-theme-load-path my-load-path))
 
 
 (defun my-monky-setup ()
@@ -209,8 +210,7 @@
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode 0)
     (require 'color-theme)
-    (require 'color-theme-my-way)
-    (color-theme-my-way)
+    (load-theme 'solarized-light t)
     (setq server-name "gui")))
 
 (defun my-elscreen-setup ()

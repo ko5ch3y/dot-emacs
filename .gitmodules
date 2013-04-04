@@ -22,3 +22,6 @@
 [submodule "site-lisp/starter-kit"]
 	path = site-lisp/starter-kit
 	url = git://github.com/technomancy/emacs-starter-kit.git
+[submodule "site-lisp/color-theme-solarized"]
+	path = site-lisp/color-theme-solarized
+	url = git://github.com/sellout/emacs-color-theme-solarized.git
