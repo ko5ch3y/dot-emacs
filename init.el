@@ -206,11 +206,11 @@
   (setq-default server-name "terminal"))
 
 (defun my-window-system-setup ()
+  (require 'color-theme)
+  (load-theme 'solarized-light t)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode 0)
-    (require 'color-theme)
-    (load-theme 'solarized-light t)
     (menu-bar-mode 0)
     (tool-bar-mode 0)
     (setq server-name "gui")))
