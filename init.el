@@ -859,6 +859,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "L"    'windmove-right)
   (evil-nmap "\M-l" 'paredit-forward)
   (evil-nmap "\M-N" '(lambda () (interactive) (next-error 1)))
+  (evil-imap "\M-N" 'now)
   (evil-nmap "\M-f" 'evil-jump-forward)
   (evil-nmap "\M-P" '(lambda () (interactive) (next-error -1)))
   (evil-nmap "\M-b" 'evil-jump-backward)
