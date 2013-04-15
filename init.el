@@ -467,7 +467,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (fset 'yes-or-no-p 'y-or-n-p)
   (show-paren-mode t)
   (setq-default show-paren-delay 0)
-  (setq-default show-paren-style 'paren)
+  (setq-default show-paren-style 'mixed)
   (setq-default grep-command "grep --exclude-from=$HOME/.grepignore -niHIR -e ")
   (setq initial-scratch-message "")
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
