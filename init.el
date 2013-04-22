@@ -208,10 +208,10 @@
 (defun my-window-system-setup ()
   (require 'color-theme)
   (load-theme 'solarized-dark t)
+  (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
     (global-hl-line-mode 0)
-    (menu-bar-mode 0)
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
     (setq server-name "gui")))
