@@ -489,6 +489,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
   (column-number-mode t)
   (setq-default inhibit-startup-screen t)
+  (start-server)
 
   (add-hook 'change-major-mode-hook
             (lambda ()
