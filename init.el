@@ -478,7 +478,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq initial-scratch-message "")
   (add-hook 'before-save-hook 'delete-trailing-whitespace)
   (add-hook 'diff-mode-hook '(lambda () (remove-hook 'before-save-hook 'delete-trailing-whitespace)))
-  (global-linum-mode t)
+  (global-linum-mode 0)
   (setq-default fill-column 80)
   (add-hook 'text-mode-hook (lambda () (auto-fill-mode t)))
   (add-hook 'org-mode-hook (lambda () (auto-fill-mode t)))
