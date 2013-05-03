@@ -312,25 +312,6 @@
   ;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
   (yas/global-mode t))
 
-(defun my-egg-setup ()
-  (require 'egg)
-  (setq-default egg-buffer-hide-sub-blocks-on-start nil)
-  (setq-default egg-enable-tooltip t)
-  (setq-default egg-refresh-index-in-backround t)
-  (setq-default egg-buffer-hide-help-on-start nil)
-  (setq-default egg-buffer-hide-section-type-on-start '((egg-status-buffer-mode . :diff)
-                                                        (egg-diff-buffer-mode . :diff)))
-  (setq-default egg-buffer-hide-sub-blocks-on-start nil)
-  (setq-default egg-quit-window-actions '((egg-status-buffer-mode restore-windows)
-                                          (egg-log-buffer-mode restore-windows)
-                                          (egg-commit-buffer-mode restore-windows)
-                                          (egg-reflog-buffer-mode restore-windows)
-                                          (egg-diff-buffer-mode restore-windows)
-                                          (egg-file-log-buffer-mode restore-windows)))
-
-  (set-face-attribute 'egg-diff-add nil :foreground "#009926")
-  (set-face-attribute 'egg-diff-del nil :foreground "#DD1144"))
-
 (defun my-evil-mode-setup ()
   (require 'evil)
   (evil-mode 1)
@@ -823,13 +804,6 @@ the line, to capture multiline input. (This only has effect if
 ;; scheme-compile-file
 ;; scheme-compile-definition
 
-(defvar my-egg-map (make-sparse-keymap))
-(defun my-egg-map-setup ()
-  (define-key my-egg-map "c" 'egg-commit-log-edit)
-  (define-key my-egg-map "g" 'egg-next-action)
-  (define-key my-egg-map "l" 'egg-log)
-  (define-key my-egg-map "s" 'egg-status))
-
 (defvar my-geiser-map (make-sparse-keymap))
 (defun my-geiser-map-setup ()
   (define-key my-geiser-map "b" 'geiser-load-current-buffer)
@@ -1013,7 +987,6 @@ the line, to capture multiline input. (This only has effect if
 (my-auto-install-setup)
 (my-autopair-setup)
 (my-cc-mode-setup)
-;; (my-egg-setup)
 (my-eldoc-setup)
 (my-elscreen-setup)
 (my-evil-mode-setup)
@@ -1039,7 +1012,6 @@ the line, to capture multiline input. (This only has effect if
 (my-eshell-setup)
 
 (my-helm-map-setup)
-;; (my-egg-map-setup)
 (my-evil-map-setup)
 (my-geiser-map-setup)
 (my-gud-map-setup)
