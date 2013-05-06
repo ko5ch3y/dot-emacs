@@ -558,6 +558,9 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (add-hook 'shell-mode-hook '(lambda () (setq scroll-margin 0))))
 
+(defun my-magit-setup ()
+  (require 'magit))
+
 ;; Adapted from http://snarfed.org/why_i_run_shells_inside_emacs
 (defun my-shell-setup ()
   (require 'tramp)
@@ -1010,6 +1013,7 @@ the line, to capture multiline input. (This only has effect if
 (my-yasnippet-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
+(my-magit-setup)
 
 (my-helm-map-setup)
 (my-evil-map-setup)
