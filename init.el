@@ -1000,7 +1000,6 @@ the line, to capture multiline input. (This only has effect if
 (my-geiser-setup)
 (my-gud-setup)
 (my-haskell-mode-setup)
-(my-misc-setup)
 ;; (my-monky-setup)
 (my-org-mode-setup)
 (my-paredit-setup)
@@ -1017,6 +1016,7 @@ the line, to capture multiline input. (This only has effect if
 ;; (my-shell-setup)
 (my-eshell-setup)
 (my-magit-setup)
+(my-misc-setup)
 
 (my-helm-map-setup)
 (my-evil-map-setup)
