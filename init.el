@@ -208,7 +208,7 @@
 
 (defun my-window-system-setup ()
   (require 'color-theme)
-  (load-theme 'solarized-light t)
+  (load-theme 'solarized-dark t)
   (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
