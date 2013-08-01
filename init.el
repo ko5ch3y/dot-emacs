@@ -485,6 +485,8 @@ This arrangement depends on the value of `gdb-many-windows'."
                       (bury-buffer "*grep*")))))
 
   (blink-cursor-mode 0)
+  (setq-default default-cursor-type 'hbar)
+  (setq-default evil-default-cursor '("#6c71c4" hbar))
 
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
