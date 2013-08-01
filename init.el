@@ -484,6 +484,8 @@ This arrangement depends on the value of `gdb-many-windows'."
                   (if (get-buffer "*grep*")
                       (bury-buffer "*grep*")))))
 
+  (blink-cursor-mode 0)
+
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
