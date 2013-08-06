@@ -24,7 +24,7 @@
 	url = git://github.com/technomancy/emacs-starter-kit.git
 [submodule "site-lisp/color-theme-solarized"]
 	path = site-lisp/color-theme-solarized
-	url = git://github.com/sellout/emacs-color-theme-solarized.git
+	url = git@bitbucket.org:pltonik/emacs-color-theme-solarized.git
 [submodule "site-lisp/lua-mode"]
 	path = site-lisp/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
