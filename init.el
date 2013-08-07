@@ -242,14 +242,6 @@
                 (with-current-buffer helm-buffer
                   (visual-line-mode))))
 
-  ;;; github color theme
-  ;; (set-face-attribute 'helm-selection-line nil :background "#BCD5FA" :underline nil)
-  ;; (set-face-attribute 'helm-selection nil :background "#BCD5FA" :underline nil)
-
-  ;;; my way color theme
-  (set-face-attribute 'helm-selection-line nil :background "#9BCD25" :foreground "#323232" :underline nil)
-  (set-face-attribute 'helm-selection nil :background "#9BCD25" :foreground "#323232" :underline nil)
-
   (setq-default helm-gtags-enable-initial-pattern t)
   (setq-default gtags-path-style 'relative)
   (setq-default helm-su-or-sudo "sudo"))
