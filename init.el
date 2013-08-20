@@ -440,6 +440,7 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default scroll-margin 10)
   (add-hook 'term-mode-hook '(lambda () (setq scroll-margin 0)))
   (setq-default scroll-step 1)
+  (setq-default scroll-conservatively 10000)
   (setq-default require-final-newline t)
   (setq-default next-line-add-newlines nil)
   (setq-default visible-bell t)
