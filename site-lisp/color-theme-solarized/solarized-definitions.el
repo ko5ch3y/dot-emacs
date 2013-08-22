@@ -200,7 +200,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
               ((t (,@bg-base1 ,@fg-base02 ,@fmt-revbb :box nil))))
              (mode-line-inactive ; StatusLineNC
               ((t (,@bg-base01 ,@fg-base02 ,@fmt-revbb :box nil))))
-             (region ((t (,@fg-base01 ,@bg-base03 ,@fmt-revbb)))) ; Visual
+             (region ((t (,@fg-base03 ,@bg-violet ,@fmt-none)))) ; Visual
              (secondary-selection ((t (,@bg-base02))))
              (shadow ((t (,@fg-base01))))
              (trailing-whitespace ((t (,@fmt-revr ,@fg-red))))
