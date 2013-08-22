@@ -4,6 +4,3 @@
 [submodule "site-lisp/color-theme-github"]
 	path = site-lisp/color-theme-github
 	url = git://github.com/dudleyf/color-theme-github.git
-[submodule "site-lisp/auto-complete-clang"]
-	path = site-lisp/auto-complete-clang
-	url = git://github.com/brianjcj/auto-complete-clang.git
