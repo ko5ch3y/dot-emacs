@@ -935,7 +935,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "\M-c" 'org-shiftright org-mode-map)
   (evil-nmap "\M-C" 'org-shiftleft org-mode-map)
   (evil-nmap "D"    "d$" org-mode-map)
-  (evil-nmap "\M-f" 'org-forward-same-level org-mode-map)
+  (evil-nmap "\M-f" 'org-forward-heading-same-level org-mode-map)
   (evil-nmap "\M-h" 'org-metaleft org-mode-map)
   (evil-nmap "\M-j" 'org-metadown org-mode-map)
   (evil-nmap "\M-k" 'org-metaup org-mode-map)
