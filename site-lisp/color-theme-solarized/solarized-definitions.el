@@ -353,6 +353,26 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (widget-single-line-field ((t (:inherit widget-field))))
              ;; extra modules
              ;; -------------
+             ;; helm
+             (helm-header ((t (,@fg-base0 ,@bg-base02 ,@fmt-none))))
+             (helm-source-header ((t (,@fg-base0 ,@bg-base02 ,@fmt-none))))
+             (helm-M-x-key ((t (,@fg-orange ,@bg-base03 ,@fmt-none))))
+             (helm-buffer-size ((t (,@fg-magenta ,@bg-base03 ,@fmt-none))))
+             (helm-candidate-number ((t (,@fg-yellow ,@bg-base03 ,@fmt-none))))
+             (helm-selection ((t (,@fg-base03 ,@bg-violet ,@fmt-none))))
+             (helm-selection-line ((t (,@fg-base03 ,@bg-violet ,@fmt-none))))
+             (helm-match ((t (,@fg-base03 ,@bg-yellow ,@fmt-none))))
+             (helm-ff-directory ((t (,@fg-blue ,@bg-base03 ,@fmt-none))))
+             (helm-ff-file ((t (,@fg-base0 ,@bg-base03 ,@fmt-none))))
+             (helm-ff-executable ((t (,@fg-green ,@bg-base03 ,@fmt-none))))
+             (helm-ff-invalid-symlink ((t (,@fg-red ,@bg-base03 ,@fmt-none))))
+             (helm-ff-symlink ((t (,@fg-cyan ,@bg-base03 ,@fmt-none))))
+             (helm-grep-cmd-line ((t (,@fg-yellow ,@bg-base03 ,@fmt-none))))
+             (helm-grep-file ((t (,@fg-base0 ,@bg-base03 ,@fmt-none))))
+             (helm-grep-finish ((t (,@fg-red ,@bg-base03 ,@fmt-none))))
+             (helm-grep-lineno ((t (,@fg-cyan ,@bg-base03 ,@fmt-none))))
+             (helm-grep-match ((t (,@fg-base03 ,@bg-yellow ,@fmt-none))))
+             (helm-grep-running ((t (,@fg-green ,@bg-base03 ,@fmt-none))))
              ;; bm visual bookmarks
              (bm-fringe-face ((t (,@bg-orange ,@fg-base03))))
              (bm-fringe-persistent-face ((t (,@bg-blue ,@fg-base03))))
