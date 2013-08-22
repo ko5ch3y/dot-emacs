@@ -344,8 +344,8 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (speedbar-separator-face ((t (,@fmt-stnd))))
              (speedbar-tag-face ((t (,@fmt-none ,@fg-blue))))
              ;; show-paren - MatchParen
-             (show-paren-match ((t (,@fmt-bold ,@fg-cyan ,@bg-base02))))
-             (show-paren-mismatch ((t (,@fmt-bold ,@fg-red ,@bg-base01))))
+             (show-paren-match ((t (,@fmt-bold ,@fg-blue :background nil))))
+             (show-paren-mismatch ((t (,@fmt-bold ,@fg-red :background nil))))
              ;; widgets
              (widget-field
               ((t (,@fg-base1 ,@bg-base02 :box (:line-width 1)
