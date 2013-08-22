@@ -16,6 +16,3 @@
 [submodule "site-lisp/geiser"]
 	path = site-lisp/geiser
 	url = git://git.sv.gnu.org/geiser.git
-[submodule "site-lisp/evil"]
-	path = site-lisp/evil
-	url = git://gitorious.org/evil/evil.git
