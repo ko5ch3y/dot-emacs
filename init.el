@@ -11,7 +11,6 @@
                         "color-theme-solarized"
                         "elscreen"
                         "evil"
-                        "geiser/elisp"
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
@@ -893,8 +892,6 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zx"   'delete-window)
   (evil-nmap "zX"   'delete-other-windows)
   (evil-nmap "zy"   'helm-show-kill-ring)
-  (evil-nmap "zz"    my-geiser-map)
-  (evil-vmap "zz"    my-geiser-map)
   (evil-imap "\M-z" 'evil-normal-state)
   (evil-rmap "\M-z" 'evil-normal-state)
   (evil-nmap "\M-z" 'evil-normal-state)
@@ -988,7 +985,6 @@ the line, to capture multiline input. (This only has effect if
 (my-elscreen-setup)
 (my-evil-mode-setup)
 (my-gambit-setup)
-(my-geiser-setup)
 (my-gud-setup)
 (my-haskell-mode-setup)
 ;; (my-monky-setup)
@@ -1010,7 +1006,6 @@ the line, to capture multiline input. (This only has effect if
 
 (my-helm-map-setup)
 (my-evil-map-setup)
-(my-geiser-map-setup)
 (my-gud-map-setup)
 (my-gud-mode-evil-map-setup)
 (my-haskell-map-setup)

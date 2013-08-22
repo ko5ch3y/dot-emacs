@@ -13,6 +13,3 @@
 [submodule "site-lisp/auto-complete"]
 	path = site-lisp/auto-complete
 	url = git://github.com/auto-complete/auto-complete.git
-[submodule "site-lisp/geiser"]
-	path = site-lisp/geiser
-	url = git://git.sv.gnu.org/geiser.git
