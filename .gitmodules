@@ -19,6 +19,3 @@
 [submodule "site-lisp/evil"]
 	path = site-lisp/evil
 	url = git://gitorious.org/evil/evil.git
-[submodule "site-lisp/starter-kit"]
-	path = site-lisp/starter-kit
-	url = git://github.com/technomancy/emacs-starter-kit.git
