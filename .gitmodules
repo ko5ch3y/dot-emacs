@@ -7,6 +7,3 @@
 [submodule "site-lisp/auto-complete-clang"]
 	path = site-lisp/auto-complete-clang
 	url = git://github.com/brianjcj/auto-complete-clang.git
-[submodule "site-lisp/org-mode"]
-	path = site-lisp/org-mode
-	url = git://orgmode.org/org-mode.git
