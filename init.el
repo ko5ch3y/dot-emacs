@@ -14,6 +14,7 @@
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
+                        "popup"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
