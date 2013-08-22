@@ -15,7 +15,6 @@
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
-                        "lua-mode"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
@@ -404,11 +403,6 @@ This arrangement depends on the value of `gdb-many-windows'."
 (defun my-qi-mode-setup ()
   (require 'qi-mode)
   (add-to-list 'auto-mode-alist '("\\.qml$" . js-mode)))
-
-(defun my-lua-mode-setup ()
-  (autoload 'lua-mode "lua-mode" "Lua editing mode." t)
-  (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
-  (add-to-list 'interpreter-mode-alist '("lua" . lua-mode)))
 
 (defun my-whitespace-setup ()
   (require 'whitespace)
@@ -1001,7 +995,6 @@ the line, to capture multiline input. (This only has effect if
 (my-org-mode-setup)
 (my-paredit-setup)
 (my-qi-mode-setup)
-(my-lua-mode-setup)
 ;; (my-rainbow-delimiters-setup)
 (my-scheme-complete-setup)
 (my-server-setup)
