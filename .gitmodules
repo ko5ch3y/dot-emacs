@@ -28,6 +28,3 @@
 [submodule "site-lisp/lua-mode"]
 	path = site-lisp/lua-mode
 	url = git://github.com/immerrr/lua-mode.git
-[submodule "site-lisp/magit"]
-	path = site-lisp/magit
-	url = git://github.com/magit/magit.git
