@@ -358,7 +358,7 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (helm-source-header ((t (,@fg-base0 ,@bg-base02 ,@fmt-none))))
              (helm-M-x-key ((t (,@fg-orange ,@bg-base03 ,@fmt-none))))
              (helm-buffer-size ((t (,@fg-magenta ,@bg-base03 ,@fmt-none))))
-             (helm-candidate-number ((t (,@fg-yellow ,@bg-base03 ,@fmt-none))))
+             (helm-candidate-number ((t (,@fg-yellow ,@bg-base02 ,@fmt-none))))
              (helm-selection ((t (,@fg-base03 ,@bg-violet ,@fmt-none))))
              (helm-selection-line ((t (,@fg-base03 ,@bg-violet ,@fmt-none))))
              (helm-match ((t (,@fg-base03 ,@bg-yellow ,@fmt-none))))
