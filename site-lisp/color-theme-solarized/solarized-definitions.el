@@ -369,10 +369,10 @@ the \"Gen RGB\" column in solarized-definitions.el to improve them further."
              (helm-ff-symlink ((t (,@fg-cyan ,@bg-base03 ,@fmt-none))))
              (helm-grep-cmd-line ((t (,@fg-yellow ,@bg-base03 ,@fmt-none))))
              (helm-grep-file ((t (,@fg-base0 ,@bg-base03 ,@fmt-none))))
-             (helm-grep-finish ((t (,@fg-red ,@bg-base03 ,@fmt-none))))
+             (helm-grep-finish ((t (,@fg-red ,@bg-base02 ,@fmt-none))))
              (helm-grep-lineno ((t (,@fg-cyan ,@bg-base03 ,@fmt-none))))
              (helm-grep-match ((t (,@fg-base03 ,@bg-yellow ,@fmt-none))))
-             (helm-grep-running ((t (,@fg-green ,@bg-base03 ,@fmt-none))))
+             (helm-grep-running ((t (,@fg-green ,@bg-base02 ,@fmt-none))))
              ;; bm visual bookmarks
              (bm-fringe-face ((t (,@bg-orange ,@fg-base03))))
              (bm-fringe-persistent-face ((t (,@bg-blue ,@fg-base03))))
