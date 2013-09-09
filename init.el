@@ -14,6 +14,7 @@
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
+                        "smart-tabs"
                         "popup"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
@@ -653,6 +654,15 @@ the line, to capture multiline input. (This only has effect if
   ;; compiled) elisp to make the above advise stick.
   (load "comint.el.gz"))
 
+(defun my-smart-tabs-setup ()
+  (autoload 'smart-tabs-mode "smart-tabs-mode"
+    "Intelligently indent with tabs, align with spaces!")
+  (autoload 'smart-tabs-mode-enable "smart-tabs-mode")
+  (autoload 'smart-tabs-advice "smart-tabs-mode")
+  (autoload 'smart-tabs-insinuate "smart-tabs-mode")
+  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
+                        'ruby 'nxml))
+
 
 (defun my-helm-map-setup ()
 ;;;###autoload
@@ -1003,6 +1013,7 @@ the line, to capture multiline input. (This only has effect if
 (my-eshell-setup)
 (my-magit-setup)
 (my-misc-setup)
+(my-smart-tabs-setup)
 
 (my-helm-map-setup)
 (my-evil-map-setup)
