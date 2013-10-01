@@ -191,7 +191,7 @@
   (defun now ()
     "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
     (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%Y-%m-%d %H:%M")))
+    (insert (format-time-string "%Y.%m.%d %H:%M")))
 
   (defun time ()
     "Insert string for the current time ISO formatted like '2:34 PM'."
@@ -201,7 +201,7 @@
   (defun date ()
     "Insert string for today's date nicely formatted in ISO style, e.g. 2011-08-01."
     (interactive)                 ; permit invocation in minibuffer
-    (insert (format-time-string "%Y-%m-%d"))))
+    (insert (format-time-string "%Y.%m.%d"))))
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
