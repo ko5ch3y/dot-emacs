@@ -223,7 +223,7 @@
   (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
-    (global-hl-line-mode 0)
+    (global-hl-line-mode 1)
     (tool-bar-mode 0)
     (scroll-bar-mode 0)
     (setq server-name "gui")))
