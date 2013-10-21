@@ -9,6 +9,7 @@
                         "auto-complete"
                         "auto-complete-clang"
                         "color-theme-solarized"
+                        "color-theme-tangotango"
                         "elscreen"
                         "evil"
                         "org-mode/EXPERIMENTAL"
@@ -218,7 +219,7 @@
 
 (defun my-window-system-setup ()
   (require 'color-theme)
-  (load-theme 'solarized-light t)
+  (load-theme 'tangotango t)
   (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
