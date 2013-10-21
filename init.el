@@ -188,6 +188,16 @@
         (message "CODING: %s" coding-str)
         (set-buffer-file-coding-system (intern coding-str)) )))
 
+  (defun org-tag-match-context (&optional todo-only match)
+    "Identical search to `org-match-sparse-tree', but shows the content of the matches."
+    (interactive "P")
+    (org-prepare-agenda-buffers (list (current-buffer)))
+    (org-overview)
+    (org-remove-occur-highlights)
+    (org-scan-tags '(progn (org-show-entry)
+                           (org-show-context))
+                   (cdr (org-make-tags-matcher match)) todo-only))
+
   (defun now ()
     "Insert string for the current date and time ISO formatted like '2011-08-01 2:34 PM'."
     (interactive)                 ; permit invocation in minibuffer
