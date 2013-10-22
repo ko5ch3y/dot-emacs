@@ -486,6 +486,9 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default default-cursor-type 'box)
   (setq-default evil-default-cursor '("#6c71c4" box))
 
+  (setq url-proxy-services '(("http" . "127.0.0.1:3128")
+                             ("https" . "127.0.0.1:3128")))
+
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
