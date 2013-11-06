@@ -944,6 +944,22 @@ the line, to capture multiline input. (This only has effect if
   (evil-mmap "$"    'evil-end-of-visual-line visual-line-mode-map)
   (evil-mmap "^"    'evil-beginning-of-visual-line visual-line-mode-map)
 
+  (define-key evil-normal-state-map [escape] 'keyboard-quit)
+  (define-key evil-visual-state-map [escape] 'keyboard-quit)
+  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+
+  (define-key evil-normal-state-map "\M-z" 'keyboard-quit)
+  (define-key evil-visual-state-map "\M-z" 'keyboard-quit)
+  (define-key minibuffer-local-map "\M-z" 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-ns-map "\M-z" 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-completion-map "\M-z" 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-must-match-map "\M-z" 'minibuffer-keyboard-quit)
+  (define-key minibuffer-local-isearch-map "\M-z" 'minibuffer-keyboard-quit)
+
   (evil-omap "\t" nil)
   (evil-nmap [tab] 'indent-line)
   (evil-vmap [tab] 'indent-line)
