@@ -916,10 +916,6 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "zx"   'delete-window)
   (evil-nmap "zX"   'delete-other-windows)
   (evil-nmap "zy"   'helm-show-kill-ring)
-  (evil-imap "\M-z" 'evil-normal-state)
-  (evil-rmap "\M-z" 'evil-normal-state)
-  (evil-nmap "\M-z" 'evil-normal-state)
-  (evil-vmap "\M-z" 'evil-normal-state)
   (evil-imap "\M-(" 'paredit-backward-slurp-sexp)
   (evil-nmap "\M-(" 'paredit-backward-slurp-sexp)
   (evil-imap "\M-)" 'paredit-forward-slurp-sexp)
@@ -944,21 +940,22 @@ the line, to capture multiline input. (This only has effect if
   (evil-mmap "$"    'evil-end-of-visual-line visual-line-mode-map)
   (evil-mmap "^"    'evil-beginning-of-visual-line visual-line-mode-map)
 
-  (define-key evil-normal-state-map [escape] 'keyboard-quit)
-  (define-key evil-visual-state-map [escape] 'keyboard-quit)
-  (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map [escape] 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map [escape] 'minibuffer-keyboard-quit)
+  (let ((my-escape-key "M-z"))
+    (defun my-esc (prompt)
+      "Functionality for escaping generally.  Includes exiting Evil insert state and C-g binding."
+      (cond
+       ((or (evil-insert-state-p) (evil-normal-state-p) (evil-replace-state-p) (evil-visual-state-p)) [escape])
+       (t (kbd "C-g"))))
 
-  (define-key evil-normal-state-map "\M-z" 'keyboard-quit)
-  (define-key evil-visual-state-map "\M-z" 'keyboard-quit)
-  (define-key minibuffer-local-map "\M-z" 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-ns-map "\M-z" 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-completion-map "\M-z" 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-must-match-map "\M-z" 'minibuffer-keyboard-quit)
-  (define-key minibuffer-local-isearch-map "\M-z" 'minibuffer-keyboard-quit)
+    (define-key key-translation-map (kbd my-escape-key) 'my-esc)
+
+    ;; Works around the fact that Evil uses read-event directly when in operator state, which
+    ;; doesn't use the key-translation-map.
+    (define-key evil-operator-state-map (kbd my-escape-key) 'keyboard-quit)
+
+    ;; Not sure what behavior this changes, but might as well set it, seeing the Elisp manual's
+    ;; documentation of it.
+    (set-quit-char my-escape-key))
 
   (evil-omap "\t" nil)
   (evil-nmap [tab] 'indent-line)
