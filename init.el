@@ -710,8 +710,7 @@ the line, to capture multiline input. (This only has effect if
     (define-key map "\M-W" 'paredit-backward-kill-word)
     (define-key map "\M-o" 'helm-buffer-or-ff-run-switch-other-window)
     (define-key map "\M-e" 'helm-execute-persistent-action)
-    (define-key map "\M-u" 'helm-find-files-down-one-level)
-    (define-key map "\M-z" 'universal-argument))
+    (define-key map "\M-u" 'helm-find-files-down-one-level))
 
   (define-key helm-c-buffer-map "\M-r" 'helm-buffer-revert-persistent)
   (define-key helm-c-buffer-map "\M-s" 'helm-buffer-save-persistent)
@@ -995,7 +994,8 @@ the line, to capture multiline input. (This only has effect if
   (my-keys-minor-mode 1)
 
   (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
-  (define-key my-keys-minor-mode-map (kbd "M-z") 'universal-argument)
+  (define-key my-keys-minor-mode-map (kbd "M-Z") 'universal-argument)
+
   (define-key paredit-mode-map "\\" nil)
   (define-key key-translation-map [?\C-h] [?\C-?])
   (define-key key-translation-map [?\C-\S-h] [?\C-?])
