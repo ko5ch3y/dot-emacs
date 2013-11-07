@@ -5,6 +5,7 @@
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
                         "starter-kit"
+                        "ace-jump"
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
@@ -677,6 +678,10 @@ the line, to capture multiline input. (This only has effect if
   (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
                         'ruby 'nxml))
 
+(defun my-ace-jump-setup ()
+  (require 'ace-jump-mode)
+  (eval-after-load "ace-jump-mode" '(ace-jump-mode-enable-mark-sync)))
+
 
 (defun my-helm-map-setup ()
 ;;;###autoload
@@ -935,6 +940,8 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "-"    'comment-or-uncomment-line)
   (evil-vmap "-"    'comment-or-uncomment-region)
   (evil-nmap "_"    'paredit-comment-dwim)
+  (evil-nmap " "    'ace-jump-mode)
+  (evil-nmap "\M- " 'ace-jump-mode-pop-mark)
 
   (evil-mmap "$"    'evil-end-of-visual-line visual-line-mode-map)
   (evil-mmap "^"    'evil-beginning-of-visual-line visual-line-mode-map)
@@ -1041,6 +1048,7 @@ the line, to capture multiline input. (This only has effect if
 (my-magit-setup)
 (my-misc-setup)
 (my-smart-tabs-setup)
+(my-ace-jump-setup)
 
 (my-helm-map-setup)
 (my-evil-map-setup)
