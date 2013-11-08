@@ -322,6 +322,7 @@
                                (setq evil-shift-width standard-indent)))
 
   (evil-set-initial-state 'completion-list-mode 'emacs)
+  (evil-set-initial-state 'term-mode 'emacs)
   (evil-set-initial-state 'occur-mode 'normal)
   (evil-set-initial-state 'compilation-mode 'normal)
   (evil-set-initial-state 'gdb-locals-mode 'normal)
@@ -682,6 +683,10 @@ the line, to capture multiline input. (This only has effect if
   (require 'ace-jump-mode)
   (eval-after-load "ace-jump-mode" '(ace-jump-mode-enable-mark-sync)))
 
+(defun my-multi-term-setup ()
+  (require 'multi-term)
+  (setq multi-term-program "/usr/bin/zsh"))
+
 
 (defun my-helm-map-setup ()
 ;;;###autoload
@@ -757,6 +762,12 @@ the line, to capture multiline input. (This only has effect if
   (define-key my-tab-map "\M-n" 'elscreen-next)
   (define-key my-tab-map "\M-p" 'elscreen-previous)
   (define-key my-tab-map "\M-t" 'elscreen-toggle))
+
+(defvar my-term-map (make-sparse-keymap))
+(defun my-term-map-setup ()
+  (define-key my-term-map "\M-s" 'multi-term)
+  (define-key my-term-map "\M-n" 'multi-term-next)
+  (define-key my-term-map "\M-p" 'multi-term-prev))
 
 (defvar my-haskell-map (make-sparse-keymap))
 (defun my-haskell-map-setup ()
@@ -869,7 +880,7 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "\M-P" '(lambda () (interactive) (next-error -1)))
   (evil-nmap "\M-b" 'evil-jump-backward)
   (evil-imap "\M-s"  nil)
-  (evil-nmap "\M-s" 'eshell)
+  (evil-nmap "\M-s" my-term-map)
   (evil-nmap "Tc"   'transpose-chars)
   (evil-nmap "Tl"   'transpose-lines)
   (evil-nmap "Tp"   'transpose-paragraphs)
@@ -1049,6 +1060,7 @@ the line, to capture multiline input. (This only has effect if
 (my-misc-setup)
 (my-smart-tabs-setup)
 (my-ace-jump-setup)
+(my-multi-term-setup)
 
 (my-helm-map-setup)
 (my-evil-map-setup)
@@ -1058,4 +1070,5 @@ the line, to capture multiline input. (This only has effect if
 (my-minibuffer-map-setup)
 (my-misc-map-setup)
 (my-tab-map-setup)
+(my-term-map-setup)
 (my-org-mode-evil-map-setup)
