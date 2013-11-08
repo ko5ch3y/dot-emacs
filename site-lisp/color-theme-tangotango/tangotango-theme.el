@@ -232,6 +232,14 @@
  `(rpm-spec-section-face ((t (:foreground "#8ae234" :underline t :weight bold))))
  `(rpm-spec-tag-face ((t (:foreground "dodger blue" :weight bold))))
  `(rpm-spec-var-face ((t (:foreground "tomato"))))
+ `(term-color-black ((t (:background "#2e3434" :foreground "#2e3434"))))
+ `(term-color-blue ((t (:background "#729fcf" :foreground "#729fcf"))))
+ `(term-color-cyan ((t (:background "#48cfcf" :foreground "#48cfcf"))))
+ `(term-color-green ((t (:background "#8ae234" :foreground "#8ae234"))))
+ `(term-color-magenta ((t (:background "#ad7fa8" :foreground "#ad7fa8"))))
+ `(term-color-red ((t (:background "#ff6347" :foreground "#ff6347"))))
+ `(term-color-white ((t (:background "#eeeeec" :foreground "#eeeeec"))))
+ `(term-color-yellow ((t (:background "#edd400" :foreground "#edd400"))))
  )
 
 
