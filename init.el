@@ -765,6 +765,13 @@ the line, to capture multiline input. (This only has effect if
 
 (defvar my-term-map (make-sparse-keymap))
 (defun my-term-map-setup ()
+  (defun toggle-term-char-line-mode ()
+    (interactive)
+    (if (term-in-char-mode)
+        (term-line-mode)
+      (term-char-mode)))
+
+  (define-key my-term-map "\M-m" 'toggle-term-char-line-mode)
   (define-key my-term-map "\M-s" 'multi-term)
   (define-key my-term-map "\M-n" 'multi-term-next)
   (define-key my-term-map "\M-p" 'multi-term-prev))
