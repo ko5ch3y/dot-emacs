@@ -958,8 +958,8 @@ the line, to capture multiline input. (This only has effect if
   (evil-nmap "-"    'comment-or-uncomment-line)
   (evil-vmap "-"    'comment-or-uncomment-region)
   (evil-nmap "_"    'paredit-comment-dwim)
-  (evil-nmap " "    'ace-jump-mode)
-  (evil-vmap " "    'ace-jump-mode)
+  (evil-nmap " "    'ace-jump-char-mode)
+  (evil-vmap " "    'ace-jump-char-mode)
   (evil-nmap "\M- " 'ace-jump-mode-pop-mark)
   (evil-vmap "\M- " 'ace-jump-mode-pop-mark)
 
