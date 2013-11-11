@@ -952,7 +952,9 @@ the line, to capture multiline input. (This only has effect if
   (evil-vmap "-"    'comment-or-uncomment-region)
   (evil-nmap "_"    'paredit-comment-dwim)
   (evil-nmap " "    'ace-jump-mode)
+  (evil-vmap " "    'ace-jump-mode)
   (evil-nmap "\M- " 'ace-jump-mode-pop-mark)
+  (evil-vmap "\M- " 'ace-jump-mode-pop-mark)
 
   (evil-mmap "$"    'evil-end-of-visual-line visual-line-mode-map)
   (evil-mmap "^"    'evil-beginning-of-visual-line visual-line-mode-map)
