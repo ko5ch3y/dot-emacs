@@ -37,7 +37,8 @@
   (load "~/.emacs.d/elpa/package.el")
   (require 'package)
   (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
-                    ("elpa" . "http://tromey.com/elpa/")))
+                    ("elpa" . "http://tromey.com/elpa/")
+                    ("SC"  . "http://joseito.republika.pl/sunrise-commander/")))
     (add-to-list 'package-archives source t))
   (package-initialize))
 
