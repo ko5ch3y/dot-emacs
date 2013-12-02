@@ -221,7 +221,7 @@
 
 (defun my-window-system-setup ()
   (require 'color-theme)
-  (load-theme 'tangotango t)
+  (load-theme 'solarized-light t)
   (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
