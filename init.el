@@ -487,7 +487,7 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (blink-cursor-mode 1)
   (setq-default default-cursor-type 'box)
-  (setq-default evil-default-cursor '("#6c71c4" box))
+  (setq-default evil-default-cursor '("#8B2323" box))
 
   (setq url-proxy-services '(("http" . "127.0.0.1:3128")
                              ("https" . "127.0.0.1:3128")))
