@@ -16,6 +16,7 @@
                         "org-mode/EXPERIMENTAL"
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
+                        "magit"
                         "smart-tabs"
                         "popup"
                         "yasnippet-0.6.1c"))
