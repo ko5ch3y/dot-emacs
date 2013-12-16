@@ -1,4 +1,7 @@
 
+(setq-default url-proxy-services '(("http" . "http://localhost:3128")
+                                   ("https" . "https://localhost:3128")))
+
 (defvar my-site-lisp "~/.emacs.d/site-lisp/")
 
 (defvar my-load-path
@@ -44,9 +47,7 @@
   (package-initialize))
 
 (defun my-auto-install-setup ()
-  (require 'auto-install)
-  (setq-default url-proxy-services '(("http" . "http://localhost:3128")
-                                     ("https" . "https://localhost:3128"))))
+  (require 'auto-install))
 
 (defun my-tramp-setup ()
   (require 'tramp)
