@@ -1075,17 +1075,6 @@ the line, to capture multiline input. (This only has effect if
 (my-ace-jump-setup)
 (my-multi-term-setup)
 
-(my-helm-map-setup)
-(my-evil-map-setup)
-(my-gud-map-setup)
-(my-gud-mode-evil-map-setup)
-(my-haskell-map-setup)
-(my-minibuffer-map-setup)
-(my-misc-map-setup)
-(my-tab-map-setup)
-(my-term-map-setup)
-(my-org-mode-evil-map-setup)
-
 
 (require 'cl)
 
@@ -1119,3 +1108,15 @@ the line, to capture multiline input. (This only has effect if
 
 ;; install new packages and init already installed packages
 (el-get 'sync my:el-get-packages)
+
+
+(my-helm-map-setup)
+(my-evil-map-setup)
+(my-gud-map-setup)
+(my-gud-mode-evil-map-setup)
+(my-haskell-map-setup)
+(my-minibuffer-map-setup)
+(my-misc-map-setup)
+(my-tab-map-setup)
+(my-term-map-setup)
+(my-org-mode-evil-map-setup)
