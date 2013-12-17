@@ -10,7 +10,6 @@
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
-                        "color-theme-tangotango"
                         "elscreen"
                         "evil"
                         "org-mode/EXPERIMENTAL"
