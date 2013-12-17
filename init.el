@@ -12,7 +12,6 @@
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
-                        "color-theme-solarized"
                         "color-theme-tangotango"
                         "elscreen"
                         "evil"
@@ -221,17 +220,6 @@
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
-
-(defun my-window-system-setup ()
-  (require 'color-theme)
-  (load-theme 'solarized-light t)
-  (menu-bar-mode 0)
-  (when window-system
-    ;; (add-hook 'server-switch-hook open-client-other-window)
-    (global-hl-line-mode 1)
-    (tool-bar-mode 0)
-    (scroll-bar-mode 0)
-    (setq server-name "gui")))
 
 (defun my-elscreen-setup ()
   (setq-default elscreen-prefix-key "`")
@@ -1065,7 +1053,6 @@ the line, to capture multiline input. (This only has effect if
 (my-tab-and-indent-setup)
 (my-tramp-setup)
 (my-whitespace-setup)
-(my-window-system-setup)
 (my-yasnippet-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
@@ -1092,13 +1079,13 @@ the line, to capture multiline input. (This only has effect if
 
 ;; set local recipes
 (setq el-get-sources
-      '(
+      '((:name color-theme :type elpa)
         ))
 
 ;; set own packages
 (setq my:el-get-packages
       '(el-get
-        ))
+        color-theme-solarized))
 
 (setq my:el-get-packages
       (append my:el-get-packages
@@ -1108,6 +1095,21 @@ the line, to capture multiline input. (This only has effect if
 
 ;; install new packages and init already installed packages
 (el-get 'sync my:el-get-packages)
+
+
+;; setup
+(defun my-window-system-setup ()
+  (require 'color-theme)
+  (load-theme 'solarized-light t)
+  (menu-bar-mode 0)
+  (when window-system
+    ;; (add-hook 'server-switch-hook open-client-other-window)
+    (global-hl-line-mode 1)
+    (tool-bar-mode 0)
+    (scroll-bar-mode 0)
+    (setq server-name "gui")))
+
+(my-window-system-setup)
 
 
 (my-helm-map-setup)
