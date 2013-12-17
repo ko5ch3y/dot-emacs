@@ -7,7 +7,6 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
-                        "ace-jump"
                         "helm"
                         "auto-complete"
                         "auto-complete-clang"
@@ -670,10 +669,6 @@ the line, to capture multiline input. (This only has effect if
   (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
                         'ruby 'nxml))
 
-(defun my-ace-jump-setup ()
-  (require 'ace-jump-mode)
-  (eval-after-load "ace-jump-mode" '(ace-jump-mode-enable-mark-sync)))
-
 (defun my-multi-term-setup ()
   (require 'multi-term)
   (setq multi-term-program "/usr/bin/zsh"))
@@ -1058,7 +1053,6 @@ the line, to capture multiline input. (This only has effect if
 (my-magit-setup)
 (my-misc-setup)
 (my-smart-tabs-setup)
-(my-ace-jump-setup)
 (my-multi-term-setup)
 
 
@@ -1084,6 +1078,7 @@ the line, to capture multiline input. (This only has effect if
 ;; set own packages
 (setq my:el-get-packages
       '(el-get
+        ace-jump-mode
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -1131,3 +1126,4 @@ the line, to capture multiline input. (This only has effect if
   (load-file (expand-file-name file user-init-dir)))
 
 (load-init-file "color-theme-solarized.el")
+(load-init-file "ace-jump-mode.el")
