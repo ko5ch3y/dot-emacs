@@ -1130,3 +1130,5 @@ the line, to capture multiline input. (This only has effect if
   (interactive "f")
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
+
+(load-init-file "color-theme-solarized.el")
