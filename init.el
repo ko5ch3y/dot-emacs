@@ -17,7 +17,6 @@
                         "org-mode/contrib/lisp"
                         "org-mode/lisp"
                         "magit"
-                        "smart-tabs"
                         "popup"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
@@ -660,15 +659,6 @@ the line, to capture multiline input. (This only has effect if
   ;; compiled) elisp to make the above advise stick.
   (load "comint.el.gz"))
 
-(defun my-smart-tabs-setup ()
-  (autoload 'smart-tabs-mode "smart-tabs-mode"
-    "Intelligently indent with tabs, align with spaces!")
-  (autoload 'smart-tabs-mode-enable "smart-tabs-mode")
-  (autoload 'smart-tabs-advice "smart-tabs-mode")
-  (autoload 'smart-tabs-insinuate "smart-tabs-mode")
-  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python
-                        'ruby 'nxml))
-
 (defun my-multi-term-setup ()
   (require 'multi-term)
   (setq multi-term-program "/usr/bin/zsh"))
@@ -1052,7 +1042,6 @@ the line, to capture multiline input. (This only has effect if
 (my-eshell-setup)
 (my-magit-setup)
 (my-misc-setup)
-(my-smart-tabs-setup)
 (my-multi-term-setup)
 
 
@@ -1079,6 +1068,7 @@ the line, to capture multiline input. (This only has effect if
 (setq my:el-get-packages
       '(el-get
         ace-jump-mode
+        smarttabs
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -1127,3 +1117,4 @@ the line, to capture multiline input. (This only has effect if
 
 (load-init-file "color-theme-solarized.el")
 (load-init-file "ace-jump-mode.el")
+(load-init-file "smarttabs.el")
