@@ -1122,3 +1122,11 @@ the line, to capture multiline input. (This only has effect if
 (my-tab-map-setup)
 (my-term-map-setup)
 (my-org-mode-evil-map-setup)
+
+
+(setq user-init-dir "~/.emacs.d/init")
+
+(defun load-init-file (file)
+  (interactive "f")
+  "Load a file in current user's configuration directory"
+  (load-file (expand-file-name file user-init-dir)))
