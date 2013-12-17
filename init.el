@@ -7,7 +7,6 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
-                        "starter-kit"
                         "ace-jump"
                         "helm"
                         "auto-complete"
