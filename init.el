@@ -8,8 +8,7 @@
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
                         "elscreen"
-                        "evil"
-                        "yasnippet-0.6.1c"))
+                        "evil"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
 (setq custom-theme-load-path (append custom-theme-load-path my-load-path))
@@ -206,13 +205,6 @@
 
 (defun my-paredit-setup ()
   (require 'paredit))
-
-(defun my-yasnippet-setup ()
-  (require 'yasnippet)
-  (yas/initialize)
-  (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
-  ;; (setq-default yas/prompt-functions '(yas/dropdown-prompt))
-  (yas/global-mode t))
 
 (defun my-evil-mode-setup ()
   (require 'evil)
@@ -590,7 +582,6 @@ the line, to capture multiline input. (This only has effect if
 (my-tab-and-indent-setup)
 (my-tramp-setup)
 (my-whitespace-setup)
-(my-yasnippet-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
 (my-misc-setup)
@@ -626,6 +617,7 @@ the line, to capture multiline input. (This only has effect if
         auto-complete
         auto-complete-clang
         org-mode
+        yasnippet
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -666,4 +658,5 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "auto-complete.el")
 (load-init-file "color-theme-solarized.el")
 (load-init-file "org-mode.el")
+(load-init-file "yasnippet.el")
 (load-init-file "key-map.el")
