@@ -7,8 +7,7 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
-                        "elscreen"
-                        "evil"))
+                        "elscreen"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
 (setq custom-theme-load-path (append custom-theme-load-path my-load-path))
@@ -67,19 +66,6 @@
 (defun my-paredit-setup ()
   (require 'paredit))
 
-(defun my-evil-mode-setup ()
-  (require 'evil)
-  (evil-mode 1)
-  (add-hook 'find-file-hook '(lambda ()
-                               (setq evil-shift-width standard-indent)))
-
-  (evil-set-initial-state 'completion-list-mode 'emacs)
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'occur-mode 'normal)
-  (evil-set-initial-state 'compilation-mode 'normal)
-  (evil-set-initial-state 'gdb-locals-mode 'normal)
-  (evil-set-initial-state 'gdb-breakpoints-mode 'normal)
-  (evil-set-initial-state 'gdb-frames-mode 'normal))
 
 (defun my-scheme-complete-setup ()
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
@@ -236,7 +222,6 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (blink-cursor-mode 1)
   (setq-default default-cursor-type 'box)
-  (setq-default evil-default-cursor '("#8B2323" box))
 
   (setq url-proxy-services '(("http" . "127.0.0.1:3128")
                              ("https" . "127.0.0.1:3128")))
@@ -427,7 +412,6 @@ the line, to capture multiline input. (This only has effect if
 (my-cc-mode-setup)
 (my-eldoc-setup)
 (my-elscreen-setup)
-(my-evil-mode-setup)
 (my-gambit-setup)
 (my-gud-setup)
 (my-haskell-mode-setup)
@@ -475,6 +459,7 @@ the line, to capture multiline input. (This only has effect if
         auto-complete-clang
         org-mode
         yasnippet
+        evil
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -509,6 +494,7 @@ the line, to capture multiline input. (This only has effect if
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
+(load-init-file "evil.el")
 (load-init-file "helpers.el")
 (load-init-file "ace-jump-mode.el")
 (load-init-file "smarttabs.el")
