@@ -43,11 +43,6 @@
   (require 'paredit))
 
 
-(defun my-scheme-complete-setup ()
-  (autoload 'scheme-smart-complete "scheme-complete" nil t)
-  (autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
-  (setq-default scheme-indent-function 'scheme-smart-indent-function))
-
 (defun my-tab-and-indent-setup ()
   (setq-default indent-line-function 'indent-according-to-mode)
   (setq-default indent-tabs-mode nil)
@@ -366,7 +361,6 @@ the line, to capture multiline input. (This only has effect if
 (my-haskell-mode-setup)
 ;; (my-monky-setup)
 (my-paredit-setup)
-(my-scheme-complete-setup)
 (my-server-setup)
 (my-tramp-setup)
 (my-whitespace-setup)
@@ -409,6 +403,7 @@ the line, to capture multiline input. (This only has effect if
         evil
         elscreen
         auto-pair-plus
+        scheme-complete
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -454,6 +449,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "yasnippet.el")
 (load-init-file "elscreen.el")
 (load-init-file "auto-pair-plus.el")
+(load-init-file "scheme-complete.el")
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
