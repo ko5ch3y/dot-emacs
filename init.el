@@ -2,6 +2,8 @@
 (setq-default url-proxy-services '(("http" . "http://localhost:3128")
                                    ("https" . "https://localhost:3128")))
 
+(setq ange-ftp-try-passive-mode t)
+
 (defvar my-site-lisp "~/.emacs.d/site-lisp/")
 
 (defvar my-load-path
