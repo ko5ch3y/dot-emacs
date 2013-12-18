@@ -7,8 +7,6 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
-                        "auto-complete"
-                        "auto-complete-clang"
                         "elscreen"
                         "evil"
                         "org-mode/EXPERIMENTAL"
@@ -220,38 +218,6 @@
 
 (defun my-paredit-setup ()
   (require 'paredit))
-
-(defun my-auto-complete-setup ()
-  (require 'auto-complete-config)
-  (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-  (ac-config-default)
-  (setq-default ac-auto-show-menu 0)
-  (setq-default ac-clang-flags (list "-I/usr/include"
-                                     "-I/usr/local/include"
-                                     "-I/usr/include/QtCore"
-                                     "-I/usr/include/QtGui"))
-  (setq-default ac-sources '(ac-source-abbrev
-                             ac-source-dictionary
-                             ac-source-functions
-                             ac-source-variables
-                             ac-source-symbols
-                             ac-source-features
-                             ac-source-yasnippet
-                             ac-source-words-in-same-mode-buffers))
-  (setq-default ac-ignore-case t)
-  (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
-  (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-  (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
-  (add-hook 'css-mode-hook 'ac-css-mode-setup)
-  (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-  (global-auto-complete-mode t))
-
-(defun my-ac-helm2-setup ()
-  (require 'ac-helm2))
-
-(defun my-auto-complete-clang-setup ()
-  (require 'auto-complete-clang)
-  (setq-default ac-clang-auto-save nil))
 
 (defun my-yasnippet-setup ()
   (require 'yasnippet)
@@ -621,8 +587,6 @@ the line, to capture multiline input. (This only has effect if
 (my-package-setup)
 (my-misc-function-setup)
 
-(my-auto-complete-clang-setup)
-(my-auto-complete-setup)
 (my-auto-install-setup)
 (my-autopair-setup)
 (my-cc-mode-setup)
@@ -675,6 +639,8 @@ the line, to capture multiline input. (This only has effect if
         ace-jump-mode
         smarttabs
         helm
+        auto-complete
+        auto-complete-clang
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -701,8 +667,6 @@ the line, to capture multiline input. (This only has effect if
 
 (my-window-system-setup)
 
-(my-ac-helm2-setup)
-
 
 (setq user-init-dir "~/.emacs.d/init")
 
@@ -714,5 +678,6 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "ace-jump-mode.el")
 (load-init-file "smarttabs.el")
 (load-init-file "helm.el")
+(load-init-file "auto-complete.el")
 (load-init-file "color-theme-solarized.el")
 (load-init-file "key-map.el")
