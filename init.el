@@ -121,8 +121,6 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq-default whitespace-style '(face tabs tab-mark)))
 
 (defun my-misc-setup ()
-  (require 'undo-tree)
-
   (winner-mode t)
   (setq-default compilation-finish-functions 'compile-autoclose)
   (setq-default read-file-name-completion-ignore-case t)
