@@ -7,7 +7,6 @@
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
                   (list ""
-                        "helm"
                         "auto-complete"
                         "auto-complete-clang"
                         "elscreen"
@@ -208,22 +207,6 @@
   (add-hook 'find-file-hook '(lambda () (setq standard-indent 2)))
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
   (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
-
-(defun my-helm-setup ()
-  (require 'helm-config)
-  (require 'helm-gtags)
-  (require 'helm-ring)
-
-  (helm-mode t)
-
-  (add-hook 'helm-after-initialize-hook
-            #'(lambda ()
-                (with-current-buffer helm-buffer
-                  (visual-line-mode))))
-
-  (setq-default helm-gtags-enable-initial-pattern t)
-  (setq-default gtags-path-style 'relative)
-  (setq-default helm-su-or-sudo "sudo"))
 
 (defun my-autopair-setup ()
   (require 'autopair)
@@ -638,8 +621,6 @@ the line, to capture multiline input. (This only has effect if
 (my-package-setup)
 (my-misc-function-setup)
 
-(my-ac-helm2-setup)
-(my-helm-setup)
 (my-auto-complete-clang-setup)
 (my-auto-complete-setup)
 (my-auto-install-setup)
@@ -693,6 +674,7 @@ the line, to capture multiline input. (This only has effect if
       '(el-get
         ace-jump-mode
         smarttabs
+        helm
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -719,6 +701,7 @@ the line, to capture multiline input. (This only has effect if
 
 (my-window-system-setup)
 
+(my-ac-helm2-setup)
 
 
 (setq user-init-dir "~/.emacs.d/init")
@@ -728,7 +711,8 @@ the line, to capture multiline input. (This only has effect if
   "Load a file in current user's configuration directory"
   (load-file (expand-file-name file user-init-dir)))
 
-(load-init-file "color-theme-solarized.el")
 (load-init-file "ace-jump-mode.el")
 (load-init-file "smarttabs.el")
+(load-init-file "helm.el")
+(load-init-file "color-theme-solarized.el")
 (load-init-file "key-map.el")

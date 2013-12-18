@@ -32,7 +32,7 @@
   ;; helm
   (set-face-attribute 'helm-header             nil :foreground base0 :background base02)
   (set-face-attribute 'helm-source-header      nil :foreground base0 :background base02)
-  ;; (set-face-attribute 'helm-M-x-key            nil :foreground orange :background base03)
+  (set-face-attribute 'helm-M-x-key            nil :foreground orange :background base03)
   (set-face-attribute 'helm-buffer-size        nil :foreground magenta :background base03)
   (set-face-attribute 'helm-match              nil :foreground base03 :background yellow)
   (set-face-attribute 'helm-grep-match         nil :foreground base03 :background yellow)
