@@ -4,14 +4,7 @@
 
 (setq ange-ftp-try-passive-mode t)
 
-(defvar my-site-lisp "~/.emacs.d/site-lisp/")
-
-(defvar my-load-path
-  (append (mapcar (lambda (x) (concat my-site-lisp x))
-                  (list ""))
-          (list "~/.emacs.d/auto-install")))
-(setq load-path (append load-path my-load-path))
-(setq custom-theme-load-path (append custom-theme-load-path my-load-path))
+(add-to-list 'load-path "~/.emacs.d/site-lisp/")
 
 
 (defun my-monky-setup ()
@@ -32,9 +25,6 @@
     (add-to-list 'package-archives source t))
   (package-initialize))
 
-(defun my-auto-install-setup ()
-  (require 'auto-install))
-
 (defun my-tramp-setup ()
   (require 'tramp)
 
@@ -48,16 +38,6 @@
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
-
-(defun my-autopair-setup ()
-  (require 'autopair)
-  (require 'auto-pair+)
-  (setq-default autopair-skip-whitespace t)
-  (add-hook 'find-file-hook             (lambda () (autopair-mode t)))
-  (add-hook 'fundamental-mode-hook      (lambda () (autopair-mode t)))
-  (add-hook 'lisp-interaction-mode-hook (lambda () (autopair-mode t)))
-  (add-hook 'slime-repl-mode-hook       (lambda () (autopair-mode t)))
-  (add-hook 'minibuffer-setup-hook      (lambda () (autopair-mode t))))
 
 (defun my-paredit-setup ()
   (require 'paredit))
@@ -403,8 +383,6 @@ the line, to capture multiline input. (This only has effect if
 
 (my-package-setup)
 
-(my-auto-install-setup)
-(my-autopair-setup)
 (my-cc-mode-setup)
 (my-eldoc-setup)
 (my-gambit-setup)
@@ -456,6 +434,7 @@ the line, to capture multiline input. (This only has effect if
         yasnippet
         evil
         elscreen
+        auto-pair-plus
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -500,6 +479,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "org-mode.el")
 (load-init-file "yasnippet.el")
 (load-init-file "elscreen.el")
+(load-init-file "auto-pair-plus.el")
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
