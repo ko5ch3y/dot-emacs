@@ -9,9 +9,6 @@
                   (list ""
                         "elscreen"
                         "evil"
-                        "org-mode/EXPERIMENTAL"
-                        "org-mode/contrib/lisp"
-                        "org-mode/lisp"
                         "magit"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
@@ -197,13 +194,6 @@
   (setq-default elscreen-prefix-key "`")
   (setq-default elscreen-startup-command-line-processing nil)
   (load "elscreen" "ElScreen" t))
-
-(defun my-org-mode-setup ()
-  (require 'org)
-  (setq-default initial-major-mode 'org-mode)
-  (add-hook 'find-file-hook '(lambda () (setq standard-indent 2)))
-  (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
-  (add-to-list 'auto-mode-alist '("\\.txt\\'" . org-mode)))
 
 (defun my-autopair-setup ()
   (require 'autopair)
@@ -596,7 +586,6 @@ the line, to capture multiline input. (This only has effect if
 (my-gud-setup)
 (my-haskell-mode-setup)
 ;; (my-monky-setup)
-(my-org-mode-setup)
 (my-paredit-setup)
 (my-qi-mode-setup)
 ;; (my-rainbow-delimiters-setup)
@@ -640,6 +629,7 @@ the line, to capture multiline input. (This only has effect if
         helm
         auto-complete
         auto-complete-clang
+        org-mode
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -679,4 +669,5 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "helm.el")
 (load-init-file "auto-complete.el")
 (load-init-file "color-theme-solarized.el")
+(load-init-file "org-mode.el")
 (load-init-file "key-map.el")
