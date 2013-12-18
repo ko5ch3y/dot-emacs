@@ -9,7 +9,6 @@
                   (list ""
                         "elscreen"
                         "evil"
-                        "magit"
                         "yasnippet-0.6.1c"))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
@@ -462,9 +461,6 @@ This arrangement depends on the value of `gdb-many-windows'."
 
   (add-hook 'shell-mode-hook '(lambda () (setq scroll-margin 0))))
 
-(defun my-magit-setup ()
-  (require 'magit))
-
 ;; Adapted from http://snarfed.org/why_i_run_shells_inside_emacs
 (defun my-shell-setup ()
   (require 'tramp)
@@ -597,7 +593,6 @@ the line, to capture multiline input. (This only has effect if
 (my-yasnippet-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
-(my-magit-setup)
 (my-misc-setup)
 (my-multi-term-setup)
 
@@ -619,6 +614,7 @@ the line, to capture multiline input. (This only has effect if
 ;; set local recipes
 (setq el-get-sources
       '((:name color-theme :type elpa)
+        (:name magit :type elpa)
         ))
 
 ;; set own packages
