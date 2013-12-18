@@ -8,8 +8,7 @@
 
 (defvar my-load-path
   (append (mapcar (lambda (x) (concat my-site-lisp x))
-                  (list ""
-                        "elscreen"))
+                  (list ""))
           (list "~/.emacs.d/auto-install")))
 (setq load-path (append load-path my-load-path))
 (setq custom-theme-load-path (append custom-theme-load-path my-load-path))
@@ -49,11 +48,6 @@
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
-
-(defun my-elscreen-setup ()
-  (setq-default elscreen-prefix-key "`")
-  (setq-default elscreen-startup-command-line-processing nil)
-  (load "elscreen" "ElScreen" t))
 
 (defun my-autopair-setup ()
   (require 'autopair)
@@ -413,7 +407,6 @@ the line, to capture multiline input. (This only has effect if
 (my-autopair-setup)
 (my-cc-mode-setup)
 (my-eldoc-setup)
-(my-elscreen-setup)
 (my-gambit-setup)
 (my-gud-setup)
 (my-haskell-mode-setup)
@@ -462,6 +455,7 @@ the line, to capture multiline input. (This only has effect if
         org-mode
         yasnippet
         evil
+        elscreen
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -505,6 +499,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "color-theme-solarized.el")
 (load-init-file "org-mode.el")
 (load-init-file "yasnippet.el")
+(load-init-file "elscreen.el")
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
