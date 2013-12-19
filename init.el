@@ -364,7 +364,6 @@ the line, to capture multiline input. (This only has effect if
 (my-whitespace-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
-(my-misc-setup)
 (my-multi-term-setup)
 
 
@@ -451,5 +450,6 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
+(my-misc-setup)
 (start-server)
 (add-hook 'find-file-hook       'no-junk-please-were-unixish)
