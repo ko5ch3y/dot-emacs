@@ -382,11 +382,6 @@
           (lambda ()
             (define-key scheme-mode-map "\t" 'scheme-complete-or-indent)))
 
-(add-hook 'autopair-mode-hook
-          (lambda ()
-            (define-key (cdr (car autopair-emulation-alist)) [return] nil)
-            (define-key (cdr (car autopair-emulation-alist)) (kbd "RET") nil)))
-
 (add-hook 'eshell-mode-hook
             #'(lambda ()
                 (define-key eshell-mode-map
