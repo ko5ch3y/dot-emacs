@@ -395,6 +395,7 @@ the line, to capture multiline input. (This only has effect if
         elscreen
         auto-pair-plus
         scheme-complete
+        find-file-in-project
         haskell-mode
         color-theme-solarized))
 
