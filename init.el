@@ -103,11 +103,6 @@ This arrangement depends on the value of `gdb-many-windows'."
         (other-window 1)))))
 
 
-(defun my-haskell-mode-setup ()
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-  (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-  (add-hook 'haskell-mode-hook 'my-haskell-mode-hook))
-
 (defun my-cc-mode-setup ()
   (require 'cc-mode)
   (setq-default c-default-style
@@ -356,7 +351,6 @@ the line, to capture multiline input. (This only has effect if
 (my-cc-mode-setup)
 (my-eldoc-setup)
 (my-gud-setup)
-(my-haskell-mode-setup)
 ;; (my-monky-setup)
 (my-paredit-setup)
 (my-server-setup)
@@ -401,6 +395,7 @@ the line, to capture multiline input. (This only has effect if
         elscreen
         auto-pair-plus
         scheme-complete
+        haskell-mode
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -447,6 +442,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "elscreen.el")
 (load-init-file "auto-pair-plus.el")
 (load-init-file "scheme-complete.el")
+(load-init-file "haskell-mode.el")
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
