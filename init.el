@@ -396,6 +396,7 @@ the line, to capture multiline input. (This only has effect if
         sunrise-x-loop
         sunrise-x-tabs
         sunrise-x-modeline
+        switch-window
         color-theme-solarized))
 
 (setq my:el-get-packages
