@@ -1,6 +1,6 @@
 
-(setq-default url-proxy-services '(("http" . "http://localhost:3128")
-                                   ("https" . "https://localhost:3128")))
+(setq url-proxy-services '(("http" . "127.0.0.1:3128")
+                           ("https" . "127.0.0.1:3128")))
 
 (setq ange-ftp-try-passive-mode t)
 
