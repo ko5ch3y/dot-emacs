@@ -17,7 +17,6 @@
   (set-face-attribute 'monky-log-sha1 nil :foreground "#0086B3"))
 
 (defun my-package-setup ()
-  (load "~/.emacs.d/elpa/package.el")
   (require 'package)
   (dolist (source '(("marmalade" . "http://marmalade-repo.org/packages/")
                     ("elpa" . "http://tromey.com/elpa/")
@@ -38,9 +37,6 @@
 
 (defun my-server-setup ()
   (setq-default server-name "terminal"))
-
-(defun my-paredit-setup ()
-  (require 'paredit))
 
 
 (defun my-tab-and-indent-setup ()
@@ -340,11 +336,6 @@ the line, to capture multiline input. (This only has effect if
   ;; compiled) elisp to make the above advise stick.
   (load "comint.el.gz"))
 
-(defun my-multi-term-setup ()
-  (require 'multi-term)
-  (setq multi-term-program "/usr/bin/zsh"))
-
-
 
 (my-package-setup)
 
@@ -352,13 +343,11 @@ the line, to capture multiline input. (This only has effect if
 (my-eldoc-setup)
 (my-gud-setup)
 ;; (my-monky-setup)
-(my-paredit-setup)
 (my-server-setup)
 (my-tramp-setup)
 (my-whitespace-setup)
 ;; (my-shell-setup)
 (my-eshell-setup)
-(my-multi-term-setup)
 
 
 (require 'cl)
@@ -379,6 +368,7 @@ the line, to capture multiline input. (This only has effect if
 (setq el-get-sources
       '((:name color-theme :type elpa)
         (:name magit :type elpa)
+        (:name multi-term :type elpa)
         ))
 
 ;; set own packages
@@ -397,6 +387,15 @@ the line, to capture multiline input. (This only has effect if
         scheme-complete
         find-file-in-project
         haskell-mode
+        auctex
+        lua-mode
+        paredit
+        yaml-mode
+        ruby-mode
+        sunrise-commander
+        sunrise-x-loop
+        sunrise-x-tabs
+        sunrise-x-modeline
         color-theme-solarized))
 
 (setq my:el-get-packages
@@ -444,6 +443,8 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "auto-pair-plus.el")
 (load-init-file "scheme-complete.el")
 (load-init-file "haskell-mode.el")
+(load-init-file "paredit.el")
+(load-init-file "multi-term.el")
 (load-init-file "key-map.el")
 
 (my-tab-and-indent-setup)
