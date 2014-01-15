@@ -352,7 +352,9 @@
   (my-keys-minor-mode 1)
 
   (define-key my-keys-minor-mode-map (kbd "C-w") 'ido-delete-backward-word-updir)
+
   (define-key my-keys-minor-mode-map (kbd "M-Z") 'universal-argument)
+  (global-set-key "\M-Z" 'universal-argument)
 
   (define-key paredit-mode-map "\\" nil)
   (define-key key-translation-map [?\C-h] [?\C-?])
