@@ -397,6 +397,7 @@ the line, to capture multiline input. (This only has effect if
         sunrise-x-tabs
         sunrise-x-modeline
         switch-window
+        helm-ls-git
         color-theme-solarized))
 
 (setq my:el-get-packages
