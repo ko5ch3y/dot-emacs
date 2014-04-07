@@ -317,7 +317,8 @@
 
     ;; Not sure what behavior this changes, but might as well set it, seeing the Elisp manual's
     ;; documentation of it.
-    (set-quit-char my-escape-key))
+    ;; (set-quit-char my-escape-key)
+  )
 
   (evil-omap "\t" nil)
   (evil-nmap [tab] 'indent-line)
