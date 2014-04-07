@@ -356,10 +356,7 @@ the line, to capture multiline input. (This only has effect if
 
 (defun get-el-get ()
   (unless (require 'el-get nil t)
-    (url-retrieve "https://github.com/dimitri/el-get/raw/master/el-get-install.el"
-                  (lambda (s)
-                    (end-of-buffer)
-                    (eval-print-last-sexp)))))
+    (load-file "~/.emacs.d/el-get-user/el-get-install.el")))
 
 (get-el-get)
 
