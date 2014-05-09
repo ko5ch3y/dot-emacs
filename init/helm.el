@@ -16,3 +16,4 @@
 (setq-default helm-gtags-enable-initial-pattern t)
 (setq-default gtags-path-style 'relative)
 (setq-default helm-su-or-sudo "sudo")
+(setq-default helm-buffer-max-length nil)
