@@ -17,7 +17,6 @@
       (blue        "#268bd2")
       (cyan        "#2aa198")
       (green       "#859900")
-      (burgundy    "#8b2323")
       (fmt-none `(:weight normal :slant normal  :underline nil        :inverse-video nil))
       )
   (when (eq 'light mode)
@@ -25,11 +24,11 @@
     (rotatef base02 base2)
     (rotatef base01 base1)
     (rotatef base00 base0))
-  (set-face-attribute 'region                  nil :background base03 :foreground burgundy :underline nil)
+
   (set-face-attribute 'show-paren-match        nil :foreground blue :background nil :weight 'bold)
   (set-face-attribute 'show-paren-mismatch     nil :foreground red :background nil :weight 'bold)
 
-  (setq-default evil-default-cursor '("#8B2323" box))
+  (setq-default evil-default-cursor '(base01 box))
 
   ;; helm
   (set-face-attribute 'helm-header             nil :foreground base0 :background base02)
@@ -46,8 +45,8 @@
   (set-face-attribute 'helm-grep-cmd-line      nil :foreground yellow :background base03)
   (set-face-attribute 'helm-grep-file          nil :foreground base0 :background base03)
   (set-face-attribute 'helm-grep-lineno        nil :foreground cyan :background base03)
-  (set-face-attribute 'helm-selection          nil :foreground base03 :background burgundy :underline nil)
-  (set-face-attribute 'helm-selection-line     nil :foreground base03 :background burgundy :underline nil)
+  (set-face-attribute 'helm-selection          nil :foreground base03 :background base01 :underline nil)
+  (set-face-attribute 'helm-selection-line     nil :foreground base03 :background base01 :underline nil)
   (set-face-attribute 'helm-grep-finish        nil :foreground red :background base02)
   (set-face-attribute 'helm-grep-running       nil :foreground green :background base02)
   (set-face-attribute 'helm-candidate-number   nil :foreground yellow :background base02)
