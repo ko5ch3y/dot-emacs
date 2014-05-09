@@ -29,6 +29,8 @@
   (set-face-attribute 'show-paren-match        nil :foreground blue :background nil :weight 'bold)
   (set-face-attribute 'show-paren-mismatch     nil :foreground red :background nil :weight 'bold)
 
+  (setq-default evil-default-cursor '("#8B2323" box))
+
   ;; helm
   (set-face-attribute 'helm-header             nil :foreground base0 :background base02)
   (set-face-attribute 'helm-source-header      nil :foreground base0 :background base02)

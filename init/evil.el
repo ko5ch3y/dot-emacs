@@ -10,5 +10,3 @@
 (evil-set-initial-state 'gdb-locals-mode 'normal)
 (evil-set-initial-state 'gdb-breakpoints-mode 'normal)
 (evil-set-initial-state 'gdb-frames-mode 'normal)
-
-(setq-default evil-default-cursor '("#8B2323" box))
