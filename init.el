@@ -163,6 +163,8 @@ This arrangement depends on the value of `gdb-many-windows'."
   (setq url-proxy-services '(("http" . "127.0.0.1:3128")
                              ("https" . "127.0.0.1:3128")))
 
+  (modify-syntax-entry ?_ "w" c-mode-syntax-table)
+
   (custom-set-variables
    ;; custom-set-variables was added by Custom.
    ;; If you edit it by hand, you could mess it up, so be careful.
