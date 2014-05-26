@@ -17,6 +17,7 @@
       (blue        "#268bd2")
       (cyan        "#2aa198")
       (green       "#859900")
+      (light-blue  "#d1f5ea")
       (fmt-none `(:weight normal :slant normal  :underline nil        :inverse-video nil))
       )
   (when (eq 'light mode)
@@ -27,6 +28,8 @@
 
   (set-face-attribute 'show-paren-match        nil :foreground blue :background nil :weight 'bold)
   (set-face-attribute 'show-paren-mismatch     nil :foreground red :background nil :weight 'bold)
+  (set-face-attribute 'region                  nil :foreground nil :background light-blue :inverse-video nil)
+  (set-face-attribute 'lazy-highlight          nil :foreground nil :background light-blue :inverse-video nil)
 
   (setq-default evil-default-cursor '(base01 bar))
 
@@ -35,8 +38,8 @@
   (set-face-attribute 'helm-source-header      nil :foreground base0 :background base02)
   (set-face-attribute 'helm-M-x-key            nil :foreground orange :background base03)
   (set-face-attribute 'helm-buffer-size        nil :foreground magenta :background base03)
-  (set-face-attribute 'helm-match              nil :foreground base03 :background yellow)
-  (set-face-attribute 'helm-grep-match         nil :foreground base03 :background yellow)
+  (set-face-attribute 'helm-match              nil :foreground nil :background light-blue)
+  (set-face-attribute 'helm-grep-match         nil :foreground nil :background light-blue)
   (set-face-attribute 'helm-ff-directory       nil :foreground blue :background base03)
   (set-face-attribute 'helm-ff-file            nil :foreground base0 :background base03)
   (set-face-attribute 'helm-ff-executable      nil :foreground green :background base03)
@@ -45,8 +48,8 @@
   (set-face-attribute 'helm-grep-cmd-line      nil :foreground yellow :background base03)
   (set-face-attribute 'helm-grep-file          nil :foreground base0 :background base03)
   (set-face-attribute 'helm-grep-lineno        nil :foreground cyan :background base03)
-  (set-face-attribute 'helm-selection          nil :foreground nil :background nil :weight 'bold)
-  (set-face-attribute 'helm-selection-line     nil :foreground nil :background nil :weight 'bold)
+  (set-face-attribute 'helm-selection          nil :foreground nil :background light-blue :underline nil)
+  (set-face-attribute 'helm-selection-line     nil :foreground nil :background light-blue :underline nil)
   (set-face-attribute 'helm-grep-finish        nil :foreground red :background base02)
   (set-face-attribute 'helm-grep-running       nil :foreground green :background base02)
   (set-face-attribute 'helm-candidate-number   nil :foreground yellow :background base02)
