@@ -5,6 +5,7 @@
 (require 'helm-buffers)
 (require 'helm-grep)
 (require 'helm-command)
+(require 'helm-ls-git)
 
 (helm-mode t)
 
