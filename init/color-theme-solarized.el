@@ -50,7 +50,7 @@
   (set-face-attribute 'helm-grep-lineno        nil :foreground cyan :background base03)
   (set-face-attribute 'helm-selection          nil :foreground nil :background light-blue :underline nil)
   (set-face-attribute 'helm-selection-line     nil :foreground nil :background light-blue :underline nil)
-  (set-face-attribute 'helm-grep-finish        nil :foreground red :background base02)
+  (set-face-attribute 'helm-grep-finish        nil :foreground orange :background base02)
   (set-face-attribute 'helm-grep-running       nil :foreground green :background base02)
   (set-face-attribute 'helm-candidate-number   nil :foreground yellow :background base02)
   )
