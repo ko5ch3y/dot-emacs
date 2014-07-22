@@ -391,6 +391,7 @@ the line, to capture multiline input. (This only has effect if
         paredit
         yaml-mode
         ruby-mode
+        coffee-mode
         sunrise-commander
         sunrise-x-loop
         sunrise-x-tabs
