@@ -449,6 +449,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "multi-term.el")
 (load-init-file "key-map.el")
 (load-init-file "slime.el")
+(load-init-file "coffeescript.el")
 
 (my-tab-and-indent-setup)
 (my-misc-setup)
