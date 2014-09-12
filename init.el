@@ -398,6 +398,8 @@ the line, to capture multiline input. (This only has effect if
         sunrise-x-modeline
         switch-window
         helm-ls-git
+        skewer-mode
+        s
         color-theme-solarized))
 
 (setq my:el-get-packages
