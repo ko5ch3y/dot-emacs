@@ -8,10 +8,10 @@
   (setq coffee "PATH=~/.nvm/v0.11.13/bin:$PATH coffee -pe ")
   (setq code (shell-command-to-string
               (concat coffee
-                      "'"
+                      "\""
                       (s-trim coffee-code)
-                      ;; (s-replace "\n" "\\n" (s-trim coffee-code))
-                      "'"
+                      ;; (s-replace "'" "\'" (s-trim coffee-code))
+                      "\""
                       )))
   (skewer-eval code #'skewer-post-minibuffer))
   ;; (skewer-eval (concat "CoffeeScript.eval(\""
