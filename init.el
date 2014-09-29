@@ -379,6 +379,7 @@ the line, to capture multiline input. (This only has effect if
         auto-complete
         auto-complete-clang
         org-mode
+        markdown-mode
         yasnippet
         evil
         elscreen
