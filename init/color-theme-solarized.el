@@ -43,7 +43,7 @@
   (set-face-attribute 'helm-match              nil :foreground base02 :background blue)
   (set-face-attribute 'helm-grep-match         nil :foreground base02 :background blue)
   (set-face-attribute 'helm-ff-directory       nil :foreground blue :background base03)
-  (set-face-attribute 'helm-ff-file            nil :foreground base0 :background base03)
+  (set-face-attribute 'helm-ff-file            nil :foreground base1 :background nil)
   (set-face-attribute 'helm-ff-executable      nil :foreground green :background base03)
   (set-face-attribute 'helm-ff-invalid-symlink nil :foreground red :background base03)
   (set-face-attribute 'helm-ff-symlink         nil :foreground cyan :background base03)
