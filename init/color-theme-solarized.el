@@ -1,8 +1,8 @@
 
 (setq mode 'light)
 
-(let ((base03      "#262626")
-      (base02      "#303030")
+(let ((base03      "#002b36")
+      (base02      "#073642")
       (base01      "#586e75")
       (base00      "#657b83")
       (base0       "#839496")
