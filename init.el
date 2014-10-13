@@ -367,7 +367,7 @@ the line, to capture multiline input. (This only has effect if
 ;; set local recipes
 (setq el-get-sources
       '((:name color-theme :type elpa)
-        (:name magit :type elpa)
+        ;(:name magit :type elpa)
         (:name multi-term :type elpa)
         ))
 
@@ -383,9 +383,9 @@ the line, to capture multiline input. (This only has effect if
         markdown-mode
         yasnippet
         evil
-        elscreen
+        ;elscreen
         auto-pair-plus
-        scheme-complete
+        ;scheme-complete
         find-file-in-project
         haskell-mode
         auctex
@@ -394,10 +394,10 @@ the line, to capture multiline input. (This only has effect if
         yaml-mode
         ruby-mode
         coffee-mode
-        sunrise-commander
-        sunrise-x-loop
-        sunrise-x-tabs
-        sunrise-x-modeline
+        ;sunrise-commander
+        ;sunrise-x-loop
+        ;sunrise-x-tabs
+        ;sunrise-x-modeline
         switch-window
         helm-ls-git
         skewer-mode
@@ -445,14 +445,14 @@ the line, to capture multiline input. (This only has effect if
 ;(load-init-file "color-theme-solarized.el")
 (load-init-file "org-mode.el")
 (load-init-file "yasnippet.el")
-(load-init-file "elscreen.el")
+;(load-init-file "elscreen.el")
 (load-init-file "auto-pair-plus.el")
-(load-init-file "scheme-complete.el")
+;(load-init-file "scheme-complete.el")
 (load-init-file "haskell-mode.el")
 (load-init-file "paredit.el")
 (load-init-file "multi-term.el")
 (load-init-file "key-map.el")
-(load-init-file "slime.el")
+;(load-init-file "slime.el")
 (load-init-file "coffeescript.el")
 
 (my-tab-and-indent-setup)
