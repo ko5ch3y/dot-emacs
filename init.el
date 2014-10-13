@@ -1,6 +1,6 @@
 
-(setq url-proxy-services '(("http" . "127.0.0.1:3128")
-                           ("https" . "127.0.0.1:3128")))
+(setq url-proxy-services '(("http" . "127.0.0.1:8118")
+                           ("https" . "127.0.0.1:8118")))
 
 (setq ange-ftp-try-passive-mode t)
 
@@ -161,8 +161,8 @@ This arrangement depends on the value of `gdb-many-windows'."
   (blink-cursor-mode 1)
   (setq-default default-cursor-type 'box)
 
-  (setq url-proxy-services '(("http" . "127.0.0.1:3128")
-                             ("https" . "127.0.0.1:3128")))
+  (setq url-proxy-services '(("http" . "127.0.0.1:8118")
+                             ("https" . "127.0.0.1:8118")))
 
   (modify-syntax-entry ?_ "w" c-mode-syntax-table)
 
