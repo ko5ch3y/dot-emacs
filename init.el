@@ -5,6 +5,7 @@
 (setq ange-ftp-try-passive-mode t)
 
 (add-to-list 'load-path "~/.emacs.d/site-lisp/")
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 
 
 (defun my-monky-setup ()
@@ -416,7 +417,7 @@ the line, to capture multiline input. (This only has effect if
 ;; setup
 (defun my-window-system-setup ()
   (require 'color-theme)
-  (load-theme 'solarized-light t)
+  (load-theme 'gruvbox t)
   (menu-bar-mode 0)
   (when window-system
     ;; (add-hook 'server-switch-hook open-client-other-window)
@@ -441,7 +442,7 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "smarttabs.el")
 (load-init-file "helm.el")
 (load-init-file "auto-complete.el")
-(load-init-file "color-theme-solarized.el")
+;(load-init-file "color-theme-solarized.el")
 (load-init-file "org-mode.el")
 (load-init-file "yasnippet.el")
 (load-init-file "elscreen.el")
