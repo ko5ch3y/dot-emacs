@@ -41,10 +41,9 @@
 
 
 (defun my-tab-and-indent-setup ()
-  (setq-default indent-line-function 'indent-according-to-mode)
   (setq-default indent-tabs-mode nil)
-  (setq-default standard-indent 2)
-  (setq-default tab-width 2)
+  (setq-default standard-indent 4)
+  (setq-default tab-width 4)
   ;; (add-hook 'completion-at-point-functions 'hippie-expand nil)
   (setq-default tab-always-indent t)
   (setq-default tab-stop-list (generate-tab-stop-list)))
