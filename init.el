@@ -351,7 +351,6 @@ the line, to capture multiline input. (This only has effect if
 ;; (my-shell-setup)
 (my-eshell-setup)
 
-
 (require 'cl)
 
 (add-to-list 'load-path "~/.emacs.d/el-get/el-get")
@@ -453,6 +452,8 @@ the line, to capture multiline input. (This only has effect if
 (load-init-file "key-map.el")
 ;(load-init-file "slime.el")
 (load-init-file "coffeescript.el")
+
+(require 'skewer-coffee)
 
 (my-tab-and-indent-setup)
 (my-misc-setup)
