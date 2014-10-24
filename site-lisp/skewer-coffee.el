@@ -4,20 +4,13 @@
 
 (defun skewer-coffee-eval (coffee-code)
   "Requests the browser to evaluate a coffeescipt string."
-  ;; XXX should escape double quote characters
   (setq coffee "PATH=~/.nvm/v0.11.13/bin:$PATH coffee -pe ")
-  (setq code (shell-command-to-string
-              (concat coffee
-                      "\""
-                      (s-trim coffee-code)
-                      ;; (s-replace "'" "\'" (s-trim coffee-code))
-                      "\""
-                      )))
-  (skewer-eval code #'skewer-post-minibuffer))
-  ;; (skewer-eval (concat "CoffeeScript.eval(\""
-                       ;; (s-replace "\n" "\\n" (s-trim coffee-code))
-                       ;; "\");")
-               ;; #'skewer-post-minibuffer))
+  (setq command-file "/tmp/skewer.sh")
+  (setq fixed-coffee-code (concat "\'" (s-replace "'" "'\\''" (s-trim coffee-code)) "\'"))
+  (setq command (concat coffee fixed-coffee-code))
+  (with-temp-file command-file (insert command))
+  (setq js-code (shell-command-to-string command))
+  (skewer-eval js-code #'skewer-post-minibuffer))
 
 (defun skewer-coffee-eval-region ()
   "Sends the coffeescript code the region encloses, or -- if
